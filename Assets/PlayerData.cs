@@ -133,7 +133,7 @@ public class ItemDirectory
 
     public enum ItemIndex //make sure to define a matching item in the item array dir
     {
-        cola, stick, hat, wallet, balloon,lighter,fan,watergun
+        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword
     };
 
     public Item[] dir = //make sure to define a matching index in the item index enum
@@ -142,10 +142,11 @@ public class ItemDirectory
         new Item(ItemType.weapon, "Stick","What's sticky, round, and brown all over? Provides 3 Offense.", 0, 0, 3,0,0,"Items/UISprites/stick"),
         new Item(ItemType.accessory, "Hat", "A sports team cap. Provides 3 MaxHP and 2 Defense",3,0,0,2,0,"Items/UISprites/hat"),
         new Item(ItemType.key, "Wallet", "My wallet.",""),
-        new Item(ItemType.weapon, "Balloon","Vigourously rub against your head for a portable on-demand Van de Graaff Generator. Unless you're bald, then I'm sorry. Provides 1 Offense.", 0, 0, 1,0,0, WeaponType.elec,""),
+        new Item(ItemType.weapon, "Balloon","Vigourously rub against your head for a portable on-demand Van de Graaff Generator. Provides 1 Offense.", 0, 0, 1,0,0, WeaponType.elec,""),
         new Item(ItemType.weapon, "Lighter","A Zippy(tm) lighter. Nice to have even if you don't smoke since it makes you look cool. Provides 2 Offense.", 0, 0, 2,0,0, WeaponType.fire,""),
         new Item(ItemType.weapon, "Handheld Fan","Not your biggest fan, but a fan nonetheless. Provides 0 Offense but 2 speed.", 0, 0, 0,0,2, WeaponType.wind,""),
-        new Item(ItemType.weapon, "Water Gun","Give me a straw and a cup of water and I'll be able to dish out better water pressure than this thing. Provides 2 Offense.", 0, 0, 2,0,0, WeaponType.water,"")
+        new Item(ItemType.weapon, "Water Gun","Give me a straw and a cup of water and I'll be able to dish out better water pressure than this thing. Provides 2 Offense.", 0, 0, 2,0,0, WeaponType.water,""),
+        new Item(ItemType.weapon, "Sword","A cool sword. Provides 20 Offense and 5 Defense.", 0, 0, 20,5,0, WeaponType.phys,"Items/UISprites/sword")
     };
 }
 

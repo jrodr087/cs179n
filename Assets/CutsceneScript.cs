@@ -8,12 +8,12 @@ public class CutsceneScript : MonoBehaviour
     public Image vigtop;
     public Image vigbot;
     public PlayerMovement movscript;
-    public int vignettespeed = 10;
+    private int vignettespeed = 10;
     private int vigspot = 64;
     private RectTransform vigtoptransform;
     private RectTransform vigbottransform;
     public Text txt;
-    public int textspeed = 2;
+    private int textspeed = 2;
     private string currstring;
     private string fullstring;
     private string[] scenestrings;
