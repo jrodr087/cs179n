@@ -24,6 +24,7 @@ public class StatPtsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pds = GameObject.Find("Player").GetComponent<PlayerData>();
         stats = pds.stats;
 
         ptsint = stats.pts;

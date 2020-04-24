@@ -26,6 +26,7 @@ public class StatusMenuScript : MonoBehaviour
 
     void Start()
     {
+        pds = GameObject.Find("Player").GetComponent<PlayerData>();
         stats = pds.stats;
         statPtsMenu.SetActive(false);
     }
