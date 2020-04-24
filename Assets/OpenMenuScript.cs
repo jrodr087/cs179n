@@ -13,7 +13,7 @@ public class OpenMenuScript : MonoBehaviour
     void Start()
     {
         panel.SetActive(false);
-        audio = gameObject.AddComponent<AudioSource>(); 
+        audio = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame

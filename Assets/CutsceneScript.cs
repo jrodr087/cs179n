@@ -13,7 +13,7 @@ public class CutsceneScript : MonoBehaviour
     private RectTransform vigtoptransform;
     private RectTransform vigbottransform;
     public Text txt;
-    private int textspeed = 2;
+    private int textspeed = 4;
     private string currstring;
     private string fullstring;
     private string[] scenestrings;
