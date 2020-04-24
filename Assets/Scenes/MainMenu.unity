@@ -1021,8 +1021,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 72299374}
   - {fileID: 2136727767}
+  - {fileID: 72299374}
   - {fileID: 96291261}
   - {fileID: 1545342283}
   m_Father: {fileID: 1263799211}
@@ -1065,7 +1065,7 @@ RectTransform:
   m_Children:
   - {fileID: 303939537}
   m_Father: {fileID: 1875578945}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1182,7 +1182,7 @@ PrefabInstance:
     - target: {fileID: 3863475184551882550, guid: 3b58004fdd79c1d4a987cdaf75390f7e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NewScene
+      value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 3863475184551882550, guid: 3b58004fdd79c1d4a987cdaf75390f7e,
         type: 3}
@@ -1232,7 +1232,7 @@ PrefabInstance:
     - target: {fileID: 3863475184551882551, guid: 3b58004fdd79c1d4a987cdaf75390f7e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3863475184551882551, guid: 3b58004fdd79c1d4a987cdaf75390f7e,
         type: 3}
