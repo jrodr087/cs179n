@@ -27,6 +27,7 @@ public class CutsceneScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
         vigtoptransform = vigtop.GetComponent<RectTransform>();
         vigbottransform = vigbot.GetComponent<RectTransform>();
         txtsfx = gameObject.GetComponent<AudioSource>();
