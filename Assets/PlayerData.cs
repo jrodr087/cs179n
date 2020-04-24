@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Reflection;
 
 [System.Serializable]
 public class PlayerStats
 {
-    public int maxhp, hp, maxen, en, lvl, exp, exptonext, off,def,spd;
+    public int maxhp, hp, maxen, en, lvl, exp, exptonext, off,def,spd,pts;
 
     public PlayerStats()
     {
@@ -170,6 +170,7 @@ public class PlayerData : MonoBehaviour
         stats.off = 10;
         stats.def = 8;
         stats.spd = 6;
+        stats.pts = 5;
     }
 
     // Update is called once per frame
@@ -179,6 +180,10 @@ public class PlayerData : MonoBehaviour
         if (Input.GetKeyDown("p"))
         {
             GiveItem(0);
+        }
+        else if (Input.GetKeyDown("m"))
+        {
+            stats.pts = stats.pts+10;
         }
     }
 
@@ -200,5 +205,28 @@ public class PlayerData : MonoBehaviour
         it = masterItemDirectory.dir[(int)itemIndex];
         items.Add(itemIndex);
         Debug.Log("Added item name: " + it.name);
+    }
+
+    public void modifyStats(string stat, int change) {
+        Debug.Log("Modifying stats");
+        // 
+
+        switch (stat) {
+            case "maxen": stats.maxen = stats.maxen + change;
+                break;
+            case "maxhp": stats.maxhp = stats.maxhp + change;
+                break;
+            case "off": stats.off = stats.off + change;
+                break;
+            case "def": stats.def = stats.def + change;
+                break;
+            case "spd": stats.spd = stats.spd + change;
+                break;
+            case "pts": stats.pts = stats.pts + change;
+                break;
+            default: break;
+        }
+
+        Debug.Log("Modified Stat: " + stat + " by " + change);
     }
 }
