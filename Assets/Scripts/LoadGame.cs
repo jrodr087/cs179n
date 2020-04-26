@@ -9,23 +9,4 @@ public class LoadGame : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
-
-    public void LoadGame()
-    { 
-        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
-            Save save = (Save)bf.Deserialize(file);
-            file.Close();
-
-            Debug.Log("Game Loaded");
-
-            Unpause();
-        }
-        else
-        {
-            Debug.Log("No game saved!");
-        }
-    }
 }
