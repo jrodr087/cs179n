@@ -28,8 +28,8 @@ public class CutsceneScript : MonoBehaviour
     void Start()
     {
         movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
-        vigtoptransform = vigtop.GetComponent<RectTransform>();
-        vigbottransform = vigbot.GetComponent<RectTransform>();
+        //vigtoptransform = vigtop.GetComponent<RectTransform>();
+        //vigbottransform = vigbot.GetComponent<RectTransform>();
         txtsfx = gameObject.GetComponent<AudioSource>();
     }
 
@@ -38,8 +38,8 @@ public class CutsceneScript : MonoBehaviour
     {
         if (currstate == states.vigentering)
         {
-            vigtoptransform.anchoredPosition = new Vector2(vigtoptransform.anchoredPosition.x, vigtoptransform.anchoredPosition.y - vignettespeed);
-            vigbottransform.anchoredPosition = new Vector2(vigbottransform.anchoredPosition.x, vigbottransform.anchoredPosition.y + vignettespeed);
+            //vigtoptransform.anchoredPosition = new Vector2(vigtoptransform.anchoredPosition.x, vigtoptransform.anchoredPosition.y - vignettespeed);
+            //vigbottransform.anchoredPosition = new Vector2(vigbottransform.anchoredPosition.x, vigbottransform.anchoredPosition.y + vignettespeed);
             if (vigbottransform.anchoredPosition.y >= 0)
             {
                 currstate = states.vigin;
