@@ -16,6 +16,7 @@ public class DamageText : MonoBehaviour
     public Text txt1;
     public Text txt2;
     public int dmg = 101;
+    public bool critical = false;
     void Start()
     {
         t = 0;
@@ -39,6 +40,10 @@ public class DamageText : MonoBehaviour
         if (t >= 10.0f) { Destroy(gameObject); }
         txt1.text = dmg.ToString();
         txt2.text = dmg.ToString();
+        if (critical)
+        {
+            txt2.color = Random.ColorHSV(0.0f, 0.5f, 0.5f, 1.0f, 0.8f, 1.0f);
+        }
     }
     private float GetY(float x)
     {

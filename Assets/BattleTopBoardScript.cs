@@ -7,15 +7,18 @@ public class BattleTopBoardScript : MonoBehaviour
 {
     public Text txt;
     public Image board;
-    public int boardspeed = 10;
+    private int boardspeed = 10;
     private int boardheight = 128;
     private RectTransform boardt;
+    private List<string> stringlist = new List<string>();
     private enum states {boardout,boardentering,boardin,boardexiting};
     private states currstate = states.boardout;
     private int timer = 0;
-    public int textspeed = 3;
+    private int textspeed = 2;
     private float boardtimer = 3.0f;
     private float currboardtimer = 0.0f;
+    private float stringtimer = 1.0f;
+    private float currstringtimer = 0.0f;
     private string currstring = "";
     private string fullstring = "";
     private int charindex = 0;
@@ -28,7 +31,6 @@ public class BattleTopBoardScript : MonoBehaviour
         boardt = board.GetComponent<RectTransform>();
         boardheight = (int)boardt.sizeDelta.y;
         currstate = states.boardout;
-        //fullstring = "Spiky Vroomer and its cohorts attacked!";
         fullstring = "";
         currstring = "";
         txt.text = "";
@@ -62,26 +64,7 @@ public class BattleTopBoardScript : MonoBehaviour
                     {
                         charindex++;
                         currstring = fullstring.Substring(0, charindex);
-                        if (Input.GetKey("space"))
-                        {
-                            timer = 0;
-                        }
-                        else
-                        {
-                            if (currstring[currstring.Length - 1] == '.')
-                            {
-                                timer = 45;
-                            }
-                            else if (fullstring[currstring.Length - 1] == ',')
-                            {
-                                timer = 30;
-                            }
-                            else
-                            {
-                                timer = textspeed;
-                            }
-
-                        }
+                        timer = textspeed;
                         if (!txtsfx.isPlaying)
                         {
                             float pitchrng = Random.Range(0.0f, 0.1f);
@@ -93,7 +76,17 @@ public class BattleTopBoardScript : MonoBehaviour
                 }
                 else
                 {
+                    if (stringlist.Count > 0 && currstringtimer >= stringtimer)
+                    {
+                        currboardtimer = 0.0f;
+                        currstringtimer = 0.0f;
+                        currstring = "";
+                        charindex = 0;
+                        fullstring = stringlist[0];
+                        stringlist.RemoveAt(0);
+                    }
                     currboardtimer += Time.deltaTime;
+                    currstringtimer += Time.deltaTime;
                     if (currboardtimer >= boardtimer)
                     {
                         currstate = states.boardexiting;
@@ -111,19 +104,21 @@ public class BattleTopBoardScript : MonoBehaviour
                 break;
         }
 
-        //if (Input.GetKeyDown("space"))
-        //{
-        //    teststring = teststring + " Test,";
-        //    UpdateString(teststring);
-        //}
     }
 
 
     public void UpdateString(string newtext)
     {
-        currstate = states.boardentering;
-        fullstring = newtext;
-        charindex = 0;
+        if (currstate != states.boardin && currstate != states.boardentering)
+        {
+            currstate = states.boardentering;
+            charindex = 0;
+            fullstring = newtext;
+        }
+        else
+        {
+            stringlist.Add(newtext);
+        }
         currboardtimer = 0.0f;
     }
 }
