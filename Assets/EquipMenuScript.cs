@@ -4,10 +4,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemMenuScript : MonoBehaviour
+public class EquipMenuScript : MonoBehaviour
 {
-    public GameObject itemDetails;
-    public Text itemName;
+	public GameObject itemDetails;
+	public Text itemName;
     public Text itemDescription;
     public Text itemEquip;
     public Image itemImage;
@@ -18,9 +18,8 @@ public class ItemMenuScript : MonoBehaviour
     private Transform containerTransform;
     AudioSource audio;
     private List<GameObject> buttonList = new List<GameObject>();
+    private List<GameObject> emptySlots = new List<GameObject>();
     private int curItem;
-    private int equippedItemsLen;
-    private GameObject noItems;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,57 +28,64 @@ public class ItemMenuScript : MonoBehaviour
         containerTransform = buttonContainer.GetComponent<Transform>();
         itemDetails.SetActive(false);
         audio = gameObject.AddComponent<AudioSource>();
-        equippedItemsLen = pd.equippedItems.Count;
-        initNoItems();
+        EmptySlotsInit();
     }
 
-    private void initNoItems() {
-        noItems = Instantiate(buttonPrefab) as GameObject;
-        noItems.GetComponent<RectTransform>().anchoredPosition = new Vector3(10, 0, 0);
-        noItems.transform.SetParent(containerTransform,false);
-        noItems.transform.Find("Text").gameObject.GetComponent<Text>().text = "You have No Items :( !";
-    } 
-
+    void EmptySlotsInit() {
+        for (int i = 0; i < pd.equipSlots; i++){
+        	GameObject tmp = Instantiate(buttonPrefab) as GameObject;
+            tmp.transform.SetParent(containerTransform,false);
+            emptySlots.Add(tmp);
+            tmp.GetComponent<Button>().GetComponent<RectTransform>().anchoredPosition = new Vector3(10, (-30 * i) - 20, 0);
+            tmp.transform.Find("Name").gameObject.GetComponent<Text>().text = (i+ 1) + ". Slot Empty";
+            tmp.transform.Find("HpText").gameObject.GetComponent<Text>().text = "0";
+            tmp.transform.Find("EnText").gameObject.GetComponent<Text>().text = "0";
+            tmp.transform.Find("OffText").gameObject.GetComponent<Text>().text = "0";
+            tmp.transform.Find("DefText").gameObject.GetComponent<Text>().text = "0";
+            tmp.transform.Find("SpdText").gameObject.GetComponent<Text>().text = "0";
+        }
+    }
     void UpdateButtons()
     {
-        noItems.SetActive(buttonList.Count < 1);
-        equippedItemsLen = pd.equippedItems.Count;
-        string x = "";
-        for (int i = 0; i < buttonList.Count; i++)
+    	int i = 0;
+        for (i = 0; i < buttonList.Count; i++)
         {
-            buttonList[i].GetComponent<Button>().GetComponent<RectTransform>().anchoredPosition = new Vector3(10, -24 * i, 0);
+            buttonList[i].GetComponent<Button>().GetComponent<RectTransform>().anchoredPosition = new Vector3(10, (-30 * i) - 20, 0);
             buttonList[i].GetComponent<Button>().onClick.RemoveAllListeners();
-            ItemDirectory.ItemIndex it = pd.items[i];
-            int idx = i;
+            ItemDirectory.ItemIndex it = pd.items[pd.equippedItems[i]];
+            int idx = pd.equippedItems[i];
             buttonList[i].GetComponent<Button>().onClick.AddListener(() => UpdateItemInfo(idx));
-            if (pd.equippedItems.Contains(i)){ x = "  <"+ (pd.equippedItems.FindIndex((int j) => j == i) + 1) +">"; }
-            buttonList[i].transform.Find("Text").gameObject.GetComponent<Text>().text = pd.masterItemDirectory.dir[(int)it].name + x;
-            x = "";
+            buttonList[i].transform.Find("Name").gameObject.GetComponent<Text>().text = (i+ 1) + ". " + pd.masterItemDirectory.dir[(int)it].name;
+            buttonList[i].transform.Find("HpText").gameObject.GetComponent<Text>().text = pd.masterItemDirectory.dir[(int)it].hp.ToString();
+            buttonList[i].transform.Find("EnText").gameObject.GetComponent<Text>().text = pd.masterItemDirectory.dir[(int)it].en.ToString();
+            buttonList[i].transform.Find("OffText").gameObject.GetComponent<Text>().text = pd.masterItemDirectory.dir[(int)it].off.ToString();
+            buttonList[i].transform.Find("DefText").gameObject.GetComponent<Text>().text = pd.masterItemDirectory.dir[(int)it].def.ToString();
+            buttonList[i].transform.Find("SpdText").gameObject.GetComponent<Text>().text = pd.masterItemDirectory.dir[(int)it].spd.ToString();
+        	emptySlots[i].SetActive(false);
         }
-        buttonContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(buttonContainer.GetComponent<RectTransform>().sizeDelta.x, buttonList.Count * 24);
+        for (; i < pd.equipSlots; i++) {
+        	emptySlots[i].SetActive(true);
+        }
+        buttonContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(buttonContainer.GetComponent<RectTransform>().sizeDelta.x, (pd.equipSlots * 30) + 20);
     }
 
     // Update is called once per frame
     void Update()
     {
         bool changedFlag = false;
-        while (buttonList.Count < pd.items.Count)
+        while (buttonList.Count < pd.equippedItems.Count)
         {
             GameObject tmp = Instantiate(buttonPrefab) as GameObject;
             tmp.transform.SetParent(containerTransform,false);
             buttonList.Add(tmp);
             changedFlag = true;
         }
-        while (buttonList.Count > pd.items.Count)
+        while (buttonList.Count > pd.equippedItems.Count)
         {
             GameObject oldbutton = buttonList[buttonList.Count - 1];
             buttonList.RemoveAt(buttonList.Count - 1);
             Destroy(oldbutton);
             changedFlag = true;
-        }
-        if (equippedItemsLen != pd.equippedItems.Count){
-            changedFlag = true;
-            UpdateItemInfo(curItem);
         }
         if (changedFlag)
         {
@@ -89,9 +95,9 @@ public class ItemMenuScript : MonoBehaviour
 
     public void UpdateItemInfo(int i)
     {
-        if (!itemDetails.activeSelf){ ToggleItemDetails(); }
+    	ItemDirectory.ItemIndex id = pd.items[i];
+    	if (!itemDetails.activeSelf){ ToggleItemDetails(); }
         curItem = i;
-        ItemDirectory.ItemIndex id = pd.items[i];
         audio.PlayOneShot((AudioClip)Resources.Load("Sounds/ItemButtonClick"));
         itemName.text = pd.masterItemDirectory.dir[(int)id].name;
         itemDescription.text = pd.masterItemDirectory.dir[(int)id].desc;
@@ -161,11 +167,9 @@ public class ItemMenuScript : MonoBehaviour
         }
     }
 
-
     public void equipItem() {
         pd.equipItem(curItem);
-        UpdateButtons();
-        UpdateItemInfo(curItem);
+        ToggleItemDetails(); 	
     }
 
     public void ToggleItemDetails()
@@ -181,5 +185,4 @@ public class ItemMenuScript : MonoBehaviour
             audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuClose"));
         }
     }
-
 }
