@@ -83,6 +83,12 @@ public class MenuScript : MonoBehaviour
         }
     }
 
+    public void ToggleExit()
+    {
+        //TO DO: Prompt to ask if they want to want to exit w/o saving first
+        Application.Quit();
+    }
+
     private void openAndClose(GameObject toOpen, GameObject toClose){
         toClose.SetActive(false);
         currNest = 1;
