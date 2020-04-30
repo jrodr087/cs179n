@@ -61,7 +61,7 @@ AnimationClip:
     - time: 0.96666664
       value: {fileID: -3650983027654873900, guid: 187de82ab387b4743a7d96edb7108f9b,
         type: 3}
-    - time: 1.0666667
+    - time: 1.0333333
       value: {fileID: 4662105534215219091, guid: 187de82ab387b4743a7d96edb7108f9b,
         type: 3}
     attribute: m_Sprite
@@ -125,6 +125,13 @@ AnimationClip:
   m_Events:
   - time: 0.76666665
     functionName: CalculateDamage
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0833334
+    functionName: EndPlayerturn
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

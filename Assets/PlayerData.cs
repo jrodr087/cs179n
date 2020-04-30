@@ -133,7 +133,7 @@ public class ItemDirectory
 
     public enum ItemIndex //make sure to define a matching item in the item array dir
     {
-        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword
+        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd
     };
 
     public Item[] dir = //make sure to define a matching index in the item index enum
@@ -146,7 +146,8 @@ public class ItemDirectory
         new Item(ItemType.weapon, "Lighter","A Zippy(tm) lighter. Nice to have even if you don't smoke since it makes you look cool. Provides 2 Offense.", 0, 0, 2,0,0, WeaponType.fire,""),
         new Item(ItemType.weapon, "Handheld Fan","Not your biggest fan, but a fan nonetheless. Provides 0 Offense but 2 speed.", 0, 0, 0,0,2, WeaponType.wind,""),
         new Item(ItemType.weapon, "Water Gun","Give me a straw and a cup of water and I'll be able to dish out better water pressure than this thing. Provides 2 Offense.", 0, 0, 2,0,0, WeaponType.water,""),
-        new Item(ItemType.weapon, "Sword","A cool sword. Provides 20 Offense and 5 Defense.", 0, 0, 20,5,0, WeaponType.phys,"Items/UISprites/sword")
+        new Item(ItemType.weapon, "Sword","A cool sword. Provides 20 Offense and 5 Defense.", 0, 0, 20,5,0, WeaponType.phys,"Items/UISprites/sword"),
+        new Item(ItemType.weapon, "All Around Buff","Buffs all stats 10.", 10,10, 10,10,10, WeaponType.phys,"")
     };
 }
 
@@ -155,7 +156,9 @@ public class ItemDirectory
 public class PlayerData : MonoBehaviour
 {
     public PlayerStats stats = new PlayerStats();
+    public int equipSlots = 3;
     public List<ItemDirectory.ItemIndex> items = new List<ItemDirectory.ItemIndex>();
+    public List<int> equippedItems = new List<int>();
     public ItemDirectory masterItemDirectory = new ItemDirectory();
     // Start is called before the first frame update
     void Start()
@@ -177,13 +180,49 @@ public class PlayerData : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown("p"))
-        {
-            GiveItem(0);
-        }
-        else if (Input.GetKeyDown("m"))
+        if (Input.GetKeyDown("m"))
         {
             stats.pts = stats.pts+10;
+        }
+        else if (Input.GetKeyDown("0"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 0);
+        }
+        else if (Input.GetKeyDown("1"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 1);
+        }
+        else if (Input.GetKeyDown("2"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 2);
+        }
+        else if (Input.GetKeyDown("3"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 3);
+        }
+        else if (Input.GetKeyDown("4"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 4);
+        }
+        else if (Input.GetKeyDown("5"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 5);
+        }
+        else if (Input.GetKeyDown("6"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 6);
+        }
+        else if (Input.GetKeyDown("7"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 7);
+        }
+        else if (Input.GetKeyDown("8"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 8);
+        }
+        else if (Input.GetKeyDown("9"))
+        {
+            GiveItem((ItemDirectory.ItemIndex) 9);
         }
     }
 
@@ -228,5 +267,34 @@ public class PlayerData : MonoBehaviour
         }
 
         Debug.Log("Modified Stat: " + stat + " by " + change);
+    }
+
+    public void equipItem (int curItem){
+        if (equippedItems.Contains(curItem)){
+            equippedItems.RemoveAt( (int) equippedItems.FindIndex( (int i) => i == curItem) );
+            applyItem(masterItemDirectory.dir[(int)items[curItem]], false);
+            Debug.Log("Dequipped item " + masterItemDirectory.dir[(int)items[curItem]].name);
+        } 
+        else if (equippedItems.Count < 3){
+            equippedItems.Add(curItem);
+            applyItem(masterItemDirectory.dir[(int)items[curItem]], true);
+            Debug.Log("Equipped item " + masterItemDirectory.dir[(int)items[curItem]].name);
+        }
+    }
+
+    private void applyItem(Item i, bool apply) {
+        if (apply){
+            stats.hp += i.hp;
+            stats.en += i.en;
+            stats.off += i.off;
+            stats.def += i.def;
+            stats.spd += i.spd;
+        } else {
+            stats.hp -= i.hp;
+            stats.en -= i.en;
+            stats.off -= i.off;
+            stats.def -= i.def;
+            stats.spd -= i.spd;
+        }
     }
 }
