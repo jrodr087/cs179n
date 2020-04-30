@@ -6549,7 +6549,6 @@ GameObject:
   - component: {fileID: 8893875729497348714}
   - component: {fileID: 6152885941178797325}
   - component: {fileID: 1418337072409350424}
-  - component: {fileID: 3647587511551179711}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -6564,7 +6563,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5930719813268949743}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6656,8 +6655,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3647587511551179711}
-        m_MethodName: ExitGame
+      - m_Target: {fileID: 737282650420982676}
+        m_MethodName: ToggleExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6667,18 +6666,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3647587511551179711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5930719813268949743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa645215ee2365d4f93fc50504fa93e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5972506734895377720
 GameObject:
   m_ObjectHideFlags: 0
