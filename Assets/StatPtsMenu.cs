@@ -21,6 +21,8 @@ public class StatPtsMenu : MonoBehaviour
     private int defint;
     private int spdint;
 
+    AudioSource audio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class StatPtsMenu : MonoBehaviour
     	offint = 0;
     	defint = 0;
     	spdint = 0;
+        audio = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -95,5 +98,6 @@ public class StatPtsMenu : MonoBehaviour
     	offint = 0;
     	defint = 0;
     	spdint = 0;
+        audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuOpen"));
     }
 }
