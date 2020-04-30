@@ -733,7 +733,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 158, y: 78}
+  m_SizeDelta: {x: 158, y: 108}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &737282650286893883
 CanvasRenderer:
@@ -2673,7 +2673,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 156, y: 76}
+  m_SizeDelta: {x: 156, y: 106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &737282651027755998
 CanvasRenderer:
@@ -2801,7 +2801,7 @@ GameObject:
   - component: {fileID: 737282651033834017}
   - component: {fileID: 737282651033834018}
   m_Layer: 5
-  m_Name: FillerButton
+  m_Name: SaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2822,11 +2822,11 @@ RectTransform:
   m_Father: {fileID: 737282651027755984}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -8, y: 12}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -8, y: 0}
   m_SizeDelta: {x: 64, y: 24}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &737282651033834016
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3870,11 +3870,11 @@ RectTransform:
   m_Father: {fileID: 737282651027755984}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 8, y: 12}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 8, y: 0}
   m_SizeDelta: {x: 64, y: 24}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &737282651560377345
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4352,7 +4352,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 80}
+  m_SizeDelta: {x: 160, y: 110}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &737282651978416675
 CanvasRenderer:
@@ -4543,7 +4543,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Filler
+  m_Text: Save
 --- !u!1 &737282652103182401
 GameObject:
   m_ObjectHideFlags: 0
