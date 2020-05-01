@@ -8,10 +8,14 @@ using UnityEngine;
 public class Game
 {
     public static Game current;
-    public Character player;
-
-    public Game() 
+    public float positionX;
+    public float positionY;
+    public Game(PlayerData player) 
     {
-        player = new Character();
+        GameObject temp = GameObject.Find("Player");
+        positionX = temp.transform.position.x;
+        positionY = temp.transform.position.y;
+
+        
     }
 }
