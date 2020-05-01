@@ -36,7 +36,7 @@ public class EquipMenuScript : MonoBehaviour
         	GameObject tmp = Instantiate(buttonPrefab) as GameObject;
             tmp.transform.SetParent(containerTransform,false);
             emptySlots.Add(tmp);
-            tmp.GetComponent<Button>().GetComponent<RectTransform>().anchoredPosition = new Vector3(10, (-30 * i) - 20, 0);
+            tmp.GetComponent<Button>().GetComponent<RectTransform>().anchoredPosition = new Vector3(5, (-30 * i) - 20, 0);
             tmp.transform.Find("Name").gameObject.GetComponent<Text>().text = (i+ 1) + ". Slot Empty";
             tmp.transform.Find("HpText").gameObject.GetComponent<Text>().text = "0";
             tmp.transform.Find("EnText").gameObject.GetComponent<Text>().text = "0";
@@ -50,7 +50,7 @@ public class EquipMenuScript : MonoBehaviour
     	int i = 0;
         for (i = 0; i < buttonList.Count; i++)
         {
-            buttonList[i].GetComponent<Button>().GetComponent<RectTransform>().anchoredPosition = new Vector3(10, (-30 * i) - 20, 0);
+            buttonList[i].GetComponent<Button>().GetComponent<RectTransform>().anchoredPosition = new Vector3(5, (-30 * i) - 20, 0);
             buttonList[i].GetComponent<Button>().onClick.RemoveAllListeners();
             ItemDirectory.ItemIndex it = pd.items[pd.equippedItems[i]];
             int idx = pd.equippedItems[i];
