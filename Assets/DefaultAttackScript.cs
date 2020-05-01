@@ -19,6 +19,7 @@ public class DefaultAttackScript : MonoBehaviour
         audio = gameObject.GetComponent<AudioSource>();
         audio.loop = true;
         audio.Play();
+        t = Random.Range(0.0f, 3.0f);
     }
 
     // Update is called once per frame

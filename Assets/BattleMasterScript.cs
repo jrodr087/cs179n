@@ -151,7 +151,7 @@ public class BattleMasterScript : MonoBehaviour
         enemy.def = 5;
         enemy.hp = 30;
         enemy.att = 9;
-        enemy.spd = 5;
+        enemy.spd = 20;
     }
 
     // Update is called once per frame
@@ -298,6 +298,10 @@ public class BattleMasterScript : MonoBehaviour
     public void EndBattle()
     {
         PlayerMovement ps = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        PlayerData pd = GameObject.Find("Player").GetComponent<PlayerData>();
+        pd.stats.hp = player.hp;
+        pd.stats.en = player.en;
+        pd.GiveExp(10);
         ps.LeaveBattle();
     }
 }
