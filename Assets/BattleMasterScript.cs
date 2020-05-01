@@ -117,7 +117,7 @@ public class BattlerDirectory
 public class BattleMasterScript : MonoBehaviour
 {
 
-    private enum states {battleintro,playerturn,playerattack,playerturnend,enemyturn,enemyattack,enemyturnend,dead};
+    private enum states {battleintro,playerturn,playerattack,playerturnend,enemyturn,enemyattack,enemyturnend,dead,battlewon};
     private states currstate;
     public BattleTopBoardScript topboard;
     public Battler player;
@@ -140,18 +140,19 @@ public class BattleMasterScript : MonoBehaviour
         currstate = states.battleintro;
         Debug.Log("Battlemaster initialized");
         topboard.UpdateString("The Spiky Vroomer approached!");
-        player.hp = 20;
-        player.maxhp = 20;
-        player.en = 10;
-        player.maxen = 10;
-        player.att = 10;
-        player.def = 4;
-        player.spd = 5;
+        PlayerData pd = GameObject.Find("Player").GetComponent<PlayerData>();
+        player.hp = pd.stats.hp;
+        player.maxhp = pd.stats.maxhp;
+        player.en = pd.stats.en;
+        player.maxen = pd.stats.maxen;
+        player.att = pd.stats.off;
+        player.def = pd.stats.def;
+        player.spd = pd.stats.spd;
         player.isPlayerControlled = true;
         enemy.def = 5;
         enemy.hp = 30;
         enemy.att = 9;
-        enemy.spd = 20;
+        enemy.spd = 5;
     }
 
     // Update is called once per frame
@@ -206,6 +207,15 @@ public class BattleMasterScript : MonoBehaviour
                     currstate = states.playerturn;
                 }
                 break;
+            case states.battlewon:
+                generalTimer += Time.deltaTime;
+                if (generalTimer >= 3.0f)
+                {
+                    generalTimer = 0.0f;
+                    currstate = states.dead;
+                    EndBattle();
+                }
+                break;
             default:
                 currstate = states.battleintro;
                 break;
@@ -225,7 +235,7 @@ public class BattleMasterScript : MonoBehaviour
         DamageText txt = dmgText.GetComponent<DamageText>();
         txt.dmg = dmg;
         txt.critical = critical;
-        Vector2 pos = sprite.transform.position;
+        Vector2 pos = sprite.transform.localPosition;
         Vector2 viewportPoint = 32 * pos;
         dmgText.GetComponent<RectTransform>().anchoredPosition = viewportPoint;
         dmgText.transform.SetParent(GameObject.Find("Canvas").transform, false);
@@ -241,14 +251,15 @@ public class BattleMasterScript : MonoBehaviour
         else
         {
             btl.Launch();
-            currstate = states.dead;
             if (btl.name == player.name)
             {
                 topboard.UpdateString("You lost...");
+                currstate = states.dead;
             }
             if (btl.name == enemy.name)
             {
                 topboard.UpdateString("You won!");
+                currstate = states.battlewon;
             }
         }
         btl.StartFlashing(3.0f);
@@ -272,16 +283,21 @@ public class BattleMasterScript : MonoBehaviour
     }
     public void EndPlayerAttack()
     {
-        if (currstate != states.dead)
+        if (currstate != states.dead && currstate != states.battlewon)
         {
             currstate = states.playerturnend;
         }
     }
     public void EndEnemyAttack()
     {
-        if (currstate != states.dead)
+        if (currstate != states.dead && currstate != states.battlewon)
         {
             currstate = states.enemyturnend;
         }
+    }
+    public void EndBattle()
+    {
+        PlayerMovement ps = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        ps.LeaveBattle();
     }
 }
