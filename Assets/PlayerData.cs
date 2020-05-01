@@ -152,7 +152,7 @@ public class ItemDirectory
 }
 
 
-[System.Serializable]
+//[System.Serializable]
 public class PlayerData : MonoBehaviour
 {
     public PlayerStats stats = new PlayerStats();
@@ -161,7 +161,22 @@ public class PlayerData : MonoBehaviour
     public List<int> equippedItems = new List<int>();
     public ItemDirectory masterItemDirectory = new ItemDirectory();
     // Start is called before the first frame update
-    void Start()
+    // void Start()
+    // {
+    //     stats.maxen = 10;
+    //     stats.maxhp = 20;
+    //     stats.hp = 15;
+    //     stats.en = 5;
+    //     stats.lvl = 1;
+    //     stats.exp = 0;
+    //     stats.exptonext = 20;
+    //     stats.off = 10;
+    //     stats.def = 8;
+    //     stats.spd = 6;
+    //     stats.pts = 5;
+    // }
+
+    public PlayerData()
     {
         stats.maxen = 10;
         stats.maxhp = 20;
