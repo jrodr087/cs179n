@@ -90,7 +90,6 @@ public class Battler
         shake = true;
         shakeT = 0.0f;
         radius = 1.0f;
-        sprite.GetComponent<ParticleSystem>().Play();
     }
     public void StartFlashing(float flashtime)
     {
@@ -263,6 +262,7 @@ public class BattleMasterScript : MonoBehaviour
             }
         }
         btl.StartFlashing(3.0f);
+        btl.sprite.GetComponent<ParticleSystem>().Emit(dmg);
         CreateDamageText(dmg, btl.sprite,critical);
     }
     public void PlayerAttack()
