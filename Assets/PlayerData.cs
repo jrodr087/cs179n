@@ -146,7 +146,7 @@ public class ItemDirectory
         new Item(ItemType.weapon, "Lighter","A Zippy(tm) lighter. Nice to have even if you don't smoke since it makes you look cool. Provides 2 Offense.", 0, 0, 2,0,0, WeaponType.fire,""),
         new Item(ItemType.weapon, "Handheld Fan","Not your biggest fan, but a fan nonetheless. Provides 0 Offense but 2 speed.", 0, 0, 0,0,2, WeaponType.wind,""),
         new Item(ItemType.weapon, "Water Gun","Give me a straw and a cup of water and I'll be able to dish out better water pressure than this thing. Provides 2 Offense.", 0, 0, 2,0,0, WeaponType.water,""),
-        new Item(ItemType.weapon, "Sword","A cool sword. Provides 20 Offense and 5 Defense.", 0, 0, 20,5,0, WeaponType.phys,"Items/UISprites/sword"),
+        new Item(ItemType.weapon, "Sword","A dangerously cool sword that silently urges you on to do dangerously stupid things. Provides 20 Offense and 5 Defense.", 0, 0, 20,5,0, WeaponType.phys,"Items/UISprites/sword"),
         new Item(ItemType.weapon, "All Around Buff","Buffs all stats 10.", 10,10, 10,10,10, WeaponType.phys,"")
     };
 }
@@ -154,14 +154,14 @@ public class ItemDirectory
 
 //[System.Serializable]
 public class PlayerData : MonoBehaviour
-{   
+{
     public PlayerStats stats = new PlayerStats();
     public int equipSlots = 3;
     public List<ItemDirectory.ItemIndex> items = new List<ItemDirectory.ItemIndex>();
     public List<int> equippedItems = new List<int>();
     public ItemDirectory masterItemDirectory = new ItemDirectory();
-    // Start is called before the first frame update
-    void Start()
+   // Start is called before the first frame update
+     void Start()
     {
         stats.maxen = 10;
         stats.maxhp = 20;
@@ -310,6 +310,17 @@ public class PlayerData : MonoBehaviour
             stats.off -= i.off;
             stats.def -= i.def;
             stats.spd -= i.spd;
+        }
+    }
+
+    public void GiveExp(int exp)
+    {
+        stats.exp += exp;
+        if (stats.exp >= stats.exptonext)
+        {
+            stats.exp = stats.exp - stats.exptonext;
+            stats.pts = stats.pts + 5;
+            stats.lvl++;
         }
     }
 }
