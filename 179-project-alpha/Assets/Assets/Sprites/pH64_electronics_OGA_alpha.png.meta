@@ -1,0 +1,2609 @@
+fileFormatVersion: 2
+guid: bd66e1cf6997bd44cb89ba1308b2ffed
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: pH64_electronics_OGA_alpha_0
+    21300002: pH64_electronics_OGA_alpha_1
+    21300004: pH64_electronics_OGA_alpha_2
+    21300006: pH64_electronics_OGA_alpha_3
+    21300008: pH64_electronics_OGA_alpha_4
+    21300010: pH64_electronics_OGA_alpha_5
+    21300012: pH64_electronics_OGA_alpha_6
+    21300014: pH64_electronics_OGA_alpha_7
+    21300016: pH64_electronics_OGA_alpha_8
+    21300018: pH64_electronics_OGA_alpha_9
+    21300020: pH64_electronics_OGA_alpha_10
+    21300022: pH64_electronics_OGA_alpha_11
+    21300024: pH64_electronics_OGA_alpha_12
+    21300026: pH64_electronics_OGA_alpha_13
+    21300028: pH64_electronics_OGA_alpha_14
+    21300030: pH64_electronics_OGA_alpha_15
+    21300032: pH64_electronics_OGA_alpha_16
+    21300034: pH64_electronics_OGA_alpha_17
+    21300036: pH64_electronics_OGA_alpha_18
+    21300038: pH64_electronics_OGA_alpha_19
+    21300040: pH64_electronics_OGA_alpha_20
+    21300042: pH64_electronics_OGA_alpha_21
+    21300044: pH64_electronics_OGA_alpha_22
+    21300046: pH64_electronics_OGA_alpha_23
+    21300048: pH64_electronics_OGA_alpha_24
+    21300050: pH64_electronics_OGA_alpha_25
+    21300052: pH64_electronics_OGA_alpha_26
+    21300054: pH64_electronics_OGA_alpha_27
+    21300056: pH64_electronics_OGA_alpha_28
+    21300058: pH64_electronics_OGA_alpha_29
+    21300060: pH64_electronics_OGA_alpha_30
+    21300062: pH64_electronics_OGA_alpha_31
+    21300064: pH64_electronics_OGA_alpha_32
+    21300066: pH64_electronics_OGA_alpha_33
+    21300068: pH64_electronics_OGA_alpha_34
+    21300070: pH64_electronics_OGA_alpha_35
+    21300072: pH64_electronics_OGA_alpha_36
+    21300074: pH64_electronics_OGA_alpha_37
+    21300076: pH64_electronics_OGA_alpha_38
+    21300078: pH64_electronics_OGA_alpha_39
+    21300080: pH64_electronics_OGA_alpha_40
+    21300082: pH64_electronics_OGA_alpha_41
+    21300084: pH64_electronics_OGA_alpha_42
+    21300086: pH64_electronics_OGA_alpha_43
+    21300088: pH64_electronics_OGA_alpha_44
+    21300090: pH64_electronics_OGA_alpha_45
+    21300092: pH64_electronics_OGA_alpha_46
+    21300094: pH64_electronics_OGA_alpha_47
+    21300096: pH64_electronics_OGA_alpha_48
+    21300098: pH64_electronics_OGA_alpha_49
+    21300100: pH64_electronics_OGA_alpha_50
+    21300102: pH64_electronics_OGA_alpha_51
+    21300104: pH64_electronics_OGA_alpha_52
+    21300106: pH64_electronics_OGA_alpha_53
+    21300108: pH64_electronics_OGA_alpha_54
+    21300110: pH64_electronics_OGA_alpha_55
+    21300112: pH64_electronics_OGA_alpha_56
+    21300114: pH64_electronics_OGA_alpha_57
+    21300116: pH64_electronics_OGA_alpha_58
+    21300118: pH64_electronics_OGA_alpha_59
+    21300120: pH64_electronics_OGA_alpha_60
+    21300122: pH64_electronics_OGA_alpha_61
+    21300124: pH64_electronics_OGA_alpha_62
+    21300126: pH64_electronics_OGA_alpha_63
+    21300128: pH64_electronics_OGA_alpha_64
+    21300130: pH64_electronics_OGA_alpha_65
+    21300132: pH64_electronics_OGA_alpha_66
+    21300134: pH64_electronics_OGA_alpha_67
+    21300136: pH64_electronics_OGA_alpha_68
+    21300138: pH64_electronics_OGA_alpha_69
+    21300140: pH64_electronics_OGA_alpha_70
+    21300142: pH64_electronics_OGA_alpha_71
+    21300144: pH64_electronics_OGA_alpha_72
+    21300146: pH64_electronics_OGA_alpha_73
+    21300148: pH64_electronics_OGA_alpha_74
+    21300150: pH64_electronics_OGA_alpha_75
+    21300152: pH64_electronics_OGA_alpha_76
+    21300154: pH64_electronics_OGA_alpha_77
+    21300156: pH64_electronics_OGA_alpha_78
+    21300158: pH64_electronics_OGA_alpha_79
+    21300160: pH64_electronics_OGA_alpha_80
+    21300162: pH64_electronics_OGA_alpha_81
+    21300164: pH64_electronics_OGA_alpha_82
+    21300166: pH64_electronics_OGA_alpha_83
+    21300168: pH64_electronics_OGA_alpha_84
+    21300170: pH64_electronics_OGA_alpha_85
+    21300172: pH64_electronics_OGA_alpha_86
+    21300174: pH64_electronics_OGA_alpha_87
+    21300176: pH64_electronics_OGA_alpha_88
+    21300178: pH64_electronics_OGA_alpha_89
+    21300180: pH64_electronics_OGA_alpha_90
+    21300182: pH64_electronics_OGA_alpha_91
+    21300184: pH64_electronics_OGA_alpha_92
+    21300186: pH64_electronics_OGA_alpha_93
+    21300188: pH64_electronics_OGA_alpha_94
+    21300190: pH64_electronics_OGA_alpha_95
+    21300192: pH64_electronics_OGA_alpha_96
+    21300194: pH64_electronics_OGA_alpha_97
+    21300196: pH64_electronics_OGA_alpha_98
+    21300198: pH64_electronics_OGA_alpha_99
+    21300200: pH64_electronics_OGA_alpha_100
+    21300202: pH64_electronics_OGA_alpha_101
+    21300204: pH64_electronics_OGA_alpha_102
+    21300206: pH64_electronics_OGA_alpha_103
+    21300208: pH64_electronics_OGA_alpha_104
+    21300210: pH64_electronics_OGA_alpha_105
+    21300212: pH64_electronics_OGA_alpha_106
+    21300214: pH64_electronics_OGA_alpha_107
+    21300216: pH64_electronics_OGA_alpha_108
+    21300218: pH64_electronics_OGA_alpha_109
+    21300220: pH64_electronics_OGA_alpha_110
+    21300222: pH64_electronics_OGA_alpha_111
+    21300224: pH64_electronics_OGA_alpha_112
+    21300226: pH64_electronics_OGA_alpha_113
+    21300228: pH64_electronics_OGA_alpha_114
+    21300230: pH64_electronics_OGA_alpha_115
+    21300232: pH64_electronics_OGA_alpha_116
+    21300234: pH64_electronics_OGA_alpha_117
+    21300236: pH64_electronics_OGA_alpha_118
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 159
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0696ae81a9521c64ca66b9d0b58805f5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_1
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 169
+        width: 31
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72e8d192498c3b140bc9aeb946fb6a3a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 166
+        width: 7
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e75831ed3a4df944cacfc90469de41f3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_3
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 175
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6361c5d1cb24c0441bdfc5856d98f2de
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_4
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 166
+        width: 7
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d129131b8ff55b44bc1448e611c8450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_5
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 175
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d900ffb1f6c00644fa2ff1d32386a444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_6
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 168
+        width: 5
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aceed7c453d0cf746bbbccb2222afe53
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_7
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 162
+        width: 5
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9b2d679b451f284c8f26992cfbc1e03
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_8
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 172
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9071379e1b520ea408cf3acbc6ef037e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_9
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 170
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd49c385892396459d23b14beded5d3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_10
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 174
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae38873a7220c5e449f0333477862ede
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_11
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 175
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59f7ee1ded64de94eaef15d030d9df4a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_12
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 170
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8803d55bd43f64542bba668a1e30ba54
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_13
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 164
+        width: 18
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43526ae83d1e70545b5cd74cf3f0131a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_14
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 173
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb25709d0304ba34485361d21ed50317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_15
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 170
+        width: 19
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4eb135fc7caa944a916fff572c4c365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_16
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 171
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df69fa5548907724485ccf6127b7a2a9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_17
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 172
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8af5ea35634066f48a27e0fb168002b2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_18
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 171
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c99f9fad303fa514cb55cda65b059ed8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_19
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 182
+        width: 13
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b69b9dd3b1fafc479345b0e05f19e8d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_20
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 178
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da67947ecc2194c4ca7d8e336ac3b4f8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_21
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 177
+        width: 13
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b677ebb81c15e7a448504adb437153aa
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_22
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 172
+        width: 13
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f1f8fb1d0f47074a9022edfcd810ce2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_23
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 157
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2126e3a5c79264e4f996cac926c0dbae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_24
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 114
+        width: 18
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35bf7046ac5dc1e489d25eb91009038d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_25
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 115
+        width: 13
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c029e8e618b02c449519d015e315718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_26
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 115
+        width: 15
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e24787fc592e49d46b1789b97a337cfb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_27
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 115
+        width: 15
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3707e1d5055a22d419888fd274695c35
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_28
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 114
+        width: 13
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2b37053ba5b7704b911aa9151f82f5e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_29
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 114
+        width: 18
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dafe0b6e0af9524d816467ecfdcd583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_30
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 114
+        width: 11
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee1fcb83bed1b4147ab52f79c0b7aade
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_31
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 114
+        width: 19
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e1b0b2df7fe24148bffae79c2edb835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_32
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 114
+        width: 15
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a778c0ba2a9da2742bebdd339d61a7d4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_33
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 115
+        width: 19
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 217a1489debcc2c4fb9e625ace7f82e9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_34
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 140
+        width: 29
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051ed77411cc23f4a8f38d5fdfd2c318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_35
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 141
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ab7136b13dc752499e07fadc853dadf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_36
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 137
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 969d6e521725bfd4d9a0e41ef292cd94
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_37
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 142
+        width: 28
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfce43d58f402304f910cbb4fc20749f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_38
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 136
+        width: 41
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e661b73bb8f2064c8d71dc20dfceec5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_39
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 142
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfbd499d058fbf34bb833c5f9a5cd34a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_40
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 136
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9d518f633f6ad74a9a97b3699a016ae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_41
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 136
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b636af4ceed592489b49161c8c86472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_42
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 120
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cd937478ac1798458a782171d594651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_43
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 119
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1a1036b21c983a4493226b3a9025a7a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_44
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 98
+        width: 15
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d433d8733b3b4e84ebcff897fbdec501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_45
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 99
+        width: 12
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28845d96d5fea8744aa8c5c7232fe847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_46
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 124
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed4f0e5d35ddc2428a6e73667a6d749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_47
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 102
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b979abbee4e8da449828232635604530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_48
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 117
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbc1ec8052e90dc4a88dc24f7c9fe601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_49
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 117
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f68ba028b3de88140bc5b2db412d45f2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_50
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 117
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40058360aecf869449275583d85bec76
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_51
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 85
+        width: 25
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c815e6e06e51f94584bdc29230962dd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_52
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 89
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5fb85517e8dfe748aa5cc2f2cee85a2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_53
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 89
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae378c07dd1c9b247968e854213f5adb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_54
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 88
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d9eaba5fb5f9f242b1e9fbc0ed4b7ad
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_55
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 89
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 551d97e057491294d9bdd759acd3a062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_56
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 89
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08a2123e9d60c4b45b7222c9738d4f2c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_57
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 88
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d78c0ca1d659d04e83e6104182430d7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_58
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 87
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2848a9dee5982bb43ab0805492491786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_59
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 89
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 570f6b82442d4394b8638fc4ede221de
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_60
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 91
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37b55f6d33f68704f8849690a59a6bcb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_61
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 92
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24427e485bb777d4fa3dfc2d6e8e7d29
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_62
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 91
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad0f4abda7dd9054b98b652371c2f4a7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_63
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 94
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c547e62be49303846aa357dd4b4c42d8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_64
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 94
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fefb8cf4ab215e4eb76e1bde3a777ee
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_65
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 97
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d3cc08747c574c429c8629bce3081fe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_66
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 103
+        width: 16
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e9d3d472fec88a4082abfd6c8c1c65e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_67
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 65
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da72daa10473ebc4787857d762afbd6f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_68
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 66
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ca77637815ea094fa1438aa7b0f32f9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_69
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 66
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1a3ef518d22d4f4ba27c5466efb36ff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_70
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 66
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63fd8897a290bfd4a975ece4db3cd68e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_71
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 66
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 600140d685b88e04b802fbd4e2b6368e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_72
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 73
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a54e5be40b5da442b65a7ca72f3949e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_73
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 73
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cfb400ac0c92364ea34950b89f89259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_74
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 73
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea2e0c377da74bd4c8763f8919d4fc22
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_75
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 71
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ddfb23471a5541419d19de53fea5f45
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_76
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 72
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 320ec77a0d3a28540a1ef74e682f4d8e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_77
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 71
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e5acbd71eeee0f4f9a6bffbb18ca2f7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_78
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 82
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f9de1d583ea4e44abe3a623e88869dd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_79
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d73b27a1a833fe45a34702d88c33d88
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_80
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 67
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80b9eb58aee7dcb4290c4118df01869e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_81
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 66
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f07a1baa0ee0b8b4eb3c72a23c5d80e2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_82
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 58
+        width: 10
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1ed61fb02d42f245ad7fe6aa26ed813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_83
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 58
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aae52a4feff202b4c9bd341bab17a40f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_84
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 58
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f98876277cd6a6642b8ae2b4af26b56b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_85
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 49
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72d74b9138228d245bde208c1d7c1bb2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_86
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 61
+        width: 37
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d217373890c21e4eb658318688711c2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_87
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 59
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9fee8d228be5994a9f1b37b9c05efad
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_88
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 59
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52d57705c0674234d9a8eb674a988241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_89
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 49
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1bc31c55c51a4a41bd4546aae6989b9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_90
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 50
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a59e4cc95d5112e4983b2bf96c804b8b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_91
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 48
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 243ddf87074c2104c8cb54534b92f63e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_92
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 38
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df5b1e95b252314e8cb7aaed385f4a7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_93
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 39
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02ea33ca4542dd54fbf0cfdc5bab4884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_94
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 39
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d405e28816a84b41bf9619757e36cf2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_95
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 41
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd34cb6007f894340a30216ff6b789a5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_96
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 42
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff4c0cd43d94493478eaab2f13ae53db
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_97
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 2
+        width: 18
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8d4fa458f8df3b409822c351e38e538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_98
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 3
+        width: 26
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26265afaa13cb2a40a6537e7666420ed
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_99
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 5
+        width: 27
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba421e97b729a0f479fd1eb7b1192030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_100
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 4
+        width: 25
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed1906eb3d1f58a469021b93ef92d92c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_101
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 37
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd96d82c905f01d4ca7903b407dbc70d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_102
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 36
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bacf4cb5938e03e41ab3f6fca4a64504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_103
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 33
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57093364fb1d35040a9ed82f7eb298da
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_104
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 33
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 595dedd1ba65bcc49aa5150d5265e011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_105
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 35
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdfffef6db4c52641bff79abe39d1804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_106
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 32
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 953061c5a31866e4ca9e36c28ebbd363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_107
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 38
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6827b5a673b52b4fa4b1a0f526b30c3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_108
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 41
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd8091c90a5e61640abe8a9c5e18ac51
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_109
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 5
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff9f6a4fdbcaba940a3455256e2a42af
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_110
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 4
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c250849881a3644469f8c8eef4f68b06
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_111
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 4
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d84a221d625ac0c4a854dac749ab0dc1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_112
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 4
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62e401fe402809e47bbb6af73d6f6522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_113
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 5
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43718f4f32ea48f4eae01654ec019231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_114
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 5
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1cead781d0ab594fac5b0f468767c90
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_115
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 3
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f798aba6873b1d4d951422543bf40b0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_116
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 4
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10a857fcb4a65f740b1223a5da5b6b19
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_117
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 5
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d130362d36304cb49883bc9ae2f66d03
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pH64_electronics_OGA_alpha_118
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 4
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a81e8d57652c76c46b5ee04ac6ad3a76
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 93bebbdb77fff2a44bb32440e0ee7bfa
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
