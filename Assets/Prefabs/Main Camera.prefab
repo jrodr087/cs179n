@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 422091370322079269}
   - component: {fileID: 422091370322079270}
   - component: {fileID: 422091370322079449}
+  - component: {fileID: 4333469292318511266}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -120,6 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerChar: {fileID: 0}
   cam: {fileID: 422091370322079451}
+  Battle: {fileID: 0}
+  sub: 0
 --- !u!114 &422091370322079449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,3 +154,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &4333469292318511266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422091370322079451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 687df4ff4e90b9e4d8a165981b74c0ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 24591e49ee5474a4e86544b8d4ab6331, type: 2}
+  currstate: 0
+  cutoff: 0.4
+  wipein: {fileID: 2800000, guid: e01f0e110473f8e4c892e49f0d20e061, type: 3}
+  wipeout: {fileID: 2800000, guid: fecd84376dc0006469f17caad9acb7f5, type: 3}

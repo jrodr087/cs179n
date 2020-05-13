@@ -30,6 +30,13 @@ public class EnemyDirectory
 
     };
 }
+public class AttackDirectory
+{
+    public Enemy[] dir = //make this match with the enemy Directory
+    {
+
+    };
+};
 
 
 public class Battler
