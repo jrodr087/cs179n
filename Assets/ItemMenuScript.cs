@@ -14,17 +14,21 @@ public class ItemMenuScript : MonoBehaviour
     public Image itemTypeImage;
     public GameObject buttonPrefab;
     public GameObject buttonContainer;
+
     private PlayerData pd;
     private Transform containerTransform;
-    AudioSource audio;
     private List<GameObject> buttonList = new List<GameObject>();
     private int curItem;
     private int equippedItemsLen;
     private GameObject noItems;
+    private CutsceneScript handler;
+
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
         GameObject player = GameObject.Find("Player");
+        handler = GameObject.Find("/UI/VignetteController").GetComponent<CutsceneScript>();
         pd = player.GetComponent<PlayerData>();
         containerTransform = buttonContainer.GetComponent<Transform>();
         itemDetails.SetActive(false);
@@ -40,7 +44,7 @@ public class ItemMenuScript : MonoBehaviour
         noItems.transform.Find("Text").gameObject.GetComponent<Text>().text = "You have No Items :( !";
     } 
 
-    void UpdateButtons()
+    public void UpdateButtons()
     {
         noItems.SetActive(buttonList.Count < 1);
         equippedItemsLen = pd.equippedItems.Count;
@@ -57,6 +61,9 @@ public class ItemMenuScript : MonoBehaviour
             x = "";
         }
         buttonContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(buttonContainer.GetComponent<RectTransform>().sizeDelta.x, buttonList.Count * 24);
+        if (itemDetails.activeSelf){
+            UpdateItemInfo(curItem);
+        }
     }
 
     // Update is called once per frame
@@ -79,7 +86,6 @@ public class ItemMenuScript : MonoBehaviour
         }
         if (equippedItemsLen != pd.equippedItems.Count){
             changedFlag = true;
-            UpdateItemInfo(curItem);
         }
         if (changedFlag)
         {
@@ -89,7 +95,8 @@ public class ItemMenuScript : MonoBehaviour
 
     public void UpdateItemInfo(int i)
     {
-        if (!itemDetails.activeSelf){ ToggleItemDetails(); }
+        // if (!itemDetails.activeSelf){ ToggleItemDetails(); }
+        ToggleItemDetails();
         curItem = i;
         ItemDirectory.ItemIndex id = pd.items[i];
         audio.PlayOneShot((AudioClip)Resources.Load("Sounds/ItemButtonClick"));
@@ -161,11 +168,38 @@ public class ItemMenuScript : MonoBehaviour
         }
     }
 
-
+    private string a;
+    private string[] b = new string[1];
     public void equipItem() {
-        pd.equipItem(curItem);
-        UpdateButtons();
-        UpdateItemInfo(curItem);
+        ItemType it = pd.masterItemDirectory.dir[(int) pd.items[curItem] ].type;
+        if ( it == ItemType.weapon || it == ItemType.accessory ) {
+            if (pd.equippedItems.Contains(curItem) || pd.equippedItems.Count < pd.equipSlots){
+                pd.equipItem(curItem);
+                UpdateButtons();
+            } else {
+                a = "No more equip slots! Dequip an item first!";
+                b[0] = a;
+                handler.StartSceneFromLock(b);
+                ToggleItemDetails();
+            }
+            
+        }
+        else if ( it == ItemType.consumable ) {
+            pd.applyConsumable(pd.masterItemDirectory.dir[(int) pd.items[curItem] ]);
+            a  = "Used a " + pd.masterItemDirectory.dir[(int) pd.items[curItem] ].name; 
+            pd.items.RemoveAt(curItem);
+            b[0] = a;
+            handler.StartSceneFromLock(b);
+            ToggleItemDetails();
+        }
+        else if ( it == ItemType.key ) {
+            a = "Can't use that here!";
+            b[0] = a;
+            handler.StartSceneFromLock(b);
+            ToggleItemDetails();
+        }
+        
+        // UpdateItemInfo(curItem);
     }
 
     public void ToggleItemDetails()

@@ -133,7 +133,7 @@ public class ItemDirectory
 
     public enum ItemIndex //make sure to define a matching item in the item array dir
     {
-        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd
+        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd, bsckey
     };
 
     public Item[] dir = //make sure to define a matching index in the item index enum
@@ -147,7 +147,7 @@ public class ItemDirectory
         new Item(ItemType.weapon, "Handheld Fan","Not your biggest fan, but a fan nonetheless. Provides 0 Offense but 2 speed.", 0, 0, 0,0,2, WeaponType.wind,""),
         new Item(ItemType.weapon, "Water Gun","Give me a straw and a cup of water and I'll be able to dish out better water pressure than this thing. Provides 2 Offense.", 0, 0, 2,0,0, WeaponType.water,""),
         new Item(ItemType.weapon, "Sword","A dangerously cool sword that silently urges you on to do dangerously stupid things. Provides 20 Offense and 5 Defense.", 0, 0, 20,5,0, WeaponType.phys,"Items/UISprites/sword"),
-        new Item(ItemType.weapon, "All Around Buff","Buffs all stats 10.", 10,10, 10,10,10, WeaponType.phys,"")
+        new Item(ItemType.weapon, "All Around Buff","Buffs all stats 10.", 10,10,10,10,10, WeaponType.phys,"")
     };
 }
 
@@ -239,26 +239,29 @@ public class PlayerData : MonoBehaviour
         {
             GiveItem((ItemDirectory.ItemIndex) 9);
         }
+        else if (Input.GetKeyDown("z"))
+        {
+            stats.hp = 1;
+        }
     }
 
     public void GiveItem(ItemDirectory.ItemIndex itemIndex)
     {
-        //ItemType type = masterItemDirectory.dir[itemIndex].type;
-        //switch (type)
-        //{
-        //    case ItemType.consumable:
-        //    {
-        //            Consumable it = new Consumable();
-        //            it = masterItemDirectory.dir[itemIndex];
-        //            items.Add(it);
-        //            Debug.Log("Added item name: " + it.name);
-        //            break;
-        //    }
-        //}
         Item it = new Item();
         it = masterItemDirectory.dir[(int)itemIndex];
         items.Add(itemIndex);
         Debug.Log("Added item name: " + it.name);
+    }
+
+    public void RemoveItem(ItemDirectory.ItemIndex itemIndex)
+    {
+        int x = (int) items.FindIndex( (ItemDirectory.ItemIndex i) => i ==  itemIndex);
+        items.RemoveAt(x);
+        if (equippedItems.Contains(x)){
+            equippedItems.RemoveAt( (int) equippedItems.FindIndex( (int i) => i == x) );
+        }
+        Item it = masterItemDirectory.dir[(int)itemIndex];
+        Debug.Log("Removed item name: " + it.name);
     }
 
     public void modifyStats(string stat, int change) {
@@ -290,26 +293,45 @@ public class PlayerData : MonoBehaviour
             applyItem(masterItemDirectory.dir[(int)items[curItem]], false);
             Debug.Log("Dequipped item " + masterItemDirectory.dir[(int)items[curItem]].name);
         } 
-        else if (equippedItems.Count < 3){
+        else if (equippedItems.Count < equipSlots){
             equippedItems.Add(curItem);
             applyItem(masterItemDirectory.dir[(int)items[curItem]], true);
             Debug.Log("Equipped item " + masterItemDirectory.dir[(int)items[curItem]].name);
         }
     }
 
-    private void applyItem(Item i, bool apply) {
+    public void applyItem(Item i, bool apply) {
         if (apply){
+            stats.maxhp += i.hp;
+            stats.maxen += i.en;
             stats.hp += i.hp;
             stats.en += i.en;
             stats.off += i.off;
             stats.def += i.def;
             stats.spd += i.spd;
         } else {
-            stats.hp -= i.hp;
-            stats.en -= i.en;
+            stats.maxhp -= i.hp;
+            stats.maxen -= i.en;
+            if (stats.hp > stats.maxhp){
+                stats.hp = stats.maxhp;
+            }
+            if (stats.en > stats.maxen){
+                stats.en = stats.maxen;
+            }
             stats.off -= i.off;
             stats.def -= i.def;
             stats.spd -= i.spd;
+        }
+    }
+
+    public void applyConsumable(Item i) {
+        stats.hp += i.hp;
+        stats.en += i.en;
+        if (stats.hp > stats.maxhp){
+            stats.hp = stats.maxhp;
+        }
+        if (stats.en > stats.maxen){
+            stats.en = stats.maxen;
         }
     }
 
