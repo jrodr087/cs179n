@@ -3,6 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class Attacks
+{
+    public int[] weights =
+    {
+
+    };
+    public string[] attackObjs =
+    {
+
+    };
+};
+
+public class Enemy
+{
+    public int hp, en, maxhp, maxen, att, def, spd, lvl;
+    public string name;
+    public string spritePath;
+    public Attacks atks;
+};
+public class EnemyDirectory
+{
+    public enum EnemyIndex { };
+    public Enemy[] dir =
+    {
+
+    };
+}
+public class AttackDirectory
+{
+    public Enemy[] dir = //make this match with the enemy Directory
+    {
+
+    };
+};
+
+
 public class Battler
 {
     public int hp, en, maxhp, maxen, att, def, spd, lvl;
@@ -102,20 +138,10 @@ public class Battler
     }
 }
 
-public class BattlerDirectory
-{
-    public enum BattlerIndex {};
-    public Battler[] dir =
-    {
-
-    };
-}
-
 
 
 public class BattleMasterScript : MonoBehaviour
 {
-
     private enum states {battleintro,playerturn,playerattack,playerturnend,enemyturn,enemyattack,enemyturnend,dead,battlewon};
     private states currstate;
     public BattleTopBoardScript topboard;
