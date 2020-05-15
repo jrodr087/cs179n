@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -159,7 +160,33 @@ public class CutsceneScript : MonoBehaviour
             txt.text = "";
             dialogue = false;
         }
+        else if (currstate == states.vigin){
+            scenestrings = scenestrings.Concat(strings).ToArray();
+        }
     }
+
+    // This function was created purely to be used from Choice Menu
+    public void StartSceneFromLock(string[] strings)
+    {
+        if (currstate == states.vigout)
+        {
+            movscript.LockMovement();
+            nametag.SetActive(false);
+            scenestrings = strings;
+            currstate = states.vigentering;
+            currstring = "";
+            fullstring = strings[0];
+            stringindex = 0;
+            charindex = 0;
+            timer = textspeed;
+            txt.text = "";
+            dialogue = false;
+        }
+        else if (currstate == states.vigin){
+            scenestrings = scenestrings.Concat(strings).ToArray();
+        }
+    }
+
     public void StartDialogue(string[] strings, string nametext)
     {
         if (currstate == states.vigout && !movscript.GetMovementLock())
