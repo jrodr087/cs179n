@@ -18,13 +18,13 @@ MonoBehaviour:
   useJsonPrettyPrint: 1
   maxSaveSlotCount: 300
   trackTimePlayed: 1
-  autoSaveOnExit: 1
-  autoSaveOnSlotSwitch: 1
+  autoSaveOnExit: 0
+  autoSaveOnSlotSwitch: 0
   resetSaveableIdOnDuplicate: 1
   resetSaveableIdOnNewScene: 0
   loadDefaultSlotOnStart: 1
   defaultSlot: 0
-  useHotkeys: 0
+  useHotkeys: 1
   saveAndWriteToDiskKey: 283
   syncSaveGameKey: 285
   syncLoadGameKey: 286
