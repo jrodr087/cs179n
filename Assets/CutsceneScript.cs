@@ -7,13 +7,16 @@ public class CutsceneScript : MonoBehaviour
 {
     public Image vigtop;
     public Image vigbot;
+    public GameObject nametag;
+    public Text nametagtext;
     public PlayerMovement movscript;
     private int vignettespeed = 10;
     private int vigspot = 64;
     private RectTransform vigtoptransform;
     private RectTransform vigbottransform;
     public Text txt;
-    private int textspeed = 2;
+    private bool dialogue = false;
+    private int textspeed = 4;
     private string currstring;
     private string fullstring;
     private string[] scenestrings;
@@ -27,6 +30,7 @@ public class CutsceneScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
         vigtoptransform = vigtop.GetComponent<RectTransform>();
         vigbottransform = vigbot.GetComponent<RectTransform>();
         txtsfx = gameObject.GetComponent<AudioSource>();
@@ -58,7 +62,14 @@ public class CutsceneScript : MonoBehaviour
                 else
                 {
                     charindex++;
-                    currstring = fullstring.Substring(0, charindex);
+                    if (dialogue)
+                    {
+                        currstring = "* " + fullstring.Substring(0, charindex);
+                    }
+                    else
+                    {
+                        currstring = fullstring.Substring(0, charindex);
+                    }
                     if (Input.GetKey("space"))
                     {
                         timer = 0;
@@ -69,7 +80,7 @@ public class CutsceneScript : MonoBehaviour
                         {
                             timer = 45;
                         }
-                        else if (fullstring[currstring.Length -1] == ',' || currstring[currstring.Length - 1] == '-')
+                        else if (currstring[currstring.Length - 1] == ',' || currstring[currstring.Length - 1] == '-')
                         {
                             timer = 30;
                         }
@@ -112,6 +123,7 @@ public class CutsceneScript : MonoBehaviour
             vigbottransform.anchoredPosition = new Vector2(vigbottransform.anchoredPosition.x, vigbottransform.anchoredPosition.y - vignettespeed);
             if (vigbottransform.anchoredPosition.y <= -vigspot)
             {
+                nametag.SetActive(false);
                 currstate = states.vigout;
                 vigbottransform.anchoredPosition = new Vector2(vigbottransform.anchoredPosition.x, -vigspot);
                 vigtoptransform.anchoredPosition = new Vector2(vigbottransform.anchoredPosition.x, vigspot);
@@ -136,6 +148,7 @@ public class CutsceneScript : MonoBehaviour
         if (currstate == states.vigout && !movscript.GetMovementLock())
         {
             movscript.LockMovement();
+            nametag.SetActive(false);
             scenestrings = strings;
             currstate = states.vigentering;
             currstring = "";
@@ -144,7 +157,26 @@ public class CutsceneScript : MonoBehaviour
             charindex = 0;
             timer = textspeed;
             txt.text = "";
+            dialogue = false;
         }
     }
-    
+    public void StartDialogue(string[] strings, string nametext)
+    {
+        if (currstate == states.vigout && !movscript.GetMovementLock())
+        {
+            movscript.LockMovement();
+            scenestrings = strings;
+            nametagtext.text = nametext;
+            nametag.SetActive(true);
+            currstate = states.vigentering;
+            currstring = "";
+            fullstring = strings[0];
+            stringindex = 0;
+            charindex = 0;
+            timer = textspeed;
+            txt.text = "";
+            dialogue = true;
+        }
+    }
+
 }

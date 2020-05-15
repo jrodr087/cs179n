@@ -5,15 +5,18 @@ using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
-    public GameObject itemlist;
-    public GameObject status;
+    public GameObject itemMenu;
+    public GameObject statusMenu;
+    public GameObject equipMenu;
     private int currNest = 0;
+    private GameObject openMenu;
     AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
-        itemlist.SetActive(false);
-        status.SetActive(false);
+        itemMenu.SetActive(false);
+        statusMenu.SetActive(false);
+        equipMenu.SetActive(false);
         audio = gameObject.AddComponent<AudioSource>();
     }
 
@@ -24,32 +27,73 @@ public class MenuScript : MonoBehaviour
     }
     public void ToggleItemMenu()
     {
-        if (currNest == 0 && !itemlist.activeSelf)
+        if (currNest == 0 && !itemMenu.activeSelf)
         {
-            itemlist.SetActive(true);
+            itemMenu.SetActive(true);
             currNest = 1;
+            openMenu = itemMenu;
             audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuOpen"));
         }
-        else if (currNest == 1 && itemlist.activeSelf)
+        else if (currNest == 1 && itemMenu.activeSelf)
         {
-            itemlist.SetActive(false);
+            itemMenu.SetActive(false);
             currNest = 0;
             audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuClose"));
+        }
+        else {
+            openAndClose(itemMenu, openMenu);
         }
     }
     public void ToggleStatusMenu()
     {
-        if (currNest == 0 && !status.activeSelf)
+        if (currNest == 0 && !statusMenu.activeSelf)
         {
-            status.SetActive(true);
+            statusMenu.SetActive(true);
             currNest = 1;
+            openMenu = statusMenu;
             audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuOpen"));
         }
-        else if (currNest == 1 && status.activeSelf)
+        else if (currNest == 1 && statusMenu.activeSelf)
         {
-            status.SetActive(false);
+            statusMenu.SetActive(false);
             currNest = 0;
             audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuClose"));
         }
+        else {
+            openAndClose(statusMenu, openMenu);
+        }
+    }
+    public void ToggleEquipMenu()
+    {
+        if (currNest == 0 && !equipMenu.activeSelf)
+        {
+            equipMenu.SetActive(true);
+            currNest = 1;
+            openMenu = equipMenu;
+            audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuOpen"));
+        }
+        else if (currNest == 1 && equipMenu.activeSelf)
+        {
+            equipMenu.SetActive(false);
+            currNest = 0;
+            audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuClose"));
+        }
+        else {
+            openAndClose(equipMenu, openMenu);
+        }
+    }
+
+    public void ToggleExit()
+    {
+        //TO DO: Prompt to ask if they want to want to exit w/o saving first
+        Application.Quit();
+    }
+
+    private void openAndClose(GameObject toOpen, GameObject toClose){
+        toClose.SetActive(false);
+        currNest = 1;
+        openMenu = toOpen;
+        toOpen.SetActive(true);
+        audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuOpen"));
     }
 }

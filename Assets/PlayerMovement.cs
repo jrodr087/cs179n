@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 	public float moveSpeed = 5f;
 	public Rigidbody2D rb;
     public Animator animator;
+    public GameObject battle;
     private bool movementlocked = false;
     Vector2 lastmovement;
 	Vector2 movement;
@@ -63,5 +64,13 @@ public class PlayerMovement : MonoBehaviour
     public bool GetMovementLock()
     {
         return movementlocked;
+    }
+    public void LeaveBattle()
+    {
+        CameraScript cs = GameObject.Find("Main Camera").GetComponent<CameraScript>();
+        cs.Battle = null;
+        cs.sub = CameraSubject.player;
+        Destroy(battle);
+        UnlockMovement();
     }
 }
