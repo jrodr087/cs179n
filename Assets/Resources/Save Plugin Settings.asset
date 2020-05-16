@@ -22,7 +22,7 @@ MonoBehaviour:
   autoSaveOnSlotSwitch: 0
   resetSaveableIdOnDuplicate: 1
   resetSaveableIdOnNewScene: 0
-  loadDefaultSlotOnStart: 1
+  loadDefaultSlotOnStart: 0
   defaultSlot: 0
   useHotkeys: 1
   saveAndWriteToDiskKey: 283
