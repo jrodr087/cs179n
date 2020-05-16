@@ -160,9 +160,9 @@ public class CutsceneScript : MonoBehaviour
             txt.text = "";
             dialogue = false;
         }
-        else if (currstate == states.vigin){
-            scenestrings = scenestrings.Concat(strings).ToArray();
-        }
+        //else if (currstate == states.vigin){
+        //    scenestrings = scenestrings.Concat(strings).ToArray();
+        //}
     }
 
     // This function was created purely to be used from Choice Menu
