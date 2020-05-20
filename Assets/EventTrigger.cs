@@ -11,7 +11,6 @@ public class EventTrigger : MonoBehaviour
     public AudioClip sound;
     new AudioSource audio;
     private PlayerMovement movscript;
-    private bool inside = false;
     // Start is called before the first frame update
     void Start()
     {

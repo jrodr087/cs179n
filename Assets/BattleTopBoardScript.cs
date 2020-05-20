@@ -14,7 +14,7 @@ public class BattleTopBoardScript : MonoBehaviour
     private enum states {boardout,boardentering,boardin,boardexiting};
     private states currstate = states.boardout;
     private int timer = 0;
-    private int textspeed = 2;
+    private int textspeed = 1;
     private float boardtimer = 3.0f;
     private float currboardtimer = 0.0f;
     private float stringtimer = 1.0f;
