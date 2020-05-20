@@ -16,7 +16,7 @@ MonoBehaviour:
   fileFolderName: SaveData
   fileName: Slot
   useJsonPrettyPrint: 1
-  maxSaveSlotCount: 300
+  maxSaveSlotCount: 10
   trackTimePlayed: 1
   autoSaveOnExit: 0
   autoSaveOnSlotSwitch: 0
