@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     private CameraShader cs;
     private Texture inwipe;
     private Texture outwipe;
+    public EnemyFactory.EnemyType type;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,9 @@ public class EnemyScript : MonoBehaviour
         cs.sub = CameraSubject.battle;
         cs.Battle = btl;
         movscript.battle = btl;
+        BattleMasterScript bm;
+        bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
+        bm.InitializeBattle(type);
         Destroy(gameObject);
     }
     void OnTriggerEnter2D(Collider2D other)

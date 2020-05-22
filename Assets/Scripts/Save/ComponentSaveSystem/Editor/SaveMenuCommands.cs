@@ -14,13 +14,14 @@ namespace Lowscope.SaveMaster.EditorTools
         [UnityEditor.MenuItem(itemName: "Saving/Open Save Location")]
         public static void OpenSaveLocation()
         {
+            string path = string.Format("{0}/{1}", Application.persistentDataPath, SaveSettings.Get().fileFolderName);
+
 #if UNITY_EDITOR_WIN
-            string dataPath = string.Format("{0}/{1}", Application.persistentDataPath, SaveSettings.Get().fileFolderName);
 
-            Directory.CreateDirectory(dataPath);
+            Directory.CreateDirectory(path);
 
-            string path = dataPath.Replace(@"/", @"\");   // explorer doesn't like front slashes
-            System.Diagnostics.Process.Start("explorer.exe", "/open," + path);
+            string winPath = path.Replace(@"/", @"\");   // explorer doesn't like front slashes
+            System.Diagnostics.Process.Start("explorer.exe", "/open," + winPath);
 
 #elif UNITY_EDITOR_OSX
 
