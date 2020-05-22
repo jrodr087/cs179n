@@ -29,7 +29,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpikyVroomer
+  m_Name: Maddened Lappy
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -102,7 +102,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a29a4364925c2074c9624c8d873c557d, type: 2}
+  m_Motion: {fileID: 7400000, guid: c5acf40568d84fe4a9236c96b85df27b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -41,12 +41,12 @@ public class AttackAnim : MonoBehaviour
             int dmg = 0;
             if (atknum == 2)
             {
-                dmg = (int)Mathf.Ceil(Mathf.Max((((float)aggressor.att * 1.4f - (float)target.def) * percent), 1));
+                dmg = (int)Mathf.Ceil(Mathf.Max(((float)aggressor.att * 1.4f - (float)target.def) * percent, 1));
                 bm.DamageBattler(dmg, target, crit);
             }
             else
             {
-                dmg = (int)Mathf.Ceil(Mathf.Max((((float)aggressor.att * 0.8f - (float)target.def) * percent), 1));
+                dmg = (int)Mathf.Ceil(Mathf.Max(((float)aggressor.att * 0.6f - (float)target.def) * percent, 1));
                 bm.DamageBattlerNoSound(dmg, target, crit);
             }
             atknum++;

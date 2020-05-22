@@ -133,13 +133,13 @@ public class ItemDirectory
 
     public enum ItemIndex //make sure to define a matching item in the item array dir
     {
-        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd, bsckey
+        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd, bitparticlegun, cheeties, bsckey
     };
 
     public Item[] dir = //make sure to define a matching index in the item index enum
     {
         new Item(ItemType.consumable, "Co-Cola Cola", "An off-brand cola. Heals 10 HP.",10,0,"Items/UISprites/cocola cola"),
-        new Item(ItemType.weapon, "Stick","What's sticky, round, and brown all over? Provides 3 Offense.", 0, 0, 3,0,0,"Items/UISprites/stick"),
+        new Item(ItemType.weapon, "Stick","What's sticky, round, and brown all over? Provides 2 Offense.", 0, 0, 2,0,0,"Items/UISprites/stick"),
         new Item(ItemType.accessory, "Hat", "A sports team cap. Provides 3 MaxHP and 2 Defense",3,0,0,2,0,"Items/UISprites/hat"),
         new Item(ItemType.key, "Wallet", "My wallet.",""),
         new Item(ItemType.weapon, "Balloon","Vigourously rub against your head for a portable on-demand Van de Graaff Generator. Provides 1 Offense.", 0, 0, 1,0,0, WeaponType.elec,""),
@@ -147,7 +147,9 @@ public class ItemDirectory
         new Item(ItemType.weapon, "Handheld Fan","Not your biggest fan, but a fan nonetheless. Provides 0 Offense but 2 speed.", 0, 0, 0,0,2, WeaponType.wind,""),
         new Item(ItemType.weapon, "Water Gun","Give me a straw and a cup of water and I'll be able to dish out better water pressure than this thing. Provides 2 Offense.", 0, 0, 2,0,0, WeaponType.water,""),
         new Item(ItemType.weapon, "Sword","A dangerously cool sword that silently urges you on to do dangerously stupid things. Provides 20 Offense and 5 Defense.", 0, 0, 20,5,0, WeaponType.phys,"Items/UISprites/sword"),
-        new Item(ItemType.weapon, "All Around Buff","Buffs all stats 10.", 10,10,10,10,10, WeaponType.phys,"")
+        new Item(ItemType.weapon, "All Around Buff","Buffs all stats 10.", 10,10,10,10,10, WeaponType.phys,""),
+        new Item(ItemType.weapon, "Bit Particle Gun","It's actually just a toy ray gun with a TV remote taped to it. Provides 3 Offense.", 0, 0, 3,0,0, WeaponType.phys,"Items/UISprites/bitparticlegun"),
+        new Item(ItemType.consumable, "Cheeties","\"Cheeties(tm): Good for tongue; Bad for health.\" Heals 15 HP and 5 EN. Good luck getting the dust off your fingers.",15, 5,"Items/UISprites/cheeties")
     };
 }
 

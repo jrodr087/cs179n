@@ -79,6 +79,16 @@ public class CameraShader : MonoBehaviour
         this.speedin = 3.0f;
         this.speedout = 3.0f;
     }
+    public void StartWipe(EmptyVoidCallback callbackmid, EmptyVoidCallback callbackend)
+    {
+        this.wipein = Resources.Load<Texture>("Textures/screenwipeintex");
+        this.wipeout = Resources.Load<Texture>("Textures/screenwipeouttex");
+        cbmid = callbackmid;
+        cbend = callbackend;
+        currstate = WipeState.wipein;
+        this.speedin = 3.0f;
+        this.speedout = 3.0f;
+    }
     public void StartWipe(Texture wipein, Texture wipeout, EmptyVoidCallback callbackmid, EmptyVoidCallback callbackend, float speedin, float speedout)
     {
         this.wipein = wipein;

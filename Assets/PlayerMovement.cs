@@ -71,6 +71,5 @@ public class PlayerMovement : MonoBehaviour
         cs.Battle = null;
         cs.sub = CameraSubject.player;
         Destroy(battle);
-        UnlockMovement();
     }
 }

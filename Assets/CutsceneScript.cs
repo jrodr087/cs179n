@@ -24,6 +24,7 @@ public class CutsceneScript : MonoBehaviour
     private int stringindex;
     private int charindex;
     private int timer;
+    private EmptyVoidCallback endSceneCallback = null;
     private enum states { vigout,vigentering,vigin,vigexiting}
     private states currstate = states.vigout;
     AudioSource txtsfx;
@@ -129,6 +130,7 @@ public class CutsceneScript : MonoBehaviour
                 vigbottransform.anchoredPosition = new Vector2(vigbottransform.anchoredPosition.x, -vigspot);
                 vigtoptransform.anchoredPosition = new Vector2(vigbottransform.anchoredPosition.x, vigspot);
                 movscript.UnlockMovement();
+                endSceneCallback?.Invoke();
             }
 
         }
@@ -159,6 +161,7 @@ public class CutsceneScript : MonoBehaviour
             timer = textspeed;
             txt.text = "";
             dialogue = false;
+            endSceneCallback = null;
         }
         //else if (currstate == states.vigin){
         //    scenestrings = scenestrings.Concat(strings).ToArray();
@@ -181,6 +184,7 @@ public class CutsceneScript : MonoBehaviour
             timer = textspeed;
             txt.text = "";
             dialogue = false;
+            endSceneCallback = null;
         }
         else if (currstate == states.vigin){
             scenestrings = scenestrings.Concat(strings).ToArray();
@@ -203,7 +207,12 @@ public class CutsceneScript : MonoBehaviour
             timer = textspeed;
             txt.text = "";
             dialogue = true;
+            endSceneCallback = null;
         }
+    }
+    public void SetCallback(EmptyVoidCallback cb)
+    {
+        endSceneCallback = cb;
     }
 
 }

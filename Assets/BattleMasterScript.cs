@@ -16,6 +16,8 @@ public class BattleMasterScript : MonoBehaviour
     public GameObject enemyCharaCenter;
     public Battler player;
     public Battler enemy;
+    private CameraShader cs;
+    EmptyVoidCallback cbbattleend = null;
     public List<Battler> playerControlledBattlers = new List<Battler>();
     public List<Battler> enemies = new List<Battler>();
     public new AudioSource audio;
@@ -26,11 +28,14 @@ public class BattleMasterScript : MonoBehaviour
     public Text playermaxen;
     private Battler currbattler;
     private List<Battler> battlerQueue = new List<Battler>();
+    private PlayerMovement movscript;
     private float generalTimer = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
         audio = gameObject.AddComponent<AudioSource>();
+        cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
+        movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
         Debug.Log("Battlemaster initialized");
     }
 
@@ -47,13 +52,21 @@ public class BattleMasterScript : MonoBehaviour
                 {
                     generalTimer = 0.0f;
                     currstate = states.dead;
-                    EndBattle();
+                    if (cbbattleend == null)
+                    {
+                        cs.StartWipe(EndBattle, movscript.UnlockMovement);
+                    }
+                    else
+                    {
+                        cs.StartWipe(EndBattle, cbbattleend);
+                    }
                 }
                 break;
             case states.turnstart:
                 {
                     currbattler = battlerQueue[0];
                     battlerQueue.RemoveAt(0);
+                    battlerQueue.Add(currbattler);
                     if (!currbattler.isPlayerControlled)
                     {
                         //generalTimer += Time.deltaTime;
@@ -83,7 +96,6 @@ public class BattleMasterScript : MonoBehaviour
                     {
                         generalTimer = 0.0f;
                         currstate = states.turnstart;
-                        battlerQueue.Add(currbattler);
                     }
                     break;
                 }
@@ -92,8 +104,12 @@ public class BattleMasterScript : MonoBehaviour
                 break;
 
         }
-        player.UpdateBattler();
-        enemy.UpdateBattler();
+        //player.UpdateBattler();
+        //enemy.UpdateBattler();
+        for (int i = 0; i < battlerQueue.Count; i++)
+        {
+            battlerQueue[0].UpdateBattler();
+        }
         playerhp.text = player.hp.ToString();
         playermaxhp.text = player.maxhp.ToString();
         playeren.text = player.en.ToString();
@@ -141,23 +157,6 @@ public class BattleMasterScript : MonoBehaviour
     {
         btl.hp -= dmg;
        // topboard.UpdateString("The " + btl.name + " took " + dmg.ToString() + " damage!");
-        if (btl.hp > 0)
-        {
-        }
-        else
-        {
-            btl.Launch();
-            if (btl.name == player.name)
-            {
-                topboard.UpdateString("You lost...");
-                currstate = states.dead;
-            }
-            if (btl.name == enemy.name)
-            {
-                topboard.UpdateString("You won!");
-                currstate = states.battlewon;
-            }
-        }
         btl.sprite.GetComponent<ParticleSystem>().Emit(dmg);
         CreateDamageText(dmg, btl.sprite, critical);
     }
@@ -171,14 +170,27 @@ public class BattleMasterScript : MonoBehaviour
     }
     public void EndBattle()
     {
-        PlayerMovement ps = GameObject.Find("Player").GetComponent<PlayerMovement>();
         PlayerData pd = GameObject.Find("Player").GetComponent<PlayerData>();
         pd.stats.hp = player.hp;
         pd.stats.en = player.en;
         pd.GiveExp(10);
-        ps.LeaveBattle();
+        movscript.LeaveBattle();
     }
 
+    public void HealBattler(int hpheal, int enheal, Battler btl)
+    {
+        btl.hp += hpheal;
+        if (btl.hp > btl.maxhp)
+        {
+            btl.hp = btl.maxhp;
+        }
+        btl.en += enheal;
+        if (btl.en > btl.maxen)
+        {
+            btl.en = btl.maxen;
+        }
+        audio.PlayOneShot((AudioClip)Resources.Load("Sounds/HealingItemUsed"));
+    }
     public void YieldTurn()
     {
         if (currstate == states.turnattack) { currstate = states.turnend; }
@@ -211,6 +223,15 @@ public class BattleMasterScript : MonoBehaviour
         battlerQueue.Add(player);
         battlerQueue.Add(enemy);
         currstate = states.turnstart;
+    }
+    public void SetBattleEndCallback(EmptyVoidCallback cb)
+    {
+        cbbattleend = cb;
+    }
+
+    public Battler GetCurrentBattler()
+    {
+        return currbattler;
     }
 }
 
@@ -378,6 +399,35 @@ public class Attacks : ScriptableObject
         yield return new WaitForSeconds(2.0f);
         bm.YieldTurn();
     }
+    public IEnumerator CallParents(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " threatens to call your parents!");
+        yield return new WaitForSeconds(1.5f);
+        bm.YieldTurn();
+    }
+    public IEnumerator CallPolice(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " threatens to call the police!");
+        yield return new WaitForSeconds(1.5f);
+        bm.YieldTurn();
+    }
+    public IEnumerator Vibrate(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " vibrates intensely!");
+        yield return new WaitForSeconds(1.5f);
+        bm.YieldTurn();
+    }
+    public IEnumerator DisposeBodyLookup(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " is looking up how to get rid of a body.");
+        yield return new WaitForSeconds(1.5f);
+        bm.YieldTurn();
+    }
+
     public Attacks()
     {
     }
@@ -425,7 +475,7 @@ public class Enemy : ScriptableObject
 };
 public class EnemyFactory
 {
-    public enum EnemyType { vroomer, lappy };
+    public enum EnemyType { vroomer, lappy, selfphone };
     public Enemy CreateEnemy(EnemyType ind)
     {
         switch (ind)
@@ -448,6 +498,17 @@ public class EnemyFactory
                     Attacks atk = new Attacks();
                     atk.weights = weights;
                     AttackDelegate[] atks = { atk.LoudSound, atk.Beep };
+                    atk.attacks = atks;
+                    nme.atks = atk;
+                    return nme;
+                }
+            case EnemyType.selfphone:
+                {
+                    Enemy nme = new Enemy(120, 10, 18, 7, 10, 2, "Self Phone", "Sprites/EnemyBattleAnims/Self Phone");
+                    int[] weights = { 1, 2, 2, 1, 1 };
+                    Attacks atk = new Attacks();
+                    atk.weights = weights;
+                    AttackDelegate[] atks = { atk.LoudSound, atk.CallParents, atk.CallPolice, atk.Vibrate, atk.DisposeBodyLookup };
                     atk.attacks = atks;
                     nme.atks = atk;
                     return nme;
