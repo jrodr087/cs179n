@@ -28,7 +28,7 @@ namespace Lowscope.Saving.Core
         public void LoadGame(int slot) {
             //var slotToLoad = 0; // Set your index here
             //SaveMaster.ClearSlot();
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("SampleScene"); //temp until more scenes/levels are added
             SaveMaster.SetSlot(slot, true);
         }
 
