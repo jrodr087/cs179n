@@ -185,6 +185,7 @@ public class ItemMenuScript : MonoBehaviour
             
         }
         else if ( it == ItemType.consumable ) {
+            pd.updateEquippedItems(curItem);
             pd.applyConsumable(pd.masterItemDirectory.dir[(int) pd.items[curItem] ]);
             a  = "Used a " + pd.masterItemDirectory.dir[(int) pd.items[curItem] ].name; 
             pd.items.RemoveAt(curItem);

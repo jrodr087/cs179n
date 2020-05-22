@@ -262,6 +262,7 @@ public class PlayerData : MonoBehaviour
         if (equippedItems.Contains(x)){
             equippedItems.RemoveAt( (int) equippedItems.FindIndex( (int i) => i == x) );
         }
+        updateEquippedItems(x);
         Item it = masterItemDirectory.dir[(int)itemIndex];
         Debug.Log("Removed item name: " + it.name);
     }
@@ -345,6 +346,14 @@ public class PlayerData : MonoBehaviour
             stats.exp = stats.exp - stats.exptonext;
             stats.pts = stats.pts + 5;
             stats.lvl++;
+        }
+    }
+
+    public void updateEquippedItems (int it){
+        for (int i = 0; i < equippedItems.Count; i++) {
+            if (equippedItems[i] > it){
+                equippedItems[i] = equippedItems[i] - 1;
+            }
         }
     }
 }
