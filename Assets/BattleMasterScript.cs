@@ -396,7 +396,7 @@ public class Attacks : ScriptableObject
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
         topboard.UpdateString("The " + aggressor.name + " beeps softly.");
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
         bm.YieldTurn();
     }
     public IEnumerator CallParents(Battler aggressor, Battler target, BattleMasterScript bm)
@@ -505,7 +505,7 @@ public class EnemyFactory
             case EnemyType.selfphone:
                 {
                     Enemy nme = new Enemy(120, 10, 18, 7, 10, 2, "Self Phone", "Sprites/EnemyBattleAnims/Self Phone");
-                    int[] weights = { 1, 2, 2, 1, 1 };
+                    int[] weights = { 2, 1, 1, 1, 1 };
                     Attacks atk = new Attacks();
                     atk.weights = weights;
                     AttackDelegate[] atks = { atk.LoudSound, atk.CallParents, atk.CallPolice, atk.Vibrate, atk.DisposeBodyLookup };
