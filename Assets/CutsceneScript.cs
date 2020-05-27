@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ public class CutsceneScript : MonoBehaviour
     private int stringindex;
     private int charindex;
     private int timer;
+    private EmptyVoidCallback endSceneCallback = null;
     private enum states { vigout,vigentering,vigin,vigexiting}
     private states currstate = states.vigout;
     AudioSource txtsfx;
@@ -128,6 +130,7 @@ public class CutsceneScript : MonoBehaviour
                 vigbottransform.anchoredPosition = new Vector2(vigbottransform.anchoredPosition.x, -vigspot);
                 vigtoptransform.anchoredPosition = new Vector2(vigbottransform.anchoredPosition.x, vigspot);
                 movscript.UnlockMovement();
+                endSceneCallback?.Invoke();
             }
 
         }
@@ -158,8 +161,36 @@ public class CutsceneScript : MonoBehaviour
             timer = textspeed;
             txt.text = "";
             dialogue = false;
+            endSceneCallback = null;
+        }
+        //else if (currstate == states.vigin){
+        //    scenestrings = scenestrings.Concat(strings).ToArray();
+        //}
+    }
+
+    // This function was created purely to be used from Choice Menu
+    public void StartSceneFromLock(string[] strings)
+    {
+        if (currstate == states.vigout)
+        {
+            movscript.LockMovement();
+            nametag.SetActive(false);
+            scenestrings = strings;
+            currstate = states.vigentering;
+            currstring = "";
+            fullstring = strings[0];
+            stringindex = 0;
+            charindex = 0;
+            timer = textspeed;
+            txt.text = "";
+            dialogue = false;
+            endSceneCallback = null;
+        }
+        else if (currstate == states.vigin){
+            scenestrings = scenestrings.Concat(strings).ToArray();
         }
     }
+
     public void StartDialogue(string[] strings, string nametext)
     {
         if (currstate == states.vigout && !movscript.GetMovementLock())
@@ -176,7 +207,12 @@ public class CutsceneScript : MonoBehaviour
             timer = textspeed;
             txt.text = "";
             dialogue = true;
+            endSceneCallback = null;
         }
+    }
+    public void SetCallback(EmptyVoidCallback cb)
+    {
+        endSceneCallback = cb;
     }
 
 }

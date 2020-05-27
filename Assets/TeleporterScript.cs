@@ -8,9 +8,12 @@ public class TeleporterScript : MonoBehaviour
     // Start is called before the first frame update
     public GameObject destination;
     public AudioClip sound;
+    public bool locked = false;
+    public string[] locktext = { "It's locked." };
     new AudioSource audio;
     private PlayerMovement movscript;
     private CameraShader cs;
+    private CutsceneScript handler;
     private bool inside = false;
     private Texture inwipe;
     private Texture outwipe;
@@ -21,6 +24,7 @@ public class TeleporterScript : MonoBehaviour
         inwipe = Resources.Load<Texture>("Textures/screenwipeintex");
         outwipe = Resources.Load<Texture>("Textures/screenwipeouttex");
         audio = gameObject.AddComponent<AudioSource>();
+        handler = GameObject.Find("/UI/VignetteController").GetComponent<CutsceneScript>();
     }
     void Teleport()
     {
@@ -31,11 +35,18 @@ public class TeleporterScript : MonoBehaviour
     {
         if (Input.GetKeyDown("space") && inside && !movscript.GetMovementLock())
         {
-            movscript.LockMovement();
-            cs.StartWipe(inwipe,outwipe,Teleport, movscript.UnlockMovement);
-            if (sound != null)
+            if (!locked)
             {
-                audio.PlayOneShot(sound);
+                movscript.LockMovement();
+                cs.StartWipe(inwipe, outwipe, Teleport, movscript.UnlockMovement);
+                if (sound != null)
+                {
+                    audio.PlayOneShot(sound);
+                }
+            }
+            else
+            {
+                handler.StartScene(locktext);
             }
         }
     }

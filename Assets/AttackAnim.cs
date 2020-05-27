@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackType { playerDefault,enemyDefault};
+public enum AttackType { playerDefault,enemyDefault,ram,loudsound};
 
 public class AttackAnim : MonoBehaviour
 {
-    // Start is called before the first frame update
-    AudioSource audio;
+    new
+        // Start is called before the first frame update
+        AudioSource audio;
     
     public Battler aggressor;
     public Battler target;
     public BattleMasterScript bm;
     public float percent = .5f;
     public AttackType at = AttackType.playerDefault;
+    private int atknum = 0;
     void Start()
     {
         audio = gameObject.GetComponent<AudioSource>();
@@ -36,8 +38,18 @@ public class AttackAnim : MonoBehaviour
                 percent = 1.1f;
                 crit = true;
             }
-            int dmg = (int)Mathf.Ceil(Mathf.Max((((float)aggressor.att * 1.5f - (float)target.def) * percent), 1));
-            bm.DamageBattler(dmg, target, crit);
+            int dmg = 0;
+            if (atknum == 2)
+            {
+                dmg = (int)Mathf.Ceil(Mathf.Max(((float)aggressor.att * 1.4f - (float)target.def) * percent, 1));
+                bm.DamageBattler(dmg, target, crit);
+            }
+            else
+            {
+                dmg = (int)Mathf.Ceil(Mathf.Max(((float)aggressor.att * 0.6f - (float)target.def) * percent, 1));
+                bm.DamageBattlerNoSound(dmg, target, crit);
+            }
+            atknum++;
         }
         if (at == AttackType.enemyDefault)
         {
@@ -45,15 +57,25 @@ public class AttackAnim : MonoBehaviour
             bm.DamageBattler(dmg, target, false);
 
         }
+        if (at == AttackType.ram)
+        {
+            int dmg = (int)Mathf.Ceil(Mathf.Max((((float)aggressor.att *1.5f - (float)target.def)), 1));
+            bm.DamageBattler(dmg, target, false);
+        }
+        if (at == AttackType.loudsound)
+        {
+            int dmg = (int)Mathf.Ceil(Mathf.Max((((float)aggressor.att * 1.2f - (float)target.def)), 1));
+            bm.DamageBattler(dmg, target, false);
+        }
     }
     void EndPlayerturn()
     {
-        bm.EndPlayerAttack();
+        bm.YieldTurn();
         Destroyanim();
     }
     void EndEnemyTurn()
     {
-        bm.EndEnemyAttack();
+        bm.YieldTurn();
         Destroyanim();
     }
     void Destroyanim()

@@ -37,5 +37,8 @@ public class OpenMenuScript : MonoBehaviour
                 movscript.UnlockMovement();
             }
         }
+        if ( active && !movscript.GetMovementLock()){
+            movscript.LockMovement();
+        }
     }
 }
