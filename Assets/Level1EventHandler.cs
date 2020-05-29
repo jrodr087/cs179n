@@ -70,7 +70,7 @@ public class Level1EventHandler : MonoBehaviour
         movscript.UnlockMovement();
         string[] dialogue =
         {
-            "Hehe, theres a lot of stuff for you to take...",
+            "Hehe, theres a lot of items for you to take...",
             "Just behind the door"
         };
         string name = "Broken Lappy";
