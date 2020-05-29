@@ -15,6 +15,10 @@ public class Level1EventHandler : MonoBehaviour
     private CutsceneScript handler;
     private PlayerMovement movscript;
     public GameObject enemyGroup;
+    public GameObject[] switch1On;
+    public GameObject[] switch1Off;
+    public GameObject[] switch2On;
+    public GameObject[] switch2Off;
     void Start()
     {
 
@@ -207,6 +211,51 @@ public class Level1EventHandler : MonoBehaviour
     	string[] eventtext = { "Can't go there. Theres too many vroomers there too fight!"};
         handler.StartScene(eventtext);
         movscript.gameObject.GetComponent<Transform>().position = movscript.gameObject.GetComponent<Transform>().position + new Vector3( (float) .25,0,0);
+    }
+
+    public void SwitchOneOn()
+    {
+        for (int i = 0; i < switch1On.Length; i++)
+        {
+            switch1On[i].SetActive(true);
+        }
+        for (int i = 0; i < switch1Off.Length; i++)
+        {
+            switch1Off[i].SetActive(false);
+        }
+    }
+    public void SwitchOneOff()
+    {
+        for (int i = 0; i < switch1On.Length; i++)
+        {
+            switch1On[i].SetActive(false);
+        }
+        for (int i = 0; i < switch1Off.Length; i++)
+        {
+            switch1Off[i].SetActive(true);
+        }
+    }
+    public void SwitchTwoOn()
+    {
+        for (int i = 0; i < switch2On.Length; i++)
+        {
+            switch2On[i].SetActive(true);
+        }
+        for (int i = 0; i < switch2Off.Length; i++)
+        {
+            switch2Off[i].SetActive(false);
+        }
+    }
+    public void SwitchTwoOff()
+    {
+        for (int i = 0; i < switch2On.Length; i++)
+        {
+            switch2On[i].SetActive(false);
+        }
+        for (int i = 0; i < switch2Off.Length; i++)
+        {
+            switch2Off[i].SetActive(true);
+        }
     }
 
 }
