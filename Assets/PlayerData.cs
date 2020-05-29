@@ -360,11 +360,12 @@ public class PlayerData : MonoBehaviour, ISaveable
     public void GiveExp(int exp)
     {
         stats.exp += exp;
-        if (stats.exp >= stats.exptonext)
+        while (stats.exp >= stats.exptonext)
         {
             stats.exp = stats.exp - stats.exptonext;
-            stats.pts = stats.pts + 5;
             stats.lvl++;
+            stats.exptonext = Mathf.RoundToInt(Mathf.Pow((stats.lvl * 20), 1.05f));
+            stats.pts = stats.pts + 5;
         }
     }
 

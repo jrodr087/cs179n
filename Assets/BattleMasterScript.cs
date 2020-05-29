@@ -18,8 +18,10 @@ public class BattleMasterScript : MonoBehaviour
     public Battler enemy;
     private CameraShader cs;
     EmptyVoidCallback cbbattleend = null;
-    public List<Battler> playerControlledBattlers = new List<Battler>();
-    public List<Battler> enemies = new List<Battler>();
+    private List<Battler> playerControlledBattlers = new List<Battler>();
+    private List<Battler> enemies = new List<Battler>();
+    private List<Battler> registeredBattlers = new List<Battler>();
+    private int earnedEXP = 0;
     public new AudioSource audio;
     public GameObject choiceRadial;
     public Text playerhp;
@@ -67,6 +69,7 @@ public class BattleMasterScript : MonoBehaviour
                     currbattler = battlerQueue[0];
                     battlerQueue.RemoveAt(0);
                     battlerQueue.Add(currbattler);
+                    currbattler.StartFlashing(1.5f);
                     if (!currbattler.isPlayerControlled)
                     {
                         //generalTimer += Time.deltaTime;
@@ -75,7 +78,7 @@ public class BattleMasterScript : MonoBehaviour
                         generalTimer = 0.0f;
                         currstate = states.turnattack;
                         AttackDelegate ad = currbattler.GetAttack(player, this);
-                        StartCoroutine(ad(enemy, player, this));
+                        StartCoroutine(ad(currbattler, player, this));
                         //}
                     }
                     else
@@ -106,9 +109,9 @@ public class BattleMasterScript : MonoBehaviour
         }
         //player.UpdateBattler();
         //enemy.UpdateBattler();
-        for (int i = 0; i < battlerQueue.Count; i++)
+        for (int i = 0; i < registeredBattlers.Count; i++)
         {
-            battlerQueue[0].UpdateBattler();
+            registeredBattlers[i].UpdateBattler();
         }
         playerhp.text = player.hp.ToString();
         playermaxhp.text = player.maxhp.ToString();
@@ -121,7 +124,7 @@ public class BattleMasterScript : MonoBehaviour
         DamageText txt = dmgText.GetComponent<DamageText>();
         txt.dmg = dmg;
         txt.critical = critical;
-        Vector2 pos = sprite.transform.position -gameObject.transform.position;
+        Vector2 pos = sprite.transform.position - gameObject.transform.position;
         Vector2 viewportPoint = 32 * pos;
         dmgText.GetComponent<RectTransform>().anchoredPosition = viewportPoint;
         dmgText.transform.SetParent(GameObject.Find("Canvas").transform, false);
@@ -137,19 +140,25 @@ public class BattleMasterScript : MonoBehaviour
         else
         {
             btl.Launch();
-            if (btl.name == player.name)
+            earnedEXP += math.max((btl.lvl * 10 - math.max((player.lvl - btl.lvl),0) * 5),0);
+            battlerQueue.Remove(btl);
+            playerControlledBattlers.Remove(btl);
+            enemies.Remove(btl);
+            if (enemies.Count < 1)
             {
-                topboard.UpdateString("You lost...");
-                currstate = states.dead;
-            }
-            if (btl.name == enemy.name)
-            {
+
                 topboard.UpdateString("You won!");
                 currstate = states.battlewon;
             }
+            else if (playerControlledBattlers.Count < 1)
+            {
+
+                topboard.UpdateString("You lost...");
+                currstate = states.dead;
+            }
         }
         audio.PlayOneShot((AudioClip)Resources.Load("Sounds/Hit"));
-        btl.StartFlashing(3.0f);
+        //btl.StartFlashing(3.0f);
         btl.sprite.GetComponent<ParticleSystem>().Emit(dmg);
         CreateDamageText(dmg, btl.sprite, critical);
     }
@@ -168,12 +177,20 @@ public class BattleMasterScript : MonoBehaviour
         attack.GetComponent<DefaultAttackScript>().target = enemy;
         currstate = states.turnattack;
     }
+    public void PlayerAttack(Battler target)
+    {
+        GameObject attack = (GameObject)Instantiate(Resources.Load("Prefabs/DefaultAttackObject"));
+        attack.transform.position = target.sprite.transform.position - new Vector3(0, .001f, 1);
+        attack.GetComponent<DefaultAttackScript>().aggressor = player;
+        attack.GetComponent<DefaultAttackScript>().target = target;
+        currstate = states.turnattack;
+    }
     public void EndBattle()
     {
         PlayerData pd = GameObject.Find("Player").GetComponent<PlayerData>();
         pd.stats.hp = player.hp;
         pd.stats.en = player.en;
-        pd.GiveExp(10);
+        pd.GiveExp(earnedEXP);
         movscript.LeaveBattle();
     }
 
@@ -210,6 +227,7 @@ public class BattleMasterScript : MonoBehaviour
         player.def = pd.stats.def;
         player.spd = pd.stats.spd;
         player.isPlayerControlled = true;
+        registeredBattlers.Add(player);
 
         GameObject enemyObj = (GameObject)Instantiate(Resources.Load("Prefabs/BattleSprite"));
         enemyObj.transform.parent = enemyCharaCenter.transform;
@@ -223,15 +241,81 @@ public class BattleMasterScript : MonoBehaviour
         battlerQueue.Add(player);
         battlerQueue.Add(enemy);
         currstate = states.turnstart;
+        enemies.Add(enemy);
+        registeredBattlers.Add(enemy);
+    }
+    public void InitializeBattle(List<EnemyFactory.EnemyType> types)
+    {
+        GameObject playerObj = (GameObject)Instantiate(Resources.Load("Prefabs/BattleSprite"));
+        playerObj.transform.parent = playerCharaCenter.transform;
+        playerObj.transform.localPosition = new Vector3(1, 0, 0);
+        player = new Battler(playerObj, "Player");
+        PlayerData pd = GameObject.Find("Player").GetComponent<PlayerData>();
+        player.hp = pd.stats.hp;
+        player.maxhp = pd.stats.maxhp;
+        player.en = pd.stats.en;
+        player.maxen = pd.stats.maxen;
+        player.att = pd.stats.off;
+        player.def = pd.stats.def;
+        player.spd = pd.stats.spd;
+        player.isPlayerControlled = true;
+        playerControlledBattlers.Add(player);
+        registeredBattlers.Add(player);
+        battlerQueue.Add(player);
+        float baseangle = 180;
+        for (int i = 0; i < types.Count; i++)
+        {
+            GameObject enemyObj = (GameObject)Instantiate(Resources.Load("Prefabs/BattleSprite"));
+            enemyObj.transform.parent = enemyCharaCenter.transform;
+            float currangle = baseangle + i * (360.0f / types.Count);
+            currangle = Mathf.Deg2Rad*currangle;
+            enemyObj.transform.localPosition = new Vector3(1.0f * math.cos(currangle), 1.0f*math.sin(currangle), 0);
+            enemy = new Battler(enemyObj, ef.CreateEnemy(types[i]));
+            string path = enemy.GetAnimationControllerPath();
+            if (path != "")
+            {
+                enemyObj.GetComponent<Animator>().runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load(path);
+            }
+            battlerQueue.Add(enemy);
+            currstate = states.turnstart;
+            enemies.Add(enemy);
+            registeredBattlers.Add(enemy);
+        }
+
     }
     public void SetBattleEndCallback(EmptyVoidCallback cb)
     {
         cbbattleend = cb;
     }
+    public List<Battler> GetEnemies()
+    {
+        return enemies;
+    }
 
     public Battler GetCurrentBattler()
     {
         return currbattler;
+    }
+    public void RemoveFromRegisteredBattlers(Battler btl)
+    {
+        registeredBattlers.Remove(btl);
+    }
+
+    public Battler GetRandomEnemy()
+    {
+        int index = Mathf.RoundToInt(UnityEngine.Random.Range(0.0f,1.0f)*(enemies.Count-1));
+        return enemies[index];
+    }
+    public Battler GetRandomEnemyIgnoringOne(Battler ignoredEnemy)
+    {
+        if (enemies.Count < 2) { return ignoredEnemy; } //if there isnt two enemies at least then we can only return the ignored one. oh well
+        Battler temp;
+        do
+        {
+            int index = Mathf.RoundToInt(UnityEngine.Random.Range(0.0f, (float)(enemies.Count - 1)));
+            temp = enemies[index];
+        } while (temp == ignoredEnemy);
+        return temp;
     }
 }
 
@@ -392,10 +476,83 @@ public class Attacks : ScriptableObject
         enemyAttack.GetComponent<AttackAnim>().at = AttackType.loudsound;
         enemyAttack.transform.position = target.sprite.transform.position;
     }
+    public IEnumerator ShootChange(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " is gunning spare change at the " + target.name + "!");
+        yield return new WaitForSeconds(2.0f);
+        GameObject enemyAttack = (GameObject)Instantiate(Resources.Load("Prefabs/EnemyAttack"));
+        enemyAttack.GetComponent<AttackAnim>().aggressor = aggressor;
+        enemyAttack.GetComponent<AttackAnim>().target = target;
+        enemyAttack.GetComponent<AttackAnim>().at = AttackType.gunchange;
+        enemyAttack.transform.position = target.sprite.transform.position;
+    }
+    public IEnumerator BarcodeLaser(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " is aiming its laser at the " + target.name + "!");
+        yield return new WaitForSeconds(2.0f);
+        GameObject enemyAttack = (GameObject)Instantiate(Resources.Load("Prefabs/EnemyAttack"));
+        enemyAttack.GetComponent<AttackAnim>().aggressor = aggressor;
+        enemyAttack.GetComponent<AttackAnim>().target = target;
+        enemyAttack.GetComponent<AttackAnim>().at = AttackType.barcodelaser;
+        enemyAttack.transform.position = target.sprite.transform.position;
+    }
+    public IEnumerator ShowTargetData(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        target = bm.GetRandomEnemyIgnoringOne(aggressor);
+        target.att += 1;
+        topboard.UpdateString("The " + aggressor.name + " is showing target data to the " + target.name + "!" + " Their Attack went up by 1!");
+        yield return new WaitForSeconds(3.0f);
+        bm.YieldTurn();
+    }
+    public IEnumerator ShowMartialArts(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        target = bm.GetRandomEnemyIgnoringOne(aggressor);
+        target.def += 1;
+        topboard.UpdateString("The " + aggressor.name + " is showing a martial arts video to the " + target.name + "!" + " Their Defense went up by 1!");
+        yield return new WaitForSeconds(3.0f);
+        bm.YieldTurn();
+    }
+    public IEnumerator ShowMilitaryTraining(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        target = bm.GetRandomEnemyIgnoringOne(aggressor);
+        target.att += 1;
+        target.def += 1;
+        topboard.UpdateString("The " + aggressor.name + " is showing a military training video to the " + target.name + "!" + " Their Attack and Defense went up by 1!");
+        yield return new WaitForSeconds(3.3f);
+        bm.YieldTurn();
+    }
+    public IEnumerator ShowUncomfortableFootage(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        target.def -= 1;
+        if (target.def < 0) { target.def = 0; }
+        topboard.UpdateString("The " + aggressor.name + " is showing something uncomfortable to watch to the " + target.name + "!" + " Their Defense went down by 1!");
+        yield return new WaitForSeconds(3.0f);
+        bm.YieldTurn();
+    }
     public IEnumerator Beep(Battler aggressor, Battler target, BattleMasterScript bm)
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
         topboard.UpdateString("The " + aggressor.name + " beeps softly.");
+        yield return new WaitForSeconds(1.5f);
+        bm.YieldTurn();
+    }
+    public IEnumerator EjectDrawer(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " ejects its money drawer.");
+        yield return new WaitForSeconds(1.5f);
+        bm.YieldTurn();
+    }
+    public IEnumerator ScanArea(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " is scanning the area.");
         yield return new WaitForSeconds(1.5f);
         bm.YieldTurn();
     }
@@ -475,7 +632,7 @@ public class Enemy : ScriptableObject
 };
 public class EnemyFactory
 {
-    public enum EnemyType { vroomer, lappy, selfphone };
+    public enum EnemyType { vroomer, lappy, selfphone,crashedregister,enlightenedmonitor,barcodeimprinter };
     public Enemy CreateEnemy(EnemyType ind)
     {
         switch (ind)
@@ -509,6 +666,39 @@ public class EnemyFactory
                     Attacks atk = new Attacks();
                     atk.weights = weights;
                     AttackDelegate[] atks = { atk.LoudSound, atk.CallParents, atk.CallPolice, atk.Vibrate, atk.DisposeBodyLookup };
+                    atk.attacks = atks;
+                    nme.atks = atk;
+                    return nme;
+                }
+            case EnemyType.crashedregister:
+                {
+                    Enemy nme = new Enemy(60, 10, 9, 8, 10, 2, "Crashed Register", "Sprites/EnemyBattleAnims/CrashedRegister");
+                    int[] weights = { 2, 1};
+                    Attacks atk = new Attacks();
+                    atk.weights = weights;
+                    AttackDelegate[] atks = { atk.ShootChange, atk.EjectDrawer};
+                    atk.attacks = atks;
+                    nme.atks = atk;
+                    return nme;
+                }
+            case EnemyType.barcodeimprinter:
+                {
+                    Enemy nme = new Enemy(50, 10, 8, 8, 15, 2, "Barcode Imprinter", "Sprites/EnemyBattleAnims/BarcodeImprinter");
+                    int[] weights = { 2, 1 };
+                    Attacks atk = new Attacks();
+                    atk.weights = weights;
+                    AttackDelegate[] atks = { atk.BarcodeLaser, atk.ScanArea };
+                    atk.attacks = atks;
+                    nme.atks = atk;
+                    return nme;
+                }
+            case EnemyType.enlightenedmonitor:
+                {
+                    Enemy nme = new Enemy(40, 10, 0, 8, 5, 2, "Enlightened Monitor", "Sprites/EnemyBattleAnims/EnlightenedMonitor");
+                    int[] weights = { 2, 2, 1, 1 };
+                    Attacks atk = new Attacks();
+                    atk.weights = weights;
+                    AttackDelegate[] atks = { atk.ShowTargetData, atk.ShowMartialArts, atk.ShowMilitaryTraining, atk.ShowUncomfortableFootage };
                     atk.attacks = atks;
                     nme.atks = atk;
                     return nme;

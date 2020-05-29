@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Level1EventHandler : MonoBehaviour
@@ -13,6 +14,7 @@ public class Level1EventHandler : MonoBehaviour
     public TeleporterScript sideroomdoor;
     private CutsceneScript handler;
     private PlayerMovement movscript;
+    public GameObject enemyGroup;
     void Start()
     {
 
@@ -60,7 +62,7 @@ public class Level1EventHandler : MonoBehaviour
             "Hey, kid.",
             "Imma hack you up."
         };
-        string name = "Maddend Lappy?";
+        string name = "Maddened Lappy?";
         handler.StartDialogue(dialogue, name);
         handler.SetCallback(StartSecondRoomEnemyFight);
     }
@@ -93,6 +95,61 @@ public class Level1EventHandler : MonoBehaviour
         Destroy(SecondRoomEnemy);
         movscript.LockMovement();
     }
+    public void InitializeGroupEnemyFight()
+    {
+        // PlayerMovement movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        GameObject btl = (GameObject)Instantiate(Resources.Load("Prefabs/BattlePrefab"));
+        btl.transform.position = new Vector3(1000, 1000, 0);
+        CameraScript cs = GameObject.Find("Main Camera").GetComponent<CameraScript>();
+        cs.sub = CameraSubject.battle;
+        cs.Battle = btl;
+        movscript.battle = btl;
+        BattleMasterScript bm;
+        List<EnemyFactory.EnemyType> enemies = new List<EnemyFactory.EnemyType>
+        {
+            EnemyFactory.EnemyType.crashedregister,
+            EnemyFactory.EnemyType.barcodeimprinter,
+            EnemyFactory.EnemyType.enlightenedmonitor
+        };
+        bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
+        bm.InitializeBattle(enemies);
+        Destroy(enemyGroup);
+    }
+    public void StartEnemyGroupDrop()
+    {
+        movscript.LockMovement();
+        enemyGroup.transform.localPosition = new Vector3(0, 15, 0);
+        StartCoroutine(DropEnemyGroup());
+    }
+    public void OpenedTrapBox()
+    {
+        string[] dialogue =
+        {
+            "You opened the box.",
+            "There seems to only be a receipt in the box, printed with the following phrase...",
+            "\"S U C K E R .\""
+        };
+        handler.StartScene(dialogue);
+        handler.SetCallback(StartEnemyGroupDrop);
+    }
+
+    private IEnumerator DropEnemyGroup()
+    {
+        while (enemyGroup.transform.localPosition.y > 0)
+        {
+            enemyGroup.transform.localPosition -= new Vector3(0, 10.0f / 60.0f, 0);
+            yield return null;
+        }
+        yield return new WaitForSeconds(1.0f);
+        StartGroupEnemyFight();
+
+    }
+
+    private void StartGroupEnemyFight()
+    {
+        CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
+        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeGroupEnemyFight, null, 1.0f, 3.0f);
+    }
     public void StartSecondRoomEnemyFight()
     {
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
@@ -103,11 +160,11 @@ public class Level1EventHandler : MonoBehaviour
     {
         string[] dialogue =
         {
-            "I swear you leave your stuff for a second..",
-            "and someone takes all your sticks",
-            "GIVE IT BACK!!!"
+            "I swear you leave your stuff alone for a second..",
+            "...and someone takes all of your sticks and snacks...",
+            "...GIVE THEM BACK!!!"
         };
-        string name = "Possesive Vromer";
+        string name = "Possesive Vroomer";
         handler.StartDialogue(dialogue, name);
         handler.SetCallback(StartThirdRoomEnemyFight);
     }
@@ -117,9 +174,9 @@ public class Level1EventHandler : MonoBehaviour
         movscript.UnlockMovement();
         string[] dialogue =
         {
-            "My Boss will here about this!"
+            "My boss will hear about this!"
         };
-        string name = "Possesive Vromer";
+        string name = "Possesive Vroomer";
         handler.StartDialogue(dialogue, name);
         // SideroomDoorUnlock();
     }
