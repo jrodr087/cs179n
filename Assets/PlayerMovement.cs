@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
+    public bool isCutScene;
 	public float moveSpeed = 5f;
 	public Rigidbody2D rb;
     public Animator animator;
@@ -14,7 +15,10 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 movement;
     void Start()
     {
-        
+        if(isCutScene)
+        {
+            movementlocked = true;
+        }
     }
 
     // Update is called once per frame
