@@ -10,6 +10,7 @@ public class EventTrigger : MonoBehaviour
     public UnityEvent eventToTrigger;
     public AudioClip sound;
     new AudioSource audio;
+    public bool continous;
     private PlayerMovement movscript;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,9 @@ public class EventTrigger : MonoBehaviour
     {
         if (other.gameObject.name == "Player" && activated == false && !movscript.GetMovementLock())
         {
-            activated = true;
+            if (!continous){
+                activated = true;
+            }
             eventToTrigger.Invoke();
             audio.PlayOneShot(sound);
         }
