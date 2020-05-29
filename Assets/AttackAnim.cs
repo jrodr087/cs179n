@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackType { playerDefault,enemyDefault,ram,loudsound};
+public enum AttackType { playerDefault,enemyDefault,ram,loudsound, gunchange,barcodelaser};
 
 public class AttackAnim : MonoBehaviour
 {
@@ -65,6 +65,16 @@ public class AttackAnim : MonoBehaviour
         if (at == AttackType.loudsound)
         {
             int dmg = (int)Mathf.Ceil(Mathf.Max((((float)aggressor.att * 1.2f - (float)target.def)), 1));
+            bm.DamageBattler(dmg, target, false);
+        }
+        if (at == AttackType.gunchange)
+        {
+            int dmg = (int)Mathf.Ceil(Mathf.Max((((float)aggressor.att * 1.8f - (float)target.def)), 1));
+            bm.DamageBattler(dmg, target, false);
+        }
+        if (at == AttackType.barcodelaser)
+        {
+            int dmg = (int)Mathf.Ceil(Mathf.Max((((float)aggressor.att * 1.6f - (float)target.def)), 1));
             bm.DamageBattler(dmg, target, false);
         }
     }
