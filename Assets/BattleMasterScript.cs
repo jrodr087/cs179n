@@ -402,7 +402,7 @@ public class Attacks : ScriptableObject
     public IEnumerator CallParents(Battler aggressor, Battler target, BattleMasterScript bm)
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
-        topboard.UpdateString("The " + aggressor.name + " threatens to call your parents!");
+        topboard.UpdateString("The " + aggressor.name + " threatens to call your parents! Mom's gonna flip!");
         yield return new WaitForSeconds(1.5f);
         bm.YieldTurn();
     }

@@ -133,7 +133,7 @@ public class ItemDirectory
 
     public enum ItemIndex //make sure to define a matching item in the item array dir
     {
-        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd, bitparticlegun, cheeties, bsckey
+        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd, bitparticlegun, cheeties, gamars, bsckey
     };
 
     public Item[] dir = //make sure to define a matching index in the item index enum
@@ -149,7 +149,8 @@ public class ItemDirectory
         new Item(ItemType.weapon, "Sword","A dangerously cool sword that silently urges you on to do dangerously stupid things. Provides 20 Offense and 5 Defense.", 0, 0, 20,5,0, WeaponType.phys,"Items/UISprites/sword"),
         new Item(ItemType.weapon, "All Around Buff","Buffs all stats 10.", 10,10,10,10,10, WeaponType.phys,""),
         new Item(ItemType.weapon, "Bit Particle Gun","It's actually just a toy ray gun with a TV remote taped to it. Provides 3 Offense.", 0, 0, 3,0,0, WeaponType.phys,"Items/UISprites/bitparticlegun"),
-        new Item(ItemType.consumable, "Cheeties","\"Cheeties(tm): Good for tongue; Bad for health.\" Heals 15 HP and 5 EN. Good luck getting the dust off your fingers.",15, 5,"Items/UISprites/cheeties")
+        new Item(ItemType.consumable, "Cheeties","\"Cheeties(tm): Good for tongue; Bad for health.\" Heals 15 HP and 5 EN. Good luck getting the dust off your fingers.",15, 5,"Items/UISprites/cheeties"),
+        new Item(ItemType.accessory, "GAMAR Gogglez", "Nothin gets by you in these patent pending GAMAR goggles. Will definitely improve your reaction time, guaranteed!. Provides 1 Speed.",0,0,0,0,1,"Items/UISprites/gamergoggles"),
     };
 }
 
