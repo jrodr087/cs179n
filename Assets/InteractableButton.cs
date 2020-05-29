@@ -48,17 +48,18 @@ public class InteractableButton : MonoBehaviour
             }
             else
             {
-                handler.StartScene(switchOffText);
+                // Josiah - changed so toggleable bool actually keeps it from switching
                 if (toggleable)
                 {
+                    handler.StartScene(switchOffText);
                     switchedon = false;
                     if (sound != null)
                     {
                         audio.PlayOneShot(sound);
                     }
                     sr.sprite = offsprite;
+                    offfunc.Invoke();
                 }
-                offfunc.Invoke();
             }
         }
 
