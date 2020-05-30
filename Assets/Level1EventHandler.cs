@@ -151,11 +151,13 @@ public class Level1EventHandler : MonoBehaviour
 
     private void StartGroupEnemyFight()
     {
+        movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeGroupEnemyFight, null, 1.0f, 3.0f);
     }
     public void StartSecondRoomEnemyFight()
     {
+        movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeSecondRoomEnemyFight, null, 1.0f, 3.0f);
     }
@@ -202,6 +204,7 @@ public class Level1EventHandler : MonoBehaviour
     }
     public void StartThirdRoomEnemyFight()
     {
+        movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeThirdRoomEnemyFight, null, 1.0f, 3.0f);
     }

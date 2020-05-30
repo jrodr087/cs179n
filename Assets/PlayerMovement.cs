@@ -9,12 +9,14 @@ public class PlayerMovement : MonoBehaviour
 	public Rigidbody2D rb;
     public Animator animator;
     public GameObject battle;
+    public bool levelled = false;
     private bool movementlocked = false;
+    private LevelUpNotificationScript lvluppanel;
     Vector2 lastmovement;
 	Vector2 movement;
     void Start()
     {
-        
+        lvluppanel = GameObject.Find("UI/Level Up Panel").GetComponent<LevelUpNotificationScript>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
+            if (levelled)
+            {
+                levelled = false;
+                lvluppanel.StartNotification();
+            }
         }
         if (movement.magnitude > .1)
         {

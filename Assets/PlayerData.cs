@@ -366,6 +366,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             stats.lvl++;
             stats.exptonext = Mathf.RoundToInt(Mathf.Pow((stats.lvl * 20), 1.05f));
             stats.pts = stats.pts + 5;
+            gameObject.GetComponent<PlayerMovement>().levelled = true;
         }
     }
 
