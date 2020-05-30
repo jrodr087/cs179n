@@ -330,6 +330,9 @@ public class Battler
     private bool launched = false;
     private float shakeT = 0.0f;
     private Enemy nme = null;
+    private string hurtAnimatorPath = "";
+    private float hurtPercent = 0.0f;
+    private bool hurtAnimation = false;
     public GameObject sprite;
     private Vector3 pos;
     public bool isPlayerControlled;
@@ -369,6 +372,11 @@ public class Battler
         sprite = sp;
         pos = sprite.transform.position;
         nme = enemy;
+        if (nme.hurtAnimation)
+        {
+            this.hurtAnimatorPath = nme.hurtSpritePath;
+            this.hurtPercent = nme.hurtPercent;
+        }
     }
     public void UpdateBattler()
     {
@@ -416,6 +424,12 @@ public class Battler
                 r.enabled = false;
             }
         }
+    
+        if (!hurtAnimation && ((float)(hp)/ maxhp) <= hurtPercent && hurtAnimatorPath != "")
+        {
+            hurtAnimation = true;
+            sprite.GetComponent<Animator>().runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load(hurtAnimatorPath);
+        }
     }
     public void StartShake()
     {
@@ -445,6 +459,10 @@ public class Battler
     {
         if (isPlayerControlled) { Debug.Log("This shouldn't have happened! Asked player controlled battler to attack."); return null; }
         return nme.GetAttack(target, this, bm);
+    }
+    public void SetHurtAnimation(string animPath,float percent)
+    {
+
     }
 }
 
@@ -526,6 +544,23 @@ public class Attacks : ScriptableObject
         yield return new WaitForSeconds(3.3f);
         bm.YieldTurn();
     }
+    public IEnumerator DrawPower(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        aggressor.att += 2;
+        aggressor.def += 2;
+        topboard.UpdateString("The " + aggressor.name + " is drawing an excess of power!" + " Their Attack and Defense went up by 2!");
+        yield return new WaitForSeconds(3.3f);
+        bm.YieldTurn();
+    }
+    public IEnumerator TurnUpVolume(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        aggressor.att += 1;
+        topboard.UpdateString("The " + aggressor.name + " is turning up the volume!" + " Their Attack went up by 1!");
+        yield return new WaitForSeconds(3.3f);
+        bm.YieldTurn();
+    }
     public IEnumerator ShowUncomfortableFootage(Battler aggressor, Battler target, BattleMasterScript bm)
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
@@ -534,6 +569,26 @@ public class Attacks : ScriptableObject
         topboard.UpdateString("The " + aggressor.name + " is showing something uncomfortable to watch to the " + target.name + "!" + " Their Defense went down by 1!");
         yield return new WaitForSeconds(3.0f);
         bm.YieldTurn();
+    }
+    public IEnumerator ShowExceedinglyUncomfortableFootage(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        target.def -= 2;
+        if (target.def < 0) { target.def = 0; }
+        topboard.UpdateString("The " + aggressor.name + " is showing something very uncomfortable to watch to the " + target.name + "!" + " Their Defense went down by 2!");
+        yield return new WaitForSeconds(3.0f);
+        bm.YieldTurn();
+    }
+    public IEnumerator WireWhip(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " is whipping its wires at the " + target.name + "!");
+        yield return new WaitForSeconds(2.0f);
+        GameObject enemyAttack = (GameObject)Instantiate(Resources.Load("Prefabs/EnemyAttack"));
+        enemyAttack.GetComponent<AttackAnim>().aggressor = aggressor;
+        enemyAttack.GetComponent<AttackAnim>().target = target;
+        enemyAttack.GetComponent<AttackAnim>().at = AttackType.gunchange;
+        enemyAttack.transform.position = target.sprite.transform.position;
     }
     public IEnumerator Beep(Battler aggressor, Battler target, BattleMasterScript bm)
     {
@@ -611,6 +666,9 @@ public class Enemy : ScriptableObject
     public int hp, en, maxhp, maxen, att, def, spd, lvl;
     public string name;
     public string spritePath;
+    public bool hurtAnimation = false;
+    public string hurtSpritePath;
+    public float hurtPercent = 0.0f;
     public Attacks atks;
     public Enemy(int hp,int en, int att, int def, int spd, int lvl, string name, string spritePath)
     {
@@ -625,6 +683,12 @@ public class Enemy : ScriptableObject
         this.name = name;
         this.spritePath = spritePath;
     }
+    public void SetHurtAnimation(string hurtpath,float percent)
+    {
+        hurtSpritePath = hurtpath;
+        hurtPercent = percent;
+        hurtAnimation = true;
+    }
     public AttackDelegate GetAttack(Battler target, Battler self, BattleMasterScript bm)
     {
         return atks.SelectAttack();
@@ -632,7 +696,7 @@ public class Enemy : ScriptableObject
 };
 public class EnemyFactory
 {
-    public enum EnemyType { vroomer, lappy, selfphone,crashedregister,enlightenedmonitor,barcodeimprinter };
+    public enum EnemyType { vroomer, lappy, selfphone,crashedregister,enlightenedmonitor,barcodeimprinter,tvboss };
     public Enemy CreateEnemy(EnemyType ind)
     {
         switch (ind)
@@ -701,6 +765,18 @@ public class EnemyFactory
                     AttackDelegate[] atks = { atk.ShowTargetData, atk.ShowMartialArts, atk.ShowMilitaryTraining, atk.ShowUncomfortableFootage };
                     atk.attacks = atks;
                     nme.atks = atk;
+                    return nme;
+                }
+            case EnemyType.tvboss:
+                {
+                    Enemy nme = new Enemy(200, 10, 12, 10, 16, 3, "Erudite TV", "Sprites/EnemyBattleAnims/TV Boss");
+                    int[] weights = { 2, 1, 2, 1 };
+                    Attacks atk = new Attacks();
+                    atk.weights = weights;
+                    AttackDelegate[] atks = { atk.WireWhip, atk.ShowExceedinglyUncomfortableFootage, atk.DrawPower, atk.TurnUpVolume };
+                    atk.attacks = atks;
+                    nme.atks = atk;
+                    nme.SetHurtAnimation("Sprites/EnemyBattleAnims/TV Boss Injured", 0.5f);
                     return nme;
                 }
             default:

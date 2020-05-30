@@ -19,6 +19,7 @@ public class Level1EventHandler : MonoBehaviour
     public GameObject[] switch1Off;
     public GameObject[] switch2On;
     public GameObject[] switch2Off;
+    public GameObject BossTV;
     void Start()
     {
 
@@ -173,6 +174,56 @@ public class Level1EventHandler : MonoBehaviour
         string name = "Possesive Vroomer";
         handler.StartDialogue(dialogue, name);
         handler.SetCallback(StartThirdRoomEnemyFight);
+    }
+    public void RemoveTV()
+    {
+        Destroy(BossTV);
+    }
+    public void EndTVBossEvent()
+    {
+        movscript.UnlockMovement();
+        string[] dialogue =
+        {
+            "If only my demise were televised...",
+            "...If you still want a chance to make it as a main character;",
+            "Find the Vroomer."
+        };
+        string name = "Erudite TV";
+        handler.StartDialogue(dialogue, name);
+        handler.SetCallback(RemoveTV);
+    }
+    public void InitializeTVBossFight()
+    {
+        // PlayerMovement movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        GameObject btl = (GameObject)Instantiate(Resources.Load("Prefabs/BattlePrefab"));
+        btl.transform.position = new Vector3(1000, 1000, 0);
+        CameraScript cs = GameObject.Find("Main Camera").GetComponent<CameraScript>();
+        cs.sub = CameraSubject.battle;
+        cs.Battle = btl;
+        movscript.battle = btl;
+        BattleMasterScript bm;
+        bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
+        bm.InitializeBattle(EnemyFactory.EnemyType.tvboss);
+        bm.SetBattleEndCallback(EndTVBossEvent);
+        movscript.LockMovement();
+    }
+    public void StartTVBossFight()
+    {
+        movscript.LockMovement();
+        CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
+        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeTVBossFight, null, 1.0f, 3.0f);
+    }
+    public void StartTVBossEvent()
+    {
+        string[] dialogue =
+        {
+            "I was warned you were coming.",
+            "Unfortunately for you, the cue card has been clapped, the action has started, the cameras already rolling...",
+            "...and you are off-screen."
+        };
+        string name = "Smarter TV?";
+        handler.StartDialogue(dialogue, name);
+        handler.SetCallback(StartTVBossFight);
     }
     public void EndThirdRoomEnemyEvent()
     {
