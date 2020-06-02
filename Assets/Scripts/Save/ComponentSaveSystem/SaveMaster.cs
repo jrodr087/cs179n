@@ -187,11 +187,11 @@ namespace Lowscope.Saving
         /// <param name="notifyListeners"> Send a message to all saveables to load the new save file </param>
         public static void SetSlot(int slot, bool notifyListeners, SaveGame saveGame = null)
         {
-            if (activeSlot == slot && saveGame == null)
-            {
-                Debug.LogWarning("Already loaded this slot.");
-                return;
-            }
+            // if (activeSlot == slot && saveGame == null)
+            // {
+            //     Debug.LogWarning("Already loaded this slot.");
+            //     return;
+            // }
 
             // Ensure the current game is saved, and write it to disk, if that is wanted behaviour.
             if (SaveSettings.Get().autoSaveOnSlotSwitch && activeSaveGame != null)

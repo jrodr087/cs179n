@@ -24,7 +24,7 @@ MonoBehaviour:
   resetSaveableIdOnNewScene: 0
   loadDefaultSlotOnStart: 0
   defaultSlot: 0
-  useHotkeys: 1
+  useHotkeys: 0
   saveAndWriteToDiskKey: 283
   syncSaveGameKey: 285
   syncLoadGameKey: 286

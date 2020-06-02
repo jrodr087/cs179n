@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using Lowscope.Saving;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ItemGiverScript : MonoBehaviour
+public class ItemGiverScript : MonoBehaviour, ISaveable
 {
     public string[] interactableDialogue;
     private SpriteRenderer sr;
@@ -15,6 +16,20 @@ public class ItemGiverScript : MonoBehaviour
     public string[] openedText;
     private bool inside = false;
     public ItemDirectory.ItemIndex itemId;
+
+    [System.Serializable]
+    public struct IData
+    {
+        public string[] IinteractableDialogue;
+        public SpriteRenderer Isr;
+        public CutsceneScript Ihandler;
+        public Sprite IopenedSprite;
+        public PlayerData Ipd;
+        public PlayerMovement Ipm;
+        public bool Iopen;
+        public string[] IopenedText;
+        public bool isInside;
+    }
 
     AudioSource itemReceivedStinger;
     // Start is called before the first frame update
@@ -64,4 +79,42 @@ public class ItemGiverScript : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private IData itemData;
+    public string OnSave()
+    {
+        return JsonUtility.ToJson(new IData() { IinteractableDialogue = interactableDialogue,
+                                                Isr = sr,
+                                                Ihandler = handler,
+                                                IopenedSprite = openedSprite,
+                                                Ipd = pd,
+                                                Ipm = pm,
+                                                Iopen = opened,
+                                                IopenedText = openedText,
+                                                isInside = inside });
+    }
+
+    public void OnLoad(string data)
+    {
+        itemData = JsonUtility.FromJson<IData>(data);
+        
+        interactableDialogue = itemData.IinteractableDialogue;
+        sr = itemData.Isr;
+        handler = itemData.Ihandler;
+        openedSprite = itemData.IopenedSprite;
+        pd = itemData.Ipd;
+        pm = itemData.Ipm;
+        opened = itemData.Iopen;
+        openedText = itemData.IopenedText;
+        inside = itemData.isInside;
+        if(opened)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = openedSprite;
+        }
+    }
+
+    public bool OnSaveCondition()
+    {
+        return true;
+    }
 }
