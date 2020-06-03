@@ -15,6 +15,13 @@ public class EventTrigger : MonoBehaviour, ISaveable
     new AudioSource audio;
     public bool continous;
     private PlayerMovement movscript;
+
+    [System.Serializable]
+    public struct EventData
+    {
+        public bool activate;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,15 +46,19 @@ public class EventTrigger : MonoBehaviour, ISaveable
     {
     }
 
-        public string OnSave()
+    [SerializeField]
+    private EventData eventData;
+
+    public string OnSave()
         {
-            return JsonUtility.ToJson(activated);
+            return JsonUtility.ToJson((new EventData() { activate = activated }));
         }
 
         public void OnLoad(string data)
         {
             //stats = JsonUtility.FromJson<PlayerStats>(data);
-            activated = JsonUtility.FromJson<bool>(data);
+            eventData = JsonUtility.FromJson<EventData>(data);
+            activated = eventData.activate;
         }
 
         public bool OnSaveCondition()
