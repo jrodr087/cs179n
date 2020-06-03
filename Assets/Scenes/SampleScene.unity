@@ -9784,6 +9784,11 @@ PrefabInstance:
       propertyPath: m_FontData.m_MinSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7053673949514804865, guid: 297de5f4669b018429d7748d09ef6ba8,
+        type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7053673949514804869, guid: 297de5f4669b018429d7748d09ef6ba8,
         type: 3}
       propertyPath: m_IsActive
