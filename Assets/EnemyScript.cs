@@ -2,14 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Lowscope;
+using Lowscope.Saving;
 
-public class EnemyScript : MonoBehaviour
+
+public class EnemyScript : MonoBehaviour, ISaveable
 {
     public PlayerMovement movscript;
     private CameraShader cs;
     private Texture inwipe;
     private Texture outwipe;
     public EnemyFactory.EnemyType type;
+
+    public bool active=true;
+    
+    [System.Serializable]
+    public struct EData
+    {
+        public bool isActive;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +48,7 @@ public class EnemyScript : MonoBehaviour
         BattleMasterScript bm;
         bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
         bm.InitializeBattle(type);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -46,6 +58,8 @@ public class EnemyScript : MonoBehaviour
             cs.StartWipe(inwipe, outwipe, InitializeBattle, null,1.0f,3.0f);
             movscript.LockMovement();
             //SceneManager.LoadScene("BattleScene");
+            active = false;
+            gameObject.SetActive(active);
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -55,4 +69,23 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private EData enemyData;
+    public string OnSave()
+        {
+            return JsonUtility.ToJson(new EData() {isActive = active});
+        }
+
+        public void OnLoad(string data)
+        {
+            //stats = JsonUtility.FromJson<PlayerStats>(data);
+            enemyData = JsonUtility.FromJson<EData>(data);
+            active = enemyData.isActive;
+            gameObject.SetActive(active);
+        }
+
+        public bool OnSaveCondition()
+        {
+            return true;
+        }
 }

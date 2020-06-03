@@ -10,11 +10,13 @@ using UnityEngine.SceneManagement;
  
 namespace Lowscope.Saving.Core
 {
-    public class SaveLoad: MonoBehaviour
+    public class SaveLoad: MonoBehaviour, ISaveable
     {
         public PlayerMovement movscript;
         public int[] saves;
         public bool active = false;
+        
+        public string sceneName = "";
 
         public void SaveSlot(int slot) {
             SaveMaster.DeleteSave(slot);
@@ -26,8 +28,7 @@ namespace Lowscope.Saving.Core
             txt.fontSize = 13;
             txt.alignment = TextAnchor.UpperRight;
             DateTime timeSaved = SaveMaster.GetSaveCreationTime(slot);
-            TimeSpan timePlayed = SaveMaster.GetSaveTimePlayed(slot);
-            txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt")+"\n\n\n"+timePlayed.ToString(@"hh\:mm\:ss");
+            txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt");
 
             //txt.text = "Saved Slot";
         }
@@ -35,8 +36,10 @@ namespace Lowscope.Saving.Core
         public void LoadGame(int slot) {
             //var slotToLoad = 0; // Set your index here
             //SaveMaster.ClearSlot();
-            SceneManager.LoadScene("SampleScene"); //temp until more scenes/levels are added
+            
             SaveMaster.SetSlot(slot, true);
+
+            SceneManager.LoadScene("SampleScene"); //temp until more scenes/levels are added
         }
 
         void Start()
@@ -59,8 +62,7 @@ namespace Lowscope.Saving.Core
                     txt.fontSize = 13;
                     txt.alignment = TextAnchor.UpperRight;
                     DateTime timeSaved = SaveMaster.GetSaveCreationTime(i);
-                    TimeSpan timePlayed = SaveMaster.GetSaveTimePlayed(i);
-                    txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt")+"\n\n\n"+timePlayed.ToString(@"hh\:mm\:ss");
+                    txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt");
                     //txt.text = "Saved Slot";
                 }
                 else if(!SaveFileUtility.IsSlotUsed(i)){
@@ -73,16 +75,27 @@ namespace Lowscope.Saving.Core
         }
         void Update()
         {
-            
-            // DisplaySlot(1);
-            // DisplaySlot(2);
-            // DisplaySlot(3);
-            // DisplaySlot(4);
-            // DisplaySlot(5);
-            // DisplaySlot(6);
-            // DisplaySlot(7);
-            // DisplaySlot(8);
-            // DisplaySlot(9);
+
+        }
+
+        public string OnSave()
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+            Debug.Log("Scene Name:" + sceneName);
+            return JsonUtility.ToJson("sceneName");
+        }
+
+        public void OnLoad(string data)
+        {
+            //stats = JsonUtility.FromJson<PlayerStats>(data);
+            sceneName = JsonUtility.FromJson<string>(data);
+            Debug.Log("Scene Name:" + sceneName);
+            //SceneManager.LoadScene("sceneName");
+        }
+
+        public bool OnSaveCondition()
+        {
+            return true;
         }
     }
 }
