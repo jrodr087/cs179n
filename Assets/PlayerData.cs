@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using Lowscope.Saving;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerStats
