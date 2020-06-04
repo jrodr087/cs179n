@@ -32,11 +32,14 @@ public class BattleMasterScript : MonoBehaviour
     private List<Battler> battlerQueue = new List<Battler>();
     private PlayerMovement movscript;
     private float generalTimer = 0.0f;
+    public string songloc;
+    private MusicPlayerScript mps;
     // Start is called before the first frame update
     void Start()
     {
         audio = gameObject.AddComponent<AudioSource>();
         cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
+        mps = GameObject.Find("Main Camera/MusicPlayer").GetComponent<MusicPlayerScript>();
         movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
         Debug.Log("Battlemaster initialized");
     }
@@ -177,6 +180,11 @@ public class BattleMasterScript : MonoBehaviour
         attack.GetComponent<DefaultAttackScript>().target = enemy;
         currstate = states.turnattack;
     }
+    public void BattlerAttack(AttackDelegate ad, Battler aggressor, Battler target)
+    {
+        currstate = states.turnattack;
+        StartCoroutine(ad(aggressor, target, this));
+    }
     public void PlayerAttack(Battler target)
     {
         GameObject attack = (GameObject)Instantiate(Resources.Load("Prefabs/DefaultAttackObject"));
@@ -192,6 +200,7 @@ public class BattleMasterScript : MonoBehaviour
         pd.stats.en = player.en;
         pd.GiveExp(earnedEXP);
         movscript.LeaveBattle();
+        mps.StopSong(songloc);
     }
 
     public void HealBattler(int hpheal, int enheal, Battler btl)
@@ -521,9 +530,18 @@ public class Attacks : ScriptableObject
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
         target = bm.GetRandomEnemyIgnoringOne(aggressor);
         target.att += 1;
-        topboard.UpdateString("The " + aggressor.name + " is showing target data to the " + target.name + "!" + " Their Attack went up by 1!");
+        topboard.UpdateString("The " + aggressor.name + " is showing target data to the " + target.name + "!" + " Their Offense went up by 1!");
         yield return new WaitForSeconds(3.0f);
         bm.YieldTurn();
+    }
+    public IEnumerator PlayerCombo(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        GameObject attack = (GameObject)Instantiate(Resources.Load("Prefabs/DefaultAttackObject"));
+        attack.transform.position = target.sprite.transform.position - new Vector3(0, .001f, 1);
+        attack.GetComponent<DefaultAttackScript>().aggressor = aggressor;
+        attack.GetComponent<DefaultAttackScript>().target = target;
+        attack.GetComponent<DefaultAttackScript>().at = AttackType.playerCombo;
+        yield return new WaitForSeconds(1.0f/60.0f);
     }
     public IEnumerator ShowMartialArts(Battler aggressor, Battler target, BattleMasterScript bm)
     {
@@ -540,16 +558,16 @@ public class Attacks : ScriptableObject
         target = bm.GetRandomEnemyIgnoringOne(aggressor);
         target.att += 1;
         target.def += 1;
-        topboard.UpdateString("The " + aggressor.name + " is showing a military training video to the " + target.name + "!" + " Their Attack and Defense went up by 1!");
+        topboard.UpdateString("The " + aggressor.name + " is showing a military training video to the " + target.name + "!" + " Their Offense and Defense went up by 1!");
         yield return new WaitForSeconds(3.3f);
         bm.YieldTurn();
     }
     public IEnumerator DrawPower(Battler aggressor, Battler target, BattleMasterScript bm)
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
-        aggressor.att += 2;
-        aggressor.def += 2;
-        topboard.UpdateString("The " + aggressor.name + " is drawing an excess of power!" + " Their Attack and Defense went up by 2!");
+        aggressor.att += 1;
+        aggressor.def += 1;
+        topboard.UpdateString("The " + aggressor.name + " is drawing an excess of power!" + " Their Offense and Defense went up by 1!");
         yield return new WaitForSeconds(3.3f);
         bm.YieldTurn();
     }
@@ -557,8 +575,58 @@ public class Attacks : ScriptableObject
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
         aggressor.att += 1;
-        topboard.UpdateString("The " + aggressor.name + " is turning up the volume!" + " Their Attack went up by 1!");
+        topboard.UpdateString("The " + aggressor.name + " is turning up the volume!" + " Their Offense went up by 1!");
         yield return new WaitForSeconds(3.3f);
+        bm.YieldTurn();
+    }
+    public IEnumerator ArmsUp(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        aggressor.def += 2;
+        topboard.UpdateString("The " + aggressor.name + " hides behind their arms! Their Defense has increased by 2!");
+        yield return new WaitForSeconds(3.0f);
+        bm.YieldTurn();
+    }
+    public IEnumerator GoodSide(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        int roll = Mathf.RoundToInt(UnityEngine.Random.Range(0.0f, 1.0f) * 4);
+        switch (roll)
+        {
+            case 0:
+                topboard.UpdateString("The " + aggressor.name + " looks on the bright side, supposing that their finals are probably cancelled now! They healed by 20 HP!");
+                break;
+            case 1:
+                topboard.UpdateString("The " + aggressor.name + " looks on the bright side, realizing their schedule is looking a lot more clear now! They healed by 20 HP!");
+                break;
+            case 2:
+                topboard.UpdateString("The " + aggressor.name + " looks on the bright side, remembering they got rid of their smart toaster after it switched to a subscription service! They healed by 20 HP!");
+                break;
+            case 3:
+                topboard.UpdateString("The " + aggressor.name + " looks on the bright side, doubting anyone is gonna bother collecting on their student loans now! They healed by 20 HP!");
+                break;
+            case 4:
+                topboard.UpdateString("The " + aggressor.name + " looks on the bright side, they didn't really have anything better to do tonight anyway! They healed by 20 HP!");
+                break;
+            default:
+                topboard.UpdateString("The " + aggressor.name + " looks on the bright side, supposing that finals are probably cancelled now! They healed by 20 HP!");
+                break;
+
+        }
+        aggressor.hp += 20;
+        if (aggressor.hp > aggressor.maxhp)
+        {
+            aggressor.hp = aggressor.maxhp;
+        }
+        yield return new WaitForSeconds(3.5f);
+        bm.YieldTurn();
+    }
+    public IEnumerator WindUp(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        aggressor.att += 2;
+        topboard.UpdateString("The " + aggressor.name + " starts whirling their arm in a circle! Their Offense has increased by 2!");
+        yield return new WaitForSeconds(3.0f);
         bm.YieldTurn();
     }
     public IEnumerator ShowUncomfortableFootage(Battler aggressor, Battler target, BattleMasterScript bm)
@@ -636,6 +704,13 @@ public class Attacks : ScriptableObject
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
         topboard.UpdateString("The " + aggressor.name + " is looking up how to get rid of a body.");
+        yield return new WaitForSeconds(1.5f);
+        bm.YieldTurn();
+    }
+    public IEnumerator ActorThought(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " is wondering which actor should play them in the movie adaptation.");
         yield return new WaitForSeconds(1.5f);
         bm.YieldTurn();
     }
@@ -770,10 +845,10 @@ public class EnemyFactory
             case EnemyType.tvboss:
                 {
                     Enemy nme = new Enemy(200, 10, 12, 10, 16, 3, "Erudite TV", "Sprites/EnemyBattleAnims/TV Boss");
-                    int[] weights = { 2, 1, 2, 1 };
+                    int[] weights = { 3, 1, 2, 2, 1 };
                     Attacks atk = new Attacks();
                     atk.weights = weights;
-                    AttackDelegate[] atks = { atk.WireWhip, atk.ShowExceedinglyUncomfortableFootage, atk.DrawPower, atk.TurnUpVolume };
+                    AttackDelegate[] atks = { atk.WireWhip, atk.ShowExceedinglyUncomfortableFootage, atk.DrawPower, atk.TurnUpVolume, atk.ActorThought };
                     atk.attacks = atks;
                     nme.atks = atk;
                     nme.SetHurtAnimation("Sprites/EnemyBattleAnims/TV Boss Injured", 0.5f);

@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Level1EventHandler : MonoBehaviour, ISaveable
 {
+
+    public MusicPlayerScript mps;
     // Start is called before the first frame update
     public GameObject swordObstacles;
     public GameObject secondRoomBlocker;
@@ -21,6 +23,15 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
     public GameObject[] switch2On;
     public GameObject[] switch2Off;
     public GameObject BossTV;
+
+    /// <summary>
+    /// CELL PHONE EVENT OBJECTS
+    /// </summary>
+    public GameObject cellPhone;
+    public SpriteRenderer cellPhoneSR;
+    public Sprite cellPhoneOn;
+    public TeleporterScript cellPhoneDoor;
+    public GameObject cellPhoneFightTrigger;
 
     public bool sideDoorLock = false;
     public bool secondEnemyActive = true;
@@ -48,6 +59,7 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
 
         handler = GameObject.Find("/UI/VignetteController").GetComponent<CutsceneScript>();
     	movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        mps.PlaySong("Sounds/Music/Floor_Mood",1,true);
     }
 
     // Update is called once per frame
@@ -130,6 +142,8 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         secondEnemyActive = false;
         SecondRoomEnemy.SetActive(secondEnemyActive);
         movscript.LockMovement();
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
     }
     public void InitializeGroupEnemyFight()
     {
@@ -152,6 +166,8 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         //Destroy(enemyGroup);
         groupEnemyActive = false;
         enemyGroup.SetActive(groupEnemyActive);
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
     }
     public void StartEnemyGroupDrop()
     {
@@ -188,12 +204,14 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeGroupEnemyFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
     }
     public void StartSecondRoomEnemyFight()
     {
         movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeSecondRoomEnemyFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
     }
 
      public void StartThirdRoomEnemyEvent()
@@ -241,12 +259,15 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         bm.InitializeBattle(EnemyFactory.EnemyType.tvboss);
         bm.SetBattleEndCallback(EndTVBossEvent);
         movscript.LockMovement();
+        mps.PlaySong("Sounds/Music/Boss_Mood", 2, true);
+        bm.songloc = "Sounds/Music/Boss_Mood";
     }
     public void StartTVBossFight()
     {
         movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
-        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeTVBossFight, null, 1.0f, 3.0f);
+        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeTVBossFight, null, .75f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY", 3, false);
     }
     public void StartTVBossEvent()
     {
@@ -289,12 +310,15 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         thirdEnemyActive = false;
         ThirdRoomEnemy.SetActive(thirdEnemyActive);
         movscript.LockMovement();
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
     }
     public void StartThirdRoomEnemyFight()
     {
         movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeThirdRoomEnemyFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
     }
 
     public void TriggerPostThirdBlockerEvent()
@@ -347,6 +371,76 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         {
             switch2Off[i].SetActive(true);
         }
+    }
+
+    public void CellPhoneTrigger()
+    {
+
+        string[] dialogue =
+        {
+            "I'm not broken yet ya idiot!",
+            "Get over here so I can kick your butt!"
+        };
+        string name = "Cell Phone";
+        cellPhoneSR.sprite = cellPhoneOn;
+        cellPhoneFightTrigger.SetActive(true);
+        handler.StartDialogue(dialogue, name);
+    }
+
+    public void StartCellPhoneFight()
+    {
+        movscript.LockMovement();
+        CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
+        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeCellPhoneFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
+    }
+    public void InitializeCellPhoneFight()
+    {
+
+        // PlayerMovement movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        GameObject btl = (GameObject)Instantiate(Resources.Load("Prefabs/BattlePrefab"));
+        btl.transform.position = new Vector3(1000, 1000, 0);
+        CameraScript cs = GameObject.Find("Main Camera").GetComponent<CameraScript>();
+        cs.sub = CameraSubject.battle;
+        cs.Battle = btl;
+        movscript.battle = btl;
+        BattleMasterScript bm;
+        bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
+        bm.InitializeBattle(EnemyFactory.EnemyType.selfphone);
+        bm.SetBattleEndCallback(EndCellPhoneEvent);
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        movscript.LockMovement();
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
+    }
+    public void RemoveCellPhone()
+    {
+        cellPhone.SetActive(false);
+    }
+    public void EndCellPhoneEvent()
+    {
+        movscript.UnlockMovement();
+        string[] dialogue =
+       {
+            "Heh... you got me good back there pal, even though I tried to do you dirty.",
+            "Tell you what - I remotely unlocked the backroom's door for you, there's something good in there. You deserve it.",
+            "Now...SeeRee...set a reminder for 6:00pm today...",
+            "For my appointment in Heck..."
+        };
+        string name = "Cell Phone";
+        cellPhoneDoor.locked = false;
+        handler.StartDialogue(dialogue, name);
+        handler.SetCallback(RemoveCellPhone);
+    }
+    public void CellPhoneFightEvent()
+    {
+        string[] dialogue =
+        {
+            "You just fell for the oldest trick in the phone book, pal!"
+        };
+        string name = "Cell Phone";
+        handler.StartDialogue(dialogue, name);
+        handler.SetCallback(StartCellPhoneFight);
     }
 
     [SerializeField]

@@ -135,7 +135,7 @@ public class ItemDirectory
 
     public enum ItemIndex //make sure to define a matching item in the item array dir
     {
-        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd, bitparticlegun, cheeties, gamars, bsckey
+        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd, bitparticlegun, cheeties, gamars, gutspill, drpeppy, bsckey
     };
 
     public Item[] dir = //make sure to define a matching index in the item index enum
@@ -153,7 +153,36 @@ public class ItemDirectory
         new Item(ItemType.weapon, "Bit Particle Gun","It's actually just a toy ray gun with a TV remote taped to it. Provides 3 Offense.", 0, 0, 3,0,0, WeaponType.phys,"Items/UISprites/bitparticlegun"),
         new Item(ItemType.consumable, "Cheeties","\"Cheeties(tm): Good for tongue; Bad for health.\" Heals 15 HP and 5 EN. Good luck getting the dust off your fingers.",15, 5,"Items/UISprites/cheeties"),
         new Item(ItemType.accessory, "GAMAR Gogglez", "Nothin gets by you in these patent pending GAMAR goggles. Will definitely improve your reaction time, guaranteed!. Provides 1 Speed.",0,0,0,0,1,"Items/UISprites/gamergoggles"),
+        new Item(ItemType.consumable, "Gutsy Protein","Said to have been blessed by a legendary gym-boss. Taking it permanently increases your Offense and Defense by 1.", 0, 0, 1,1,0,"Items/UISprites/stick"),
+        new Item(ItemType.consumable, "Dr. Peppy","Soft drink of choice for super geniuses (or people that pretend to be one). Restores 15 EN.",0, 15,"Items/UISprites/dr peppy"),
     };
+}
+
+public class Skill
+{
+    public AttackDelegate skill;
+    public int reqLevel = 0;
+    public int reqEn = 0;
+    public string name;
+    public string desc;
+    public bool targetsEnemy = false;
+    public Skill(AttackDelegate d, int level, int en,string name, string desc)
+    {
+        skill = d;
+        reqLevel = level;
+        reqEn = en;
+        this.name = name;
+        this.desc = desc;
+    }
+    public Skill(AttackDelegate d, int level, int en, string name, string desc, bool targ)
+    {
+        skill = d;
+        reqLevel = level;
+        reqEn = en;
+        this.name = name;
+        this.desc = desc;
+        targetsEnemy = targ;
+    }
 }
 
 
@@ -165,6 +194,8 @@ public class PlayerData : MonoBehaviour, ISaveable
     public List<ItemDirectory.ItemIndex> items = new List<ItemDirectory.ItemIndex>();
     public List<int> equippedItems = new List<int>();
     public ItemDirectory masterItemDirectory = new ItemDirectory();
+    public List<Skill> skillList;
+    public Attacks atks;
 
     [System.Serializable]
     public struct PData
@@ -178,6 +209,27 @@ public class PlayerData : MonoBehaviour, ISaveable
     // Start is called before the first frame update
     void Start()
     {
+        stats.maxen = 10;
+        stats.maxhp = 20;
+        stats.hp = 20;
+        stats.en = 10;
+        stats.lvl = 1;
+        stats.exp = 0;
+        stats.exptonext = 20;
+        stats.off = 10;
+        stats.def = 8;
+        stats.spd = 6;
+        stats.pts = 5;
+        atks = new Attacks();
+        skillList = new List<Skill>();
+        Skill armsUp = new Skill(atks.ArmsUp, 1, 2, "Arms Up", "Put your arms up in front of your much more delicate face. Defense up by 2.");
+        Skill windUp = new Skill(atks.WindUp, 2, 3, "Wind Up", "Start spinning your arm around in a circle. It works in cartoons. Attack up by 2.");
+        Skill heal = new Skill(atks.GoodSide, 3, 3, "Happy Thoughts", "Guess it's not all that bad. Heal yourself by 20 HP.");
+        Skill combo = new Skill(atks.PlayerCombo, 3, 3, "Multi-Hit", "Uses a mix of elementary-level martial arts you learned at the age of 9 and primal instinct. Deals low damage to an enemy 3 times.", true);
+        skillList.Add(armsUp);
+        skillList.Add(windUp);
+        skillList.Add(heal);
+        skillList.Add(combo);
         if(SaveMaster.GetActiveSlot() == -1)
         {
             stats.maxen = 10;
@@ -359,6 +411,8 @@ public class PlayerData : MonoBehaviour, ISaveable
         {
             stats.en = stats.maxen;
         }
+        stats.off += i.off;
+        stats.def += i.def;
     }
 
     public void GiveExp(int exp)
@@ -411,5 +465,18 @@ public class PlayerData : MonoBehaviour, ISaveable
     public bool OnSaveCondition()
     {
         return true;
+    }
+
+    public List<Skill> GetUseableSkills()
+    {
+        List<Skill> useableSkills = new List<Skill>();
+        for (int i = 0; i < skillList.Count; i++)
+        {
+            if (skillList[i].reqLevel <= stats.lvl)
+            {
+                useableSkills.Add(skillList[i]);
+            }
+        }
+        return useableSkills;
     }
 }
