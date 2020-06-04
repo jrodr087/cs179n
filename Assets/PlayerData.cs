@@ -155,6 +155,33 @@ public class ItemDirectory
     };
 }
 
+public class Skill
+{
+    public AttackDelegate skill;
+    public int reqLevel = 0;
+    public int reqEn = 0;
+    public string name;
+    public string desc;
+    public bool targetsEnemy = false;
+    public Skill(AttackDelegate d, int level, int en,string name, string desc)
+    {
+        skill = d;
+        reqLevel = level;
+        reqEn = en;
+        this.name = name;
+        this.desc = desc;
+    }
+    public Skill(AttackDelegate d, int level, int en, string name, string desc, bool targ)
+    {
+        skill = d;
+        reqLevel = level;
+        reqEn = en;
+        this.name = name;
+        this.desc = desc;
+        targetsEnemy = targ;
+    }
+}
+
 
 //[System.Serializable]
 public class PlayerData : MonoBehaviour, ISaveable
@@ -164,6 +191,8 @@ public class PlayerData : MonoBehaviour, ISaveable
     public List<ItemDirectory.ItemIndex> items = new List<ItemDirectory.ItemIndex>();
     public List<int> equippedItems = new List<int>();
     public ItemDirectory masterItemDirectory = new ItemDirectory();
+    public List<Skill> skillList;
+    public Attacks atks;
 
     [System.Serializable]
     public struct PData
@@ -188,6 +217,16 @@ public class PlayerData : MonoBehaviour, ISaveable
         stats.def = 8;
         stats.spd = 6;
         stats.pts = 5;
+        atks = new Attacks();
+        skillList = new List<Skill>();
+        Skill armsUp = new Skill(atks.ArmsUp, 1, 2, "Arms Up", "Put your arms up in front of your much more delicate face. Defense up by 2.");
+        Skill windUp = new Skill(atks.WindUp, 2, 3, "Wind Up", "Start spinning your arm around in a circle. It works in cartoons. Attack up by 2.");
+        Skill heal = new Skill(atks.GoodSide, 3, 3, "Happy Thoughts", "Guess it's not all that bad. Heal yourself by 20 HP.");
+        Skill combo = new Skill(atks.PlayerCombo, 3, 3, "Multi-Hit", "Uses a mix of elementary-level martial arts you learned at the age of 9 and primal instinct. Deals low damage to an enemy 3 times.", true);
+        skillList.Add(armsUp);
+        skillList.Add(windUp);
+        skillList.Add(heal);
+        skillList.Add(combo);
     }
 
 
@@ -407,5 +446,18 @@ public class PlayerData : MonoBehaviour, ISaveable
     public bool OnSaveCondition()
     {
         return true;
+    }
+
+    public List<Skill> GetUseableSkills()
+    {
+        List<Skill> useableSkills = new List<Skill>();
+        for (int i = 0; i < skillList.Count; i++)
+        {
+            if (skillList[i].reqLevel <= stats.lvl)
+            {
+                useableSkills.Add(skillList[i]);
+            }
+        }
+        return useableSkills;
     }
 }
