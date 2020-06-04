@@ -1,12 +1,12 @@
-﻿using System.Collections;
+﻿using Lowscope.Saving;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class InteractableButton : MonoBehaviour
+public class InteractableButton : MonoBehaviour, ISaveable
 {
-
     public string[] switchOnText;
     public string[] switchOffText;
     public bool toggleable = false;
@@ -24,6 +24,17 @@ public class InteractableButton : MonoBehaviour
     private PlayerMovement movscript;
     private SpriteRenderer sr;
     private bool inside = false;
+
+    [System.Serializable]
+    public struct ButtonData
+    {
+        public bool toggle;
+        public bool dialogueOn;
+        public bool dialogueOff;
+        public bool showText;
+        public bool onSwitch;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -95,5 +106,41 @@ public class InteractableButton : MonoBehaviour
         {
             inside = false;
         }
+    }
+
+    [SerializeField]
+    private ButtonData BData;
+
+    public string OnSave()
+    {
+        return JsonUtility.ToJson(new ButtonData() { toggle = toggleable,
+                                                     dialogueOn = onDialogue,
+                                                     dialogueOff = offDialogue,
+                                                     showText = showTextEvenWhenNotToggleable,
+                                                     onSwitch = switchedon });
+    }
+
+    public void OnLoad(string data)
+    {
+        BData = JsonUtility.FromJson<ButtonData>(data);
+
+        toggleable = BData.toggle;
+        onDialogue = BData.dialogueOn;
+        offDialogue = BData.dialogueOff;
+        showTextEvenWhenNotToggleable = BData.showText;
+        switchedon = BData.onSwitch;
+        if(switchedon)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = onsprite;
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().sprite = offsprite;
+        }
+    }
+
+    public bool OnSaveCondition()
+    {
+        return true;
     }
 }

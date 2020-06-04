@@ -40,6 +40,8 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
     public bool groupEnemyActive = true;
     public bool thirdEnemyActive = true;
     public bool bossEnemyActive = true;
+    public bool switchOne;
+    public bool switchTwo;
     
 
     [System.Serializable]
@@ -52,6 +54,8 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         public bool groupEnemy;
         public bool thirdEnemy;
         public bool bossEnemy;
+        public bool switchOneOn;
+        public bool switchTwoOn;
     }
 
     void Start()
@@ -330,46 +334,50 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
 
     public void SwitchOneOn()
     {
+        switchOne = true;
         for (int i = 0; i < switch1On.Length; i++)
         {
-            switch1On[i].SetActive(true);
+            switch1On[i].SetActive(switchOne);
         }
         for (int i = 0; i < switch1Off.Length; i++)
         {
-            switch1Off[i].SetActive(false);
+            switch1Off[i].SetActive(!switchOne);
         }
     }
     public void SwitchOneOff()
     {
+        switchOne = false;
         for (int i = 0; i < switch1On.Length; i++)
         {
-            switch1On[i].SetActive(false);
+            switch1On[i].SetActive(switchOne);
         }
         for (int i = 0; i < switch1Off.Length; i++)
         {
-            switch1Off[i].SetActive(true);
+            switch1Off[i].SetActive(!switchOne);
         }
     }
     public void SwitchTwoOn()
     {
+        switchTwo = true;
         for (int i = 0; i < switch2On.Length; i++)
         {
-            switch2On[i].SetActive(true);
+            switch2On[i].SetActive(switchTwo);
         }
         for (int i = 0; i < switch2Off.Length; i++)
         {
-            switch2Off[i].SetActive(false);
+            switch2Off[i].SetActive(!switchTwo);
         }
     }
     public void SwitchTwoOff()
     {
+        switchTwo = false;
         for (int i = 0; i < switch2On.Length; i++)
         {
-            switch2On[i].SetActive(false);
+            switch2On[i].SetActive(switchTwo);
         }
         for (int i = 0; i < switch2Off.Length; i++)
         {
-            switch2Off[i].SetActive(true);
+            switch2Off[i].SetActive(!switchTwo);
         }
     }
 
@@ -454,7 +462,10 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
                                                    swordBlock = swordBlockActive,
                                                    groupEnemy = groupEnemyActive,
                                                    thirdEnemy = thirdEnemyActive,
-                                                   bossEnemy = bossEnemyActive });
+                                                   bossEnemy = bossEnemyActive,
+                                                   switchOneOn = switchOne,
+                                                   switchTwoOn = switchTwo
+                                                   });
     }
 
     public void OnLoad(string data)
@@ -469,6 +480,8 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         groupEnemyActive = LevelOneData.groupEnemy;
         thirdEnemyActive = LevelOneData.thirdEnemy;
         bossEnemyActive = LevelOneData.bossEnemy;
+        switchOne = LevelOneData.switchOneOn;
+        switchTwo = LevelOneData.switchTwoOn;
 
         //set state
         sideroomdoor.locked = sideDoorLock;
@@ -478,6 +491,16 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         enemyGroup.SetActive(groupEnemyActive);
         ThirdRoomEnemy.SetActive(thirdEnemyActive);
         BossTV.SetActive(bossEnemyActive);
+
+        if (switchOne)
+            SwitchOneOn();
+        else
+            SwitchOneOff();
+
+        if (switchTwo)
+            SwitchTwoOn();
+        else
+            SwitchTwoOff();
     }
 
     public bool OnSaveCondition()
