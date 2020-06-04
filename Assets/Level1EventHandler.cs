@@ -119,7 +119,7 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         string[] dialogue =
         {
             "Hehe, theres a lot of items for you to take...",
-            "Just behind the door"
+            "Just behind the door."
         };
         string name = "Broken Lappy";
         handler.StartDialogue(dialogue, name);
@@ -323,7 +323,7 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
 
     public void TriggerPostThirdBlockerEvent()
     {
-    	string[] eventtext = { "Can't go there. Theres too many vroomers there too fight!"};
+    	string[] eventtext = { "Can't go there. Theres too many vroomers there to fight!"};
         handler.StartScene(eventtext);
         movscript.gameObject.GetComponent<Transform>().position = movscript.gameObject.GetComponent<Transform>().position + new Vector3( (float) .25,0,0);
     }
