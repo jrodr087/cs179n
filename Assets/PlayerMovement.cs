@@ -5,20 +5,18 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-    //public bool isCutScene;
 	public float moveSpeed = 5f;
 	public Rigidbody2D rb;
     public Animator animator;
     public GameObject battle;
+    public bool levelled = false;
     private bool movementlocked = false;
+    private LevelUpNotificationScript lvluppanel;
     Vector2 lastmovement;
 	Vector2 movement;
     void Start()
     {
-        // if(isCutScene)
-        // {
-        //     movementlocked = true;
-        // }
+        lvluppanel = GameObject.Find("UI/Level Up Panel").GetComponent<LevelUpNotificationScript>();
     }
 
     // Update is called once per frame
@@ -33,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
+            if (levelled)
+            {
+                levelled = false;
+                lvluppanel.StartNotification();
+            }
         }
         if (movement.magnitude > .1)
         {

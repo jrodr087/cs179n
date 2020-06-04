@@ -10,6 +10,9 @@ public class InteractableButton : MonoBehaviour
     public string[] switchOnText;
     public string[] switchOffText;
     public bool toggleable = false;
+    public bool onDialogue = true;
+    public bool offDialogue = true;
+    public bool showTextEvenWhenNotToggleable = false;
     public bool switchedon = false;
     public UnityEvent onfunc;
     public UnityEvent offfunc;
@@ -37,7 +40,10 @@ public class InteractableButton : MonoBehaviour
         {
             if (!switchedon)
             {
-                handler.StartScene(switchOnText);
+                if (onDialogue)
+                {
+                    handler.StartScene(switchOffText);
+                }
                 if (sound != null)
                 {
                     audio.PlayOneShot(sound);
@@ -48,17 +54,29 @@ public class InteractableButton : MonoBehaviour
             }
             else
             {
-                handler.StartScene(switchOffText);
+                // Josiah - changed so toggleable bool actually keeps it from switching
                 if (toggleable)
                 {
+                    if (offDialogue)
+                    {
+                        handler.StartScene(switchOffText);
+                    }
                     switchedon = false;
                     if (sound != null)
                     {
                         audio.PlayOneShot(sound);
                     }
                     sr.sprite = offsprite;
+                    offfunc.Invoke();
                 }
-                offfunc.Invoke();
+                else if (showTextEvenWhenNotToggleable) //Jake - should have mentioned that it's intended behaviour to still trigger a scene using the switchOffText, but I created a separate bool for this case just to make it more explicit
+                    //for when its intended
+                {
+                    if (offDialogue)
+                    {
+                        handler.StartScene(switchOffText);
+                    }
+                }
             }
         }
 

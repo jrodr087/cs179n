@@ -15,7 +15,9 @@ public class BattleRadialMenuScript : MonoBehaviour
     private bool rotating = false;
     private int direction = 0;
     private int depth = 0;
+    private int enemySelectorIndex = 0;
     private bool itemMenu = false;
+    private bool enemySelectorOpen = false;
     private const float firstMoveTimer = 0.35f;
     private const float heldMoveTimer = 5.0f / 60.0f;
     private float currMoveTimer = 0.0f;
@@ -25,11 +27,19 @@ public class BattleRadialMenuScript : MonoBehaviour
     private PlayerData pd;
     AudioSource click;
     public GameObject itemList;
+    public GameObject enemySelector;
+    public GameObject optionSelector;
     public BattleMasterScript bm;
     public Text[] itemTexts;
     public Text hpTextNum;
     public Text enTextNum;
     public RectTransform itemSelectorTransform;
+    public RectTransform enemySelectorTransform;
+    public Text enemySelectorNameplateText;
+    public Text enemySelectorHPPlateText;
+    public GameObject directionPanel;
+    public Text directionText;
+    public Text directionShadowText;
     private new AudioSource audio;
     void Start()
     {
@@ -58,6 +68,7 @@ public class BattleRadialMenuScript : MonoBehaviour
         float speed = 720.0f;
         if (depth == 0)
         {
+            optionSelector.SetActive(true);
             if (!rotating)
             {
                 switch (currindex)
@@ -65,8 +76,16 @@ public class BattleRadialMenuScript : MonoBehaviour
                     case (int)RadialOptions.attack:
                         if (Input.GetKeyDown("space"))
                         {
-                            bm.PlayerAttack();
-                            gameObject.SetActive(false);
+                            audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuOpen"));
+                            Debug.Log("opening enemy selector");
+                            enemySelector.SetActive(true);
+                            depth++;
+                            enemySelectorOpen = true;
+                            enemySelectorIndex = 0;
+                            directionPanel.SetActive(true);
+                            directionText.text = "Attack which enemy?";
+                            directionShadowText.text = "Attack which enemy?";
+                            optionSelector.SetActive(false);
                         }
                         break;
                     case (int)RadialOptions.items:
@@ -77,6 +96,10 @@ public class BattleRadialMenuScript : MonoBehaviour
                             itemList.SetActive(true);
                             depth++;
                             itemMenu = true;
+                            directionPanel.SetActive(true);
+                            directionText.text = "Pick an item to use.";
+                            directionShadowText.text = "Pick an item to use.";
+                            optionSelector.SetActive(false);
                         }
                         break;
                     case (int)RadialOptions.tactics:
@@ -160,6 +183,7 @@ public class BattleRadialMenuScript : MonoBehaviour
                 itemMenu = false;
                 depth--;
                 itemList.SetActive(false);
+                directionPanel.SetActive(false);
                 return;
             }
             if (currMoveTimer >= 0.0f)
@@ -233,10 +257,91 @@ public class BattleRadialMenuScript : MonoBehaviour
                     itemList.SetActive(false);
                     bm.YieldTurn();
                     gameObject.SetActive(false);
+                    directionPanel.SetActive(false);
                 }
             }
             
             itemSelectorTransform.anchoredPosition = new Vector3(4, -(itemSelectorIndex % 4) * 24 - 12, 0);
+        }
+        else if (depth == 1 && enemySelectorOpen)
+        {
+            List<Battler> enemyList = bm.GetEnemies();
+            //handle movement of the enemy selector cursor
+            //the if below just lets me collapse all of the cursor movement related code super easy
+            if (true)
+            {
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    audio.PlayOneShot((AudioClip)Resources.Load("Sounds/SecondaryMenuClose"));
+                    Debug.Log("exiting enemy selector menu");
+                    enemySelectorOpen = false;
+                    depth--;
+                    enemySelector.SetActive(false);
+                    directionPanel.SetActive(false);
+                    return;
+                }
+                if (currMoveTimer >= 0.0f)
+                {
+                    currMoveTimer -= Time.deltaTime;
+                }
+                if ((movement.y >= .8f || movement.x >= .8f)&& currMoveTimer <= 0.0f)
+                {
+                    audio.PlayOneShot((AudioClip)Resources.Load("Sounds/ItemSelectorMove"));
+                    enemySelectorIndex--;
+                    if (enemySelectorIndex < 0)
+                    {
+                        enemySelectorIndex = enemyList.Count - 1;
+                    }
+                    if (!held)
+                    {
+                        held = true;
+                        currMoveTimer = firstMoveTimer;
+                    }
+                    else
+                    {
+                        currMoveTimer = heldMoveTimer;
+                    }
+                }
+                else if ((movement.y <= -.8f || movement.x <= -.8f) && currMoveTimer <= 0.0)
+                {
+                    audio.PlayOneShot((AudioClip)Resources.Load("Sounds/ItemSelectorMove"));
+                    enemySelectorIndex++;
+                    if (enemySelectorIndex > enemyList.Count - 1)
+                    {
+                        enemySelectorIndex = 0;
+                    }
+                    if (!held)
+                    {
+                        held = true;
+                        currMoveTimer = firstMoveTimer;
+                    }
+                    else
+                    {
+                        currMoveTimer = heldMoveTimer;
+                    }
+
+                }
+                else if (movement.y > -0.8f && movement.y < 0.8f && movement.x < 0.8f && movement.x > -0.8f)
+                {
+                    held = false;
+                    currMoveTimer = -1.0f;
+                }
+            }
+            Battler currEnemy = enemyList[enemySelectorIndex];
+            Vector3 distFromCenterBattle = currEnemy.sprite.transform.position - bm.gameObject.transform.position;
+            enemySelectorTransform.anchoredPosition = (distFromCenterBattle * 32) + new Vector3(-16, 0, 0); //32 is the pixels per unit and 16 just offsets the selector above the enemy
+            enemySelectorNameplateText.text = currEnemy.name;
+            enemySelectorHPPlateText.text = currEnemy.hp.ToString();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                bm.PlayerAttack(currEnemy);
+                gameObject.SetActive(false);
+                enemySelector.SetActive(false);
+                directionPanel.SetActive(false);
+                depth = 0;
+                enemySelectorOpen = false;
+
+            }
         }
         rt.transform.eulerAngles = new Vector3(0, 0, angle);
 

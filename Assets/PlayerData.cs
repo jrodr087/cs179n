@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
+using Lowscope.Saving;
 
 [System.Serializable]
 public class PlayerStats
@@ -133,7 +134,7 @@ public class ItemDirectory
 
     public enum ItemIndex //make sure to define a matching item in the item array dir
     {
-        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd, bitparticlegun, cheeties, bsckey
+        cola, stick, hat, wallet, balloon,lighter,fan,watergun, sword, allarnd, bitparticlegun, cheeties, gamars, bsckey
     };
 
     public Item[] dir = //make sure to define a matching index in the item index enum
@@ -149,21 +150,32 @@ public class ItemDirectory
         new Item(ItemType.weapon, "Sword","A dangerously cool sword that silently urges you on to do dangerously stupid things. Provides 20 Offense and 5 Defense.", 0, 0, 20,5,0, WeaponType.phys,"Items/UISprites/sword"),
         new Item(ItemType.weapon, "All Around Buff","Buffs all stats 10.", 10,10,10,10,10, WeaponType.phys,""),
         new Item(ItemType.weapon, "Bit Particle Gun","It's actually just a toy ray gun with a TV remote taped to it. Provides 3 Offense.", 0, 0, 3,0,0, WeaponType.phys,"Items/UISprites/bitparticlegun"),
-        new Item(ItemType.consumable, "Cheeties","\"Cheeties(tm): Good for tongue; Bad for health.\" Heals 15 HP and 5 EN. Good luck getting the dust off your fingers.",15, 5,"Items/UISprites/cheeties")
+        new Item(ItemType.consumable, "Cheeties","\"Cheeties(tm): Good for tongue; Bad for health.\" Heals 15 HP and 5 EN. Good luck getting the dust off your fingers.",15, 5,"Items/UISprites/cheeties"),
+        new Item(ItemType.accessory, "GAMAR Gogglez", "Nothin gets by you in these patent pending GAMAR goggles. Will definitely improve your reaction time, guaranteed!. Provides 1 Speed.",0,0,0,0,1,"Items/UISprites/gamergoggles"),
     };
 }
 
 
 //[System.Serializable]
-public class PlayerData : MonoBehaviour
+public class PlayerData : MonoBehaviour, ISaveable
 {
     public PlayerStats stats = new PlayerStats();
     public int equipSlots = 3;
     public List<ItemDirectory.ItemIndex> items = new List<ItemDirectory.ItemIndex>();
     public List<int> equippedItems = new List<int>();
     public ItemDirectory masterItemDirectory = new ItemDirectory();
-   // Start is called before the first frame update
-     void Start()
+
+    [System.Serializable]
+    public struct PData
+    {
+        public PlayerStats stat;
+        public int equipSlot;
+        public List<ItemDirectory.ItemIndex> item;
+        public List<int> equippedItem;
+    }
+
+    // Start is called before the first frame update
+    void Start()
     {
         stats.maxen = 10;
         stats.maxhp = 20;
@@ -178,20 +190,6 @@ public class PlayerData : MonoBehaviour
         stats.pts = 5;
     }
 
-    public PlayerData()
-    {
-        stats.maxen = 10;
-        stats.maxhp = 20;
-        stats.hp = 15;
-        stats.en = 5;
-        stats.lvl = 1;
-        stats.exp = 0;
-        stats.exptonext = 20;
-        stats.off = 10;
-        stats.def = 8;
-        stats.spd = 6;
-        stats.pts = 5;
-    }
 
     // Update is called once per frame
     void Update()
@@ -199,47 +197,47 @@ public class PlayerData : MonoBehaviour
 
         if (Input.GetKeyDown("m"))
         {
-            stats.pts = stats.pts+10;
+            stats.pts = stats.pts + 10;
         }
         else if (Input.GetKeyDown("0"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 0);
+            GiveItem((ItemDirectory.ItemIndex)0);
         }
         else if (Input.GetKeyDown("1"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 1);
+            GiveItem((ItemDirectory.ItemIndex)1);
         }
         else if (Input.GetKeyDown("2"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 2);
+            GiveItem((ItemDirectory.ItemIndex)2);
         }
         else if (Input.GetKeyDown("3"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 3);
+            GiveItem((ItemDirectory.ItemIndex)3);
         }
         else if (Input.GetKeyDown("4"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 4);
+            GiveItem((ItemDirectory.ItemIndex)4);
         }
         else if (Input.GetKeyDown("5"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 5);
+            GiveItem((ItemDirectory.ItemIndex)5);
         }
         else if (Input.GetKeyDown("6"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 6);
+            GiveItem((ItemDirectory.ItemIndex)6);
         }
         else if (Input.GetKeyDown("7"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 7);
+            GiveItem((ItemDirectory.ItemIndex)7);
         }
         else if (Input.GetKeyDown("8"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 8);
+            GiveItem((ItemDirectory.ItemIndex)8);
         }
         else if (Input.GetKeyDown("9"))
         {
-            GiveItem((ItemDirectory.ItemIndex) 9);
+            GiveItem((ItemDirectory.ItemIndex)9);
         }
         else if (Input.GetKeyDown("z"))
         {
@@ -257,32 +255,41 @@ public class PlayerData : MonoBehaviour
 
     public void RemoveItem(ItemDirectory.ItemIndex itemIndex)
     {
-        int x = (int) items.FindIndex( (ItemDirectory.ItemIndex i) => i ==  itemIndex);
+        int x = (int)items.FindIndex((ItemDirectory.ItemIndex i) => i == itemIndex);
         items.RemoveAt(x);
-        if (equippedItems.Contains(x)){
-            equippedItems.RemoveAt( (int) equippedItems.FindIndex( (int i) => i == x) );
+        if (equippedItems.Contains(x))
+        {
+            equippedItems.RemoveAt((int)equippedItems.FindIndex((int i) => i == x));
         }
         updateEquippedItems(x);
         Item it = masterItemDirectory.dir[(int)itemIndex];
         Debug.Log("Removed item name: " + it.name);
     }
 
-    public void modifyStats(string stat, int change) {
+    public void modifyStats(string stat, int change)
+    {
         Debug.Log("Modifying stats");
         // 
 
-        switch (stat) {
-            case "maxen": stats.maxen = stats.maxen + change;
+        switch (stat)
+        {
+            case "maxen":
+                stats.maxen = stats.maxen + change;
                 break;
-            case "maxhp": stats.maxhp = stats.maxhp + change;
+            case "maxhp":
+                stats.maxhp = stats.maxhp + change;
                 break;
-            case "off": stats.off = stats.off + change;
+            case "off":
+                stats.off = stats.off + change;
                 break;
-            case "def": stats.def = stats.def + change;
+            case "def":
+                stats.def = stats.def + change;
                 break;
-            case "spd": stats.spd = stats.spd + change;
+            case "spd":
+                stats.spd = stats.spd + change;
                 break;
-            case "pts": stats.pts = stats.pts + change;
+            case "pts":
+                stats.pts = stats.pts + change;
                 break;
             default: break;
         }
@@ -290,21 +297,26 @@ public class PlayerData : MonoBehaviour
         Debug.Log("Modified Stat: " + stat + " by " + change);
     }
 
-    public void equipItem (int curItem){
-        if (equippedItems.Contains(curItem)){
-            equippedItems.RemoveAt( (int) equippedItems.FindIndex( (int i) => i == curItem) );
+    public void equipItem(int curItem)
+    {
+        if (equippedItems.Contains(curItem))
+        {
+            equippedItems.RemoveAt((int)equippedItems.FindIndex((int i) => i == curItem));
             applyItem(masterItemDirectory.dir[(int)items[curItem]], false);
             Debug.Log("Dequipped item " + masterItemDirectory.dir[(int)items[curItem]].name);
-        } 
-        else if (equippedItems.Count < equipSlots){
+        }
+        else if (equippedItems.Count < equipSlots)
+        {
             equippedItems.Add(curItem);
             applyItem(masterItemDirectory.dir[(int)items[curItem]], true);
             Debug.Log("Equipped item " + masterItemDirectory.dir[(int)items[curItem]].name);
         }
     }
 
-    public void applyItem(Item i, bool apply) {
-        if (apply){
+    public void applyItem(Item i, bool apply)
+    {
+        if (apply)
+        {
             stats.maxhp += i.hp;
             stats.maxen += i.en;
             stats.hp += i.hp;
@@ -312,13 +324,17 @@ public class PlayerData : MonoBehaviour
             stats.off += i.off;
             stats.def += i.def;
             stats.spd += i.spd;
-        } else {
+        }
+        else
+        {
             stats.maxhp -= i.hp;
             stats.maxen -= i.en;
-            if (stats.hp > stats.maxhp){
+            if (stats.hp > stats.maxhp)
+            {
                 stats.hp = stats.maxhp;
             }
-            if (stats.en > stats.maxen){
+            if (stats.en > stats.maxen)
+            {
                 stats.en = stats.maxen;
             }
             stats.off -= i.off;
@@ -327,13 +343,16 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public void applyConsumable(Item i) {
+    public void applyConsumable(Item i)
+    {
         stats.hp += i.hp;
         stats.en += i.en;
-        if (stats.hp > stats.maxhp){
+        if (stats.hp > stats.maxhp)
+        {
             stats.hp = stats.maxhp;
         }
-        if (stats.en > stats.maxen){
+        if (stats.en > stats.maxen)
+        {
             stats.en = stats.maxen;
         }
     }
@@ -341,19 +360,52 @@ public class PlayerData : MonoBehaviour
     public void GiveExp(int exp)
     {
         stats.exp += exp;
-        if (stats.exp >= stats.exptonext)
+        while (stats.exp >= stats.exptonext)
         {
             stats.exp = stats.exp - stats.exptonext;
-            stats.pts = stats.pts + 5;
             stats.lvl++;
+            stats.exptonext = Mathf.RoundToInt(Mathf.Pow((stats.lvl * 20), 1.05f));
+            stats.pts = stats.pts + 5;
+            gameObject.GetComponent<PlayerMovement>().levelled = true;
         }
     }
 
-    public void updateEquippedItems (int it){
-        for (int i = 0; i < equippedItems.Count; i++) {
-            if (equippedItems[i] > it){
+    public void updateEquippedItems(int it)
+    {
+        for (int i = 0; i < equippedItems.Count; i++)
+        {
+            if (equippedItems[i] > it)
+            {
                 equippedItems[i] = equippedItems[i] - 1;
             }
         }
+    }
+    
+
+    [SerializeField]
+    private PData playData;
+    public string OnSave()
+    {
+        //string stat = JsonUtility.ToJson(stats);
+        return JsonUtility.ToJson(new PData() { stat = this.stats, 
+                                                equipSlot = this.equipSlots, 
+                                                item = this.items, 
+                                                equippedItem = this.equippedItems});
+    }
+
+    public void OnLoad(string data)
+    {
+        //stats = JsonUtility.FromJson<PlayerStats>(data);
+        playData = JsonUtility.FromJson<PData>(data);
+        
+        stats = playData.stat;
+        equipSlots = playData.equipSlot;
+        items = playData.item;
+        equippedItems = playData.equippedItem;
+    }
+
+    public bool OnSaveCondition()
+    {
+        return true;
     }
 }

@@ -10,6 +10,7 @@ public class TeleporterScript : MonoBehaviour
     public AudioClip sound;
     public bool locked = false;
     public string[] locktext = { "It's locked." };
+    public bool above;
     new AudioSource audio;
     private PlayerMovement movscript;
     private CameraShader cs;
@@ -26,9 +27,13 @@ public class TeleporterScript : MonoBehaviour
         audio = gameObject.AddComponent<AudioSource>();
         handler = GameObject.Find("/UI/VignetteController").GetComponent<CutsceneScript>();
     }
-    void Teleport()
+    void BelowTeleport()
     {
         movscript.gameObject.GetComponent<Transform>().position = destination.GetComponent<BoxCollider2D>().transform.position;
+    }
+    void AboveTeleport()
+    {
+        movscript.gameObject.GetComponent<Transform>().position = destination.GetComponent<BoxCollider2D>().transform.position + new Vector3(0,5,0);
     }
     // Update is called once per frame
     void Update()
@@ -38,7 +43,12 @@ public class TeleporterScript : MonoBehaviour
             if (!locked)
             {
                 movscript.LockMovement();
-                cs.StartWipe(inwipe, outwipe, Teleport, movscript.UnlockMovement);
+                if (above){
+                    cs.StartWipe(inwipe, outwipe, AboveTeleport, movscript.UnlockMovement);
+                }
+                else {
+                    cs.StartWipe(inwipe, outwipe, BelowTeleport, movscript.UnlockMovement);
+                }
                 if (sound != null)
                 {
                     audio.PlayOneShot(sound);

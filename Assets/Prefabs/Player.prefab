@@ -269,6 +269,22 @@ MonoBehaviour:
   equipSlots: 3
   items: 
   equippedItems: 
+  playData:
+    stat:
+      maxhp: 0
+      hp: 0
+      maxen: 0
+      en: 0
+      lvl: 0
+      exp: 0
+      exptonext: 0
+      off: 0
+      def: 0
+      spd: 0
+      pts: 0
+    equipSlot: 0
+    item: 
+    equippedItem: 
 --- !u!114 &4184099790902839254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +303,8 @@ MonoBehaviour:
   cachedSaveableComponents:
   - identifier: SavePosition-32b7d
     monoBehaviour: {fileID: 4993321497810808345}
+  - identifier: PlayerData-e2a51
+    monoBehaviour: {fileID: 7040238565668720440}
   saveIdentification: 
   sceneName: 
 --- !u!114 &4993321497810808345
