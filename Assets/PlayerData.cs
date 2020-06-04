@@ -153,7 +153,7 @@ public class ItemDirectory
         new Item(ItemType.weapon, "Bit Particle Gun","It's actually just a toy ray gun with a TV remote taped to it. Provides 3 Offense.", 0, 0, 3,0,0, WeaponType.phys,"Items/UISprites/bitparticlegun"),
         new Item(ItemType.consumable, "Cheeties","\"Cheeties(tm): Good for tongue; Bad for health.\" Heals 15 HP and 5 EN. Good luck getting the dust off your fingers.",15, 5,"Items/UISprites/cheeties"),
         new Item(ItemType.accessory, "GAMAR Gogglez", "Nothin gets by you in these patent pending GAMAR goggles. Will definitely improve your reaction time, guaranteed!. Provides 1 Speed.",0,0,0,0,1,"Items/UISprites/gamergoggles"),
-        new Item(ItemType.consumable, "Gutsy Protein","Said to have been blessed by a legendary gym-boss. Taking it permanently increases your Offense and Defense by 1.", 0, 0, 1,1,0,"Items/UISprites/stick"),
+        new Item(ItemType.consumable, "Gutsy Protein","Said to have been blessed by a legendary gym-boss. Taking it permanently increases your Offense and Defense by 1.", 0, 0, 1,1,0,"Items/UISprites/protein"),
         new Item(ItemType.consumable, "Dr. Peppy","Soft drink of choice for super geniuses (or people that pretend to be one). Restores 15 EN.",0, 15,"Items/UISprites/dr peppy"),
     };
 }
