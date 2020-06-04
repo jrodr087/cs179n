@@ -15,6 +15,14 @@ namespace Lowscope.Saving.Core
         public PlayerMovement movscript;
         public int[] saves;
         public bool active = false;
+        
+        public string sceneName = "";
+
+        // [System.Serializable]
+        // public struct SData
+        // {
+        //     public string scene;
+        // }
 
         public void SaveSlot(int slot) {
             SaveMaster.DeleteSave(slot);
@@ -26,27 +34,26 @@ namespace Lowscope.Saving.Core
             txt.fontSize = 13;
             txt.alignment = TextAnchor.UpperRight;
             DateTime timeSaved = SaveMaster.GetSaveCreationTime(slot);
-            TimeSpan timePlayed = SaveMaster.GetSaveTimePlayed(slot);
-            txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt")+"\n\n\n"+timePlayed.ToString(@"hh\:mm\:ss");
+            txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt");
 
+            sceneName = JsonUtility.ToJson(SceneManager.GetActiveScene().name);
+            //SaveMaster.SetString("sceneNameKey", SceneManager.GetActiveScene().name);
+            //Debug.Log("Scene Name: "+SaveMaster.GetString("sceneNameKey"));
             //txt.text = "Saved Slot";
         }
 
         public void LoadGame(int slot) {
             //var slotToLoad = 0; // Set your index here
             //SaveMaster.ClearSlot();
-            SceneManager.LoadScene("SampleScene"); //temp until more scenes/levels are added
+            
             SaveMaster.SetSlot(slot, true);
+            //sceneName = JsonUtility.FromJson<string>(SaveMaster.GetSave(slot, false).Get(""));
+            //Debug.Log("Scene Name: "+SaveMaster.GetString("sceneNameKey"));
+            SceneManager.LoadScene("SampleScene"); //temp until more scenes/levels are added
         }
 
         void Start()
         {
-
-            Debug.Log("Getting Used Save Slots");
-            saves = SaveFileUtility.GetUsedSlots();
-            Debug.Log("Saves: " + saves.Length.ToString());
-            Debug.Log("Active Slot: " + SaveMaster.GetActiveSlot().ToString());
-            
             Button[] button = GameObject.Find("SaveContent").GetComponentsInChildren<Button>();
             int i = 0;
             foreach(Button btn in button)
@@ -59,8 +66,7 @@ namespace Lowscope.Saving.Core
                     txt.fontSize = 13;
                     txt.alignment = TextAnchor.UpperRight;
                     DateTime timeSaved = SaveMaster.GetSaveCreationTime(i);
-                    TimeSpan timePlayed = SaveMaster.GetSaveTimePlayed(i);
-                    txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt")+"\n\n\n"+timePlayed.ToString(@"hh\:mm\:ss");
+                    txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt");
                     //txt.text = "Saved Slot";
                 }
                 else if(!SaveFileUtility.IsSlotUsed(i)){
@@ -73,16 +79,29 @@ namespace Lowscope.Saving.Core
         }
         void Update()
         {
-            
-            // DisplaySlot(1);
-            // DisplaySlot(2);
-            // DisplaySlot(3);
-            // DisplaySlot(4);
-            // DisplaySlot(5);
-            // DisplaySlot(6);
-            // DisplaySlot(7);
-            // DisplaySlot(8);
-            // DisplaySlot(9);
+
         }
+
+        // [SerializeField]
+        //     private SData sceneData;
+        // public string OnSave()
+        // {
+        //     sceneName = SceneManager.GetActiveScene().name;
+        //     return JsonUtility.ToJson(new SData() {scene = sceneName});
+        // }
+
+        // public void OnLoad(string data)
+        // {
+        //     //stats = JsonUtility.FromJson<PlayerStats>(data);
+        //     sceneData = JsonUtility.FromJson<SData>(data);
+        //     sceneName = sceneData.scene;
+
+        //     Debug.Log("Scene Name:" + sceneName);
+        // }
+
+        // public bool OnSaveCondition()
+        // {
+        //     return true;
+        // }
     }
 }

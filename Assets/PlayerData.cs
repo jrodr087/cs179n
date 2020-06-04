@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using Lowscope.Saving;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerStats
@@ -227,6 +228,20 @@ public class PlayerData : MonoBehaviour, ISaveable
         skillList.Add(windUp);
         skillList.Add(heal);
         skillList.Add(combo);
+        if(SaveMaster.GetActiveSlot() == -1)
+        {
+            stats.maxen = 10;
+            stats.maxhp = 20;
+            stats.hp = 15;
+            stats.en = 5;
+            stats.lvl = 1;
+            stats.exp = 0;
+            stats.exptonext = 20;
+            stats.off = 10;
+            stats.def = 8;
+            stats.spd = 6;
+            stats.pts = 5;
+        }
     }
 
 

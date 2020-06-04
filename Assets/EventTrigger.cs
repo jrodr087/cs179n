@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Lowscope;
+using Lowscope.Saving;
 
-public class EventTrigger : MonoBehaviour
+[System.Serializable]
+public class EventTrigger : MonoBehaviour, ISaveable
 {
     // Start is called before the first frame update
     private bool activated = false;
@@ -12,6 +15,13 @@ public class EventTrigger : MonoBehaviour
     new AudioSource audio;
     public bool continous;
     private PlayerMovement movscript;
+
+    [System.Serializable]
+    public struct EventData
+    {
+        public bool activate;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,4 +45,24 @@ public class EventTrigger : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
     }
+
+    [SerializeField]
+    private EventData eventData;
+
+    public string OnSave()
+        {
+            return JsonUtility.ToJson((new EventData() { activate = activated }));
+        }
+
+        public void OnLoad(string data)
+        {
+            //stats = JsonUtility.FromJson<PlayerStats>(data);
+            eventData = JsonUtility.FromJson<EventData>(data);
+            activated = eventData.activate;
+        }
+
+        public bool OnSaveCondition()
+        {
+            return true;
+        }
 }
