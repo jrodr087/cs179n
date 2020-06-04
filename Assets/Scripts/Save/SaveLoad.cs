@@ -17,12 +17,7 @@ namespace Lowscope.Saving.Core
         public bool active = false;
         
         public string sceneName = "";
-
-        // [System.Serializable]
-        // public struct SData
-        // {
-        //     public string scene;
-        // }
+        
 
         public void SaveSlot(int slot) {
             SaveMaster.DeleteSave(slot);
@@ -35,11 +30,6 @@ namespace Lowscope.Saving.Core
             txt.alignment = TextAnchor.UpperRight;
             DateTime timeSaved = SaveMaster.GetSaveCreationTime(slot);
             txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt");
-
-            sceneName = JsonUtility.ToJson(SceneManager.GetActiveScene().name);
-            //SaveMaster.SetString("sceneNameKey", SceneManager.GetActiveScene().name);
-            //Debug.Log("Scene Name: "+SaveMaster.GetString("sceneNameKey"));
-            //txt.text = "Saved Slot";
         }
 
         public void LoadGame(int slot) {
@@ -47,9 +37,7 @@ namespace Lowscope.Saving.Core
             //SaveMaster.ClearSlot();
             
             SaveMaster.SetSlot(slot, true);
-            //sceneName = JsonUtility.FromJson<string>(SaveMaster.GetSave(slot, false).Get(""));
-            //Debug.Log("Scene Name: "+SaveMaster.GetString("sceneNameKey"));
-            SceneManager.LoadScene("SampleScene"); //temp until more scenes/levels are added
+            SceneManager.LoadScene("Level1");
         }
 
         void Start()
@@ -81,27 +69,6 @@ namespace Lowscope.Saving.Core
         {
 
         }
-
-        // [SerializeField]
-        //     private SData sceneData;
-        // public string OnSave()
-        // {
-        //     sceneName = SceneManager.GetActiveScene().name;
-        //     return JsonUtility.ToJson(new SData() {scene = sceneName});
-        // }
-
-        // public void OnLoad(string data)
-        // {
-        //     //stats = JsonUtility.FromJson<PlayerStats>(data);
-        //     sceneData = JsonUtility.FromJson<SData>(data);
-        //     sceneName = sceneData.scene;
-
-        //     Debug.Log("Scene Name:" + sceneName);
-        // }
-
-        // public bool OnSaveCondition()
-        // {
-        //     return true;
-        // }
+        
     }
 }

@@ -209,17 +209,17 @@ public class PlayerData : MonoBehaviour, ISaveable
     // Start is called before the first frame update
     void Start()
     {
-        stats.maxen = 10;
-        stats.maxhp = 20;
-        stats.hp = 20;
-        stats.en = 10;
-        stats.lvl = 1;
-        stats.exp = 0;
-        stats.exptonext = 20;
-        stats.off = 10;
-        stats.def = 8;
-        stats.spd = 6;
-        stats.pts = 5;
+        //stats.maxen = 10;
+        //stats.maxhp = 20;
+        //stats.hp = 20;
+        //stats.en = 10;
+        //stats.lvl = 1;
+        //stats.exp = 0;
+        //stats.exptonext = 20;
+        //stats.off = 10;
+        //stats.def = 8;
+        //stats.spd = 6;
+        //stats.pts = 5;
         atks = new Attacks();
         skillList = new List<Skill>();
         Skill armsUp = new Skill(atks.ArmsUp, 1, 2, "Arms Up", "Put your arms up in front of your much more delicate face. Defense up by 2.");
