@@ -211,8 +211,8 @@ public class PlayerData : MonoBehaviour, ISaveable
     {
         stats.maxen = 10;
         stats.maxhp = 20;
-        stats.hp = 15;
-        stats.en = 5;
+        stats.hp = 20;
+        stats.en = 10;
         stats.lvl = 1;
         stats.exp = 0;
         stats.exptonext = 20;

@@ -613,7 +613,7 @@ public class Attacks : ScriptableObject
                 break;
 
         }
-        aggressor.hp += 10;
+        aggressor.hp += 20;
         if (aggressor.hp > aggressor.maxhp)
         {
             aggressor.hp = aggressor.maxhp;
@@ -704,6 +704,13 @@ public class Attacks : ScriptableObject
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
         topboard.UpdateString("The " + aggressor.name + " is looking up how to get rid of a body.");
+        yield return new WaitForSeconds(1.5f);
+        bm.YieldTurn();
+    }
+    public IEnumerator ActorThought(Battler aggressor, Battler target, BattleMasterScript bm)
+    {
+        BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
+        topboard.UpdateString("The " + aggressor.name + " is wondering which actor should play them in the movie adaptation.");
         yield return new WaitForSeconds(1.5f);
         bm.YieldTurn();
     }
@@ -838,10 +845,10 @@ public class EnemyFactory
             case EnemyType.tvboss:
                 {
                     Enemy nme = new Enemy(200, 10, 12, 10, 16, 3, "Erudite TV", "Sprites/EnemyBattleAnims/TV Boss");
-                    int[] weights = { 3, 1, 2, 2 };
+                    int[] weights = { 3, 1, 2, 2, 1 };
                     Attacks atk = new Attacks();
                     atk.weights = weights;
-                    AttackDelegate[] atks = { atk.WireWhip, atk.ShowExceedinglyUncomfortableFootage, atk.DrawPower, atk.TurnUpVolume };
+                    AttackDelegate[] atks = { atk.WireWhip, atk.ShowExceedinglyUncomfortableFootage, atk.DrawPower, atk.TurnUpVolume, atk.ActorThought };
                     atk.attacks = atks;
                     nme.atks = atk;
                     nme.SetHurtAnimation("Sprites/EnemyBattleAnims/TV Boss Injured", 0.5f);
