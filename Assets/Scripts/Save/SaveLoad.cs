@@ -10,13 +10,19 @@ using UnityEngine.SceneManagement;
  
 namespace Lowscope.Saving.Core
 {
-    public class SaveLoad: MonoBehaviour, ISaveable
+    public class SaveLoad: MonoBehaviour
     {
         public PlayerMovement movscript;
         public int[] saves;
         public bool active = false;
         
         public string sceneName = "";
+
+        // [System.Serializable]
+        // public struct SData
+        // {
+        //     public string scene;
+        // }
 
         public void SaveSlot(int slot) {
             SaveMaster.DeleteSave(slot);
@@ -30,6 +36,9 @@ namespace Lowscope.Saving.Core
             DateTime timeSaved = SaveMaster.GetSaveCreationTime(slot);
             txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt");
 
+            sceneName = JsonUtility.ToJson(SceneManager.GetActiveScene().name);
+            //SaveMaster.SetString("sceneNameKey", SceneManager.GetActiveScene().name);
+            //Debug.Log("Scene Name: "+SaveMaster.GetString("sceneNameKey"));
             //txt.text = "Saved Slot";
         }
 
@@ -38,18 +47,13 @@ namespace Lowscope.Saving.Core
             //SaveMaster.ClearSlot();
             
             SaveMaster.SetSlot(slot, true);
-
+            //sceneName = JsonUtility.FromJson<string>(SaveMaster.GetSave(slot, false).Get(""));
+            //Debug.Log("Scene Name: "+SaveMaster.GetString("sceneNameKey"));
             SceneManager.LoadScene("SampleScene"); //temp until more scenes/levels are added
         }
 
         void Start()
         {
-
-            Debug.Log("Getting Used Save Slots");
-            saves = SaveFileUtility.GetUsedSlots();
-            Debug.Log("Saves: " + saves.Length.ToString());
-            Debug.Log("Active Slot: " + SaveMaster.GetActiveSlot().ToString());
-            
             Button[] button = GameObject.Find("SaveContent").GetComponentsInChildren<Button>();
             int i = 0;
             foreach(Button btn in button)
@@ -78,24 +82,26 @@ namespace Lowscope.Saving.Core
 
         }
 
-        public string OnSave()
-        {
-            sceneName = SceneManager.GetActiveScene().name;
-            Debug.Log("Scene Name:" + sceneName);
-            return JsonUtility.ToJson("sceneName");
-        }
+        // [SerializeField]
+        //     private SData sceneData;
+        // public string OnSave()
+        // {
+        //     sceneName = SceneManager.GetActiveScene().name;
+        //     return JsonUtility.ToJson(new SData() {scene = sceneName});
+        // }
 
-        public void OnLoad(string data)
-        {
-            //stats = JsonUtility.FromJson<PlayerStats>(data);
-            sceneName = JsonUtility.FromJson<string>(data);
-            Debug.Log("Scene Name:" + sceneName);
-            //SceneManager.LoadScene("sceneName");
-        }
+        // public void OnLoad(string data)
+        // {
+        //     //stats = JsonUtility.FromJson<PlayerStats>(data);
+        //     sceneData = JsonUtility.FromJson<SData>(data);
+        //     sceneName = sceneData.scene;
 
-        public bool OnSaveCondition()
-        {
-            return true;
-        }
+        //     Debug.Log("Scene Name:" + sceneName);
+        // }
+
+        // public bool OnSaveCondition()
+        // {
+        //     return true;
+        // }
     }
 }

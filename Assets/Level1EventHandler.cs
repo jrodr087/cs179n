@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Lowscope.Saving;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Level1EventHandler : MonoBehaviour
+public class Level1EventHandler : MonoBehaviour, ISaveable
 {
     // Start is called before the first frame update
     public GameObject swordObstacles;
@@ -20,6 +21,28 @@ public class Level1EventHandler : MonoBehaviour
     public GameObject[] switch2On;
     public GameObject[] switch2Off;
     public GameObject BossTV;
+
+    public bool sideDoorLock = false;
+    public bool secondEnemyActive = true;
+    public bool secondBlockerActive;
+    public bool swordBlockActive;
+    public bool groupEnemyActive = true;
+    public bool thirdEnemyActive = true;
+    public bool bossEnemyActive = true;
+    
+
+    [System.Serializable]
+    public struct LOneData
+    {
+        public bool sideDoor;
+        public bool secondEnemy;
+        public bool secondBlocker;
+        public bool swordBlock;
+        public bool groupEnemy;
+        public bool thirdEnemy;
+        public bool bossEnemy;
+    }
+
     void Start()
     {
 
@@ -34,29 +57,35 @@ public class Level1EventHandler : MonoBehaviour
     }
     public void DisappearSwordObstacles()
     {
-        swordObstacles.SetActive(false);
+        swordBlockActive = false;
+        swordObstacles.SetActive(swordBlockActive);
     }
     public void ReappearSwordObstacles()
     {
-        swordObstacles.SetActive(true);
+        swordBlockActive = true;
+        swordObstacles.SetActive(swordBlockActive);
     }
     public void DisappearSecondRoomBlocker()
     {
-        secondRoomBlocker.SetActive(false);
+        secondBlockerActive = false;
+        secondRoomBlocker.SetActive(secondBlockerActive);
     }
     public void ReappearSecondRoomBlocker()
     {
-        secondRoomBlocker.SetActive(true);
+        secondBlockerActive = true;
+        secondRoomBlocker.SetActive(secondBlockerActive);
     }
     public void SideroomDoorLock()
     {
-        sideroomdoor.locked = true;
+        sideDoorLock = true;
+        sideroomdoor.locked = sideDoorLock;
         string[] eventtext = { "You hear the door click behind you." };
         handler.StartScene(eventtext);
     }
     public void SideroomDoorUnlock()
     {
-        sideroomdoor.locked = false;
+        sideDoorLock = false;
+        sideroomdoor.locked = sideDoorLock;
         string[] eventtext = { "You hear the door unlock behind you." };
         handler.StartScene(eventtext);
     }
@@ -69,7 +98,7 @@ public class Level1EventHandler : MonoBehaviour
         };
         string name = "Maddened Lappy?";
         handler.StartDialogue(dialogue, name);
-        handler.SetCallback(StartSecondRoomEnemyFight);
+        handler.SetCallback(InitializeSecondRoomEnemyFight);
     }
     public void EndSecondRoomEnemyEvent()
     {
@@ -97,7 +126,9 @@ public class Level1EventHandler : MonoBehaviour
         bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
         bm.InitializeBattle(EnemyFactory.EnemyType.lappy);
         bm.SetBattleEndCallback(EndSecondRoomEnemyEvent);
-        Destroy(SecondRoomEnemy);
+        //Destroy(SecondRoomEnemy);
+        secondEnemyActive = false;
+        SecondRoomEnemy.SetActive(secondEnemyActive);
         movscript.LockMovement();
     }
     public void InitializeGroupEnemyFight()
@@ -118,7 +149,9 @@ public class Level1EventHandler : MonoBehaviour
         };
         bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
         bm.InitializeBattle(enemies);
-        Destroy(enemyGroup);
+        //Destroy(enemyGroup);
+        groupEnemyActive = false;
+        enemyGroup.SetActive(groupEnemyActive);
     }
     public void StartEnemyGroupDrop()
     {
@@ -177,7 +210,9 @@ public class Level1EventHandler : MonoBehaviour
     }
     public void RemoveTV()
     {
-        Destroy(BossTV);
+        //Destroy(BossTV);
+        bossEnemyActive = false;
+        BossTV.SetActive(bossEnemyActive);
     }
     public void EndTVBossEvent()
     {
@@ -250,7 +285,9 @@ public class Level1EventHandler : MonoBehaviour
         bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
         bm.InitializeBattle(EnemyFactory.EnemyType.vroomer);
         bm.SetBattleEndCallback(EndThirdRoomEnemyEvent);
-        Destroy(ThirdRoomEnemy);
+        //Destroy(ThirdRoomEnemy);
+        thirdEnemyActive = false;
+        ThirdRoomEnemy.SetActive(thirdEnemyActive);
         movscript.LockMovement();
     }
     public void StartThirdRoomEnemyFight()
@@ -312,4 +349,45 @@ public class Level1EventHandler : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private LOneData LevelOneData;
+
+    public string OnSave()
+    {
+        return JsonUtility.ToJson(new LOneData() { sideDoor = sideDoorLock,
+                                                   secondEnemy = secondEnemyActive,
+                                                   secondBlocker = secondBlockerActive,
+                                                   swordBlock = swordBlockActive,
+                                                   groupEnemy = groupEnemyActive,
+                                                   thirdEnemy = thirdEnemyActive,
+                                                   bossEnemy = bossEnemyActive });
+    }
+
+    public void OnLoad(string data)
+    {
+        LevelOneData = JsonUtility.FromJson<LOneData>(data);
+
+        //retrieve information
+        sideDoorLock = LevelOneData.sideDoor;
+        secondEnemyActive = LevelOneData.secondEnemy;
+        secondBlockerActive = LevelOneData.secondBlocker;
+        swordBlockActive = LevelOneData.swordBlock;
+        groupEnemyActive = LevelOneData.groupEnemy;
+        thirdEnemyActive = LevelOneData.thirdEnemy;
+        bossEnemyActive = LevelOneData.bossEnemy;
+
+        //set state
+        sideroomdoor.locked = sideDoorLock;
+        SecondRoomEnemy.SetActive(secondEnemyActive);
+        secondRoomBlocker.SetActive(secondBlockerActive);
+        swordObstacles.SetActive(swordBlockActive);
+        enemyGroup.SetActive(groupEnemyActive);
+        ThirdRoomEnemy.SetActive(thirdEnemyActive);
+        BossTV.SetActive(bossEnemyActive);
+    }
+
+    public bool OnSaveCondition()
+    {
+        return true;
+    }
 }
