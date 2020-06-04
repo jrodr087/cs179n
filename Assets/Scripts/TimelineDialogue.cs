@@ -5,6 +5,7 @@ using UnityEngine.Playables;
 
 public class TimelineDialogue : MonoBehaviour
 {
+    [TextArea]
 	public string[] Dialogue;
 	private CutsceneScript handler;
     private PlayableDirector gameTimeline;
@@ -13,7 +14,7 @@ public class TimelineDialogue : MonoBehaviour
     void Start()
     {
         handler = GameObject.Find("/UI/VignetteController").GetComponent<CutsceneScript>();
-        gameTimeline = GameObject.Find("TimelineManager").GetComponent<PlayableDirector>();
+        gameTimeline = GameObject.Find("OpeningSceneManager").GetComponent<PlayableDirector>();
         //movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 

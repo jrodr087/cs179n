@@ -1180,7 +1180,7 @@ PrefabInstance:
     - target: {fileID: 295767628126484875, guid: b10382a0565c00d4ab753cf428b1103a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: SampleScene
+      value: OpeningCutScene
       objectReference: {fileID: 0}
     - target: {fileID: 295767628196587969, guid: b10382a0565c00d4ab753cf428b1103a,
         type: 3}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class TimelineManager : MonoBehaviour
 {
@@ -22,5 +23,10 @@ public class TimelineManager : MonoBehaviour
         else{
         	movscript.LockMovement();
         }
+    }
+
+    public void TriggerEnterTutorialZone()
+    {
+        SceneManager.LoadScene("Level0");
     }
 }
