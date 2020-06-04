@@ -32,11 +32,14 @@ public class BattleMasterScript : MonoBehaviour
     private List<Battler> battlerQueue = new List<Battler>();
     private PlayerMovement movscript;
     private float generalTimer = 0.0f;
+    public string songloc;
+    private MusicPlayerScript mps;
     // Start is called before the first frame update
     void Start()
     {
         audio = gameObject.AddComponent<AudioSource>();
         cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
+        mps = GameObject.Find("Main Camera/MusicPlayer").GetComponent<MusicPlayerScript>();
         movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
         Debug.Log("Battlemaster initialized");
     }
@@ -197,6 +200,7 @@ public class BattleMasterScript : MonoBehaviour
         pd.stats.en = player.en;
         pd.GiveExp(earnedEXP);
         movscript.LeaveBattle();
+        mps.StopSong(songloc);
     }
 
     public void HealBattler(int hpheal, int enheal, Battler btl)
@@ -526,7 +530,7 @@ public class Attacks : ScriptableObject
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
         target = bm.GetRandomEnemyIgnoringOne(aggressor);
         target.att += 1;
-        topboard.UpdateString("The " + aggressor.name + " is showing target data to the " + target.name + "!" + " Their Attack went up by 1!");
+        topboard.UpdateString("The " + aggressor.name + " is showing target data to the " + target.name + "!" + " Their Offense went up by 1!");
         yield return new WaitForSeconds(3.0f);
         bm.YieldTurn();
     }
@@ -554,16 +558,16 @@ public class Attacks : ScriptableObject
         target = bm.GetRandomEnemyIgnoringOne(aggressor);
         target.att += 1;
         target.def += 1;
-        topboard.UpdateString("The " + aggressor.name + " is showing a military training video to the " + target.name + "!" + " Their Attack and Defense went up by 1!");
+        topboard.UpdateString("The " + aggressor.name + " is showing a military training video to the " + target.name + "!" + " Their Offense and Defense went up by 1!");
         yield return new WaitForSeconds(3.3f);
         bm.YieldTurn();
     }
     public IEnumerator DrawPower(Battler aggressor, Battler target, BattleMasterScript bm)
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
-        aggressor.att += 2;
-        aggressor.def += 2;
-        topboard.UpdateString("The " + aggressor.name + " is drawing an excess of power!" + " Their Attack and Defense went up by 2!");
+        aggressor.att += 1;
+        aggressor.def += 1;
+        topboard.UpdateString("The " + aggressor.name + " is drawing an excess of power!" + " Their Offense and Defense went up by 1!");
         yield return new WaitForSeconds(3.3f);
         bm.YieldTurn();
     }
@@ -571,7 +575,7 @@ public class Attacks : ScriptableObject
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
         aggressor.att += 1;
-        topboard.UpdateString("The " + aggressor.name + " is turning up the volume!" + " Their Attack went up by 1!");
+        topboard.UpdateString("The " + aggressor.name + " is turning up the volume!" + " Their Offense went up by 1!");
         yield return new WaitForSeconds(3.3f);
         bm.YieldTurn();
     }
@@ -621,7 +625,7 @@ public class Attacks : ScriptableObject
     {
         BattleTopBoardScript topboard = GameObject.Find("Canvas/BattleTopBoard").GetComponent<BattleTopBoardScript>();
         aggressor.att += 2;
-        topboard.UpdateString("The " + aggressor.name + " starts whirling their arm in a circle! Their Attack has increased by 2!");
+        topboard.UpdateString("The " + aggressor.name + " starts whirling their arm in a circle! Their Offense has increased by 2!");
         yield return new WaitForSeconds(3.0f);
         bm.YieldTurn();
     }
@@ -834,7 +838,7 @@ public class EnemyFactory
             case EnemyType.tvboss:
                 {
                     Enemy nme = new Enemy(200, 10, 12, 10, 16, 3, "Erudite TV", "Sprites/EnemyBattleAnims/TV Boss");
-                    int[] weights = { 2, 1, 2, 1 };
+                    int[] weights = { 3, 1, 2, 2 };
                     Attacks atk = new Attacks();
                     atk.weights = weights;
                     AttackDelegate[] atks = { atk.WireWhip, atk.ShowExceedinglyUncomfortableFootage, atk.DrawPower, atk.TurnUpVolume };

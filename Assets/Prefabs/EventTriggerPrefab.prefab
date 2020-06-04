@@ -84,4 +84,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  sound: {fileID: 8300000, guid: c6d2e52c19645b44285f6edb4cc80e42, type: 3}
+  sound: {fileID: 0}
+  continous: 0
+  eventData:
+    activate: 0
