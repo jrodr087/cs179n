@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1521523881440219657}
   - component: {fileID: 1521523881440219661}
   - component: {fileID: 570182940785307734}
+  - component: {fileID: 1697877188627426232}
   m_Layer: 0
   m_Name: ItemGiverPrefab
   m_TagString: Untagged
@@ -103,6 +104,16 @@ MonoBehaviour:
   openedText:
   - You previously pilfered this parcel.
   itemId: 0
+  itemData:
+    IinteractableDialogue: []
+    Isr: {fileID: 0}
+    Ihandler: {fileID: 0}
+    IopenedSprite: {fileID: 0}
+    Ipd: {fileID: 0}
+    Ipm: {fileID: 0}
+    Iopen: 0
+    IopenedText: []
+    isInside: 0
 --- !u!61 &1521523881440219661
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -155,3 +166,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.31, y: 0.91}
   m_EdgeRadius: 0
+--- !u!114 &1697877188627426232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521523881440219654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6a0d75815a6ec449c648f0cf0fec23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadOnce: 0
+  manualSaveLoad: 0
+  externalListeners: []
+  cachedSaveableComponents:
+  - identifier: Item
+    monoBehaviour: {fileID: 1521523881440219657}
+  saveIdentification: 
+  sceneName: 
