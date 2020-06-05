@@ -5,15 +5,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-	public float moveSpeed = 5f;
-	public Rigidbody2D rb;
+    public float moveSpeed = 5f;
+    public Rigidbody2D rb;
     public Animator animator;
     public GameObject battle;
     public bool levelled = false;
     private bool movementlocked = false;
     private LevelUpNotificationScript lvluppanel;
     Vector2 lastmovement;
-	Vector2 movement;
+    Vector2 movement;
     void Start()
     {
         lvluppanel = GameObject.Find("UI/Level Up Panel").GetComponent<LevelUpNotificationScript>();
@@ -42,19 +42,19 @@ public class PlayerMovement : MonoBehaviour
             lastmovement = movement;
         }
         Animate();
-	}
-	
-	void FixedUpdate()
-	{//movement
-		rb.MovePosition(rb.position+movement.normalized*moveSpeed*Time.fixedDeltaTime);
-	}
+    }
+    
+    void FixedUpdate()
+    {//movement
+        rb.MovePosition(rb.position+movement.normalized*moveSpeed*Time.fixedDeltaTime);
+    }
 
-	void ProcessInputs()
+    void ProcessInputs()
     {
 
     }
 
-	void Animate()
+    void Animate()
     {
         animator.SetFloat("Horizontal", lastmovement.x);
         animator.SetFloat("Vertical", lastmovement.y);

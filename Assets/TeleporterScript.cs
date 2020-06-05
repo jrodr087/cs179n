@@ -75,4 +75,12 @@ public class TeleporterScript : MonoBehaviour
             inside = false;
         }
     }
+
+    public void Unlock(){
+        locked = false;
+    }
+
+    public void Lock(){
+        locked = true;
+    }
 }

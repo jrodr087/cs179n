@@ -65,7 +65,17 @@ PrefabInstance:
     - target: {fileID: 2020251173769507965, guid: fa98769122c9b504a8b0a9ed3f87f5e1,
         type: 3}
       propertyPath: m_Name
-      value: InteractablePrefab
+      value: InteractablePrefab Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870330650999660546, guid: fa98769122c9b504a8b0a9ed3f87f5e1,
+        type: 3}
+      propertyPath: saveIdentification
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870330650999660546, guid: fa98769122c9b504a8b0a9ed3f87f5e1,
+        type: 3}
+      propertyPath: sceneName
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa98769122c9b504a8b0a9ed3f87f5e1, type: 3}
