@@ -27,7 +27,6 @@ public class CutsceneScript : MonoBehaviour
     private EmptyVoidCallback endSceneCallback = null;
     private enum states { vigout,vigentering,vigin,vigexiting}
     private states currstate = states.vigout;
-    private int arg = -1;
     AudioSource txtsfx;
 
     // Start is called before the first frame update
@@ -215,4 +214,5 @@ public class CutsceneScript : MonoBehaviour
     {
         endSceneCallback = cb;
     }
+    
 }
