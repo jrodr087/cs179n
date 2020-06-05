@@ -85,10 +85,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-<<<<<<< HEAD
-  sound: {fileID: 8300000, guid: c6d2e52c19645b44285f6edb4cc80e42, type: 3}
-  continous: 0
-=======
   sound: {fileID: 0}
   continous: 0
   eventData:
@@ -113,4 +109,3 @@ MonoBehaviour:
     monoBehaviour: {fileID: 4147858507445770889}
   saveIdentification: 
   sceneName: 
->>>>>>> 3bf8220cf07723120107b39726157db8e306189b

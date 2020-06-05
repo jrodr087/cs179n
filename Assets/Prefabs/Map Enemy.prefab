@@ -133,8 +133,6 @@ MonoBehaviour:
   active: 1
   enemyData:
     isActive: 0
-<<<<<<< HEAD
-=======
 --- !u!114 &8661680234980750083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,4 +153,3 @@ MonoBehaviour:
     monoBehaviour: {fileID: 7441839756596028845}
   saveIdentification: 
   sceneName: 
->>>>>>> 3bf8220cf07723120107b39726157db8e306189b

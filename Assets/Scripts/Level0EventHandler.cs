@@ -38,6 +38,7 @@ public class Level0EventHandler : MonoBehaviour
     public GameObject ItemTutorialTrigger;
     public GameObject StatTutorialTrigger;
     public GameObject LoneVroomerTrigger;
+    public GameObject Level1Start;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +67,11 @@ public class Level0EventHandler : MonoBehaviour
 
     }
 
+    public void TeleportToLevel1()
+    {
+        movscript.transform.position = Level1Start.transform.position;
+    }
+
     //When player goes into door of Worst Buy, Level One begins
     public void TriggerEnterLevel1()
     {
@@ -75,7 +81,7 @@ public class Level0EventHandler : MonoBehaviour
         };
 
         handler.StartScene(dialogue);
-        SceneManager.LoadScene("Level1");
+        handler.SetCallback(TeleportToLevel1);
     }
 
     // When player gets near doctor, the doctor explains what happened to him
