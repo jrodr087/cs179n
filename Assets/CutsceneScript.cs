@@ -25,7 +25,7 @@ public class CutsceneScript : MonoBehaviour
     private int charindex;
     private int timer;
     private EmptyVoidCallback endSceneCallback = null;
-    private enum states { vigout,vigentering,vigin,vigexiting}
+    public enum states { vigout,vigentering,vigin,vigexiting}
     private states currstate = states.vigout;
     AudioSource txtsfx;
 
@@ -191,6 +191,27 @@ public class CutsceneScript : MonoBehaviour
         }
     }
 
+    // This function was created for non playable cutscenes
+    public void StartSceneForTimeline(string[] strings)
+    {
+        if (currstate == states.vigout)
+        {
+            movscript.LockMovement();
+            nametag.SetActive(false);
+            scenestrings = strings;
+            currstate = states.vigentering;
+            currstring = "";
+            fullstring = strings[0];
+            stringindex = 0;
+            charindex = 0;
+            timer = textspeed;
+            txt.text = "";
+            dialogue = false;
+            endSceneCallback = null;
+        }
+
+    }
+
     public void StartDialogue(string[] strings, string nametext)
     {
         if (currstate == states.vigout && !movscript.GetMovementLock())
@@ -214,5 +235,8 @@ public class CutsceneScript : MonoBehaviour
     {
         endSceneCallback = cb;
     }
-    
+
+    public states getCurrState(){
+        return currstate;
+    }
 }

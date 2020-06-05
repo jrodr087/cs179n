@@ -30,10 +30,12 @@ public class TeleporterScript : MonoBehaviour
     void BelowTeleport()
     {
         movscript.gameObject.GetComponent<Transform>().position = destination.GetComponent<BoxCollider2D>().transform.position;
+        movscript.gameObject.GetComponent<Transform>().position = new Vector3(movscript.gameObject.GetComponent<Transform>().position.x, movscript.gameObject.GetComponent<Transform>().position.y, -1);
     }
     void AboveTeleport()
     {
         movscript.gameObject.GetComponent<Transform>().position = destination.GetComponent<BoxCollider2D>().transform.position + new Vector3(0,5,0);
+        movscript.gameObject.GetComponent<Transform>().position = new Vector3(movscript.gameObject.GetComponent<Transform>().position.x, movscript.gameObject.GetComponent<Transform>().position.y, -1);
     }
     // Update is called once per frame
     void Update()
@@ -74,5 +76,13 @@ public class TeleporterScript : MonoBehaviour
         {
             inside = false;
         }
+    }
+
+    public void Unlock(){
+        locked = false;
+    }
+
+    public void Lock(){
+        locked = true;
     }
 }

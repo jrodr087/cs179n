@@ -5,18 +5,25 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-	public float moveSpeed = 5f;
-	public Rigidbody2D rb;
+    public float moveSpeed = 5f;
+    public Rigidbody2D rb;
     public Animator animator;
+    public Animator maleAnimator;
+    public Animator femaleAnimator;
+    public GameObject maleSprite;
+    public GameObject femaleSprite;
+
     public GameObject battle;
     public bool levelled = false;
     private bool movementlocked = false;
     private LevelUpNotificationScript lvluppanel;
+    private PlayerData pd;
     Vector2 lastmovement;
-	Vector2 movement;
+    Vector2 movement;
     void Start()
     {
         lvluppanel = GameObject.Find("UI/Level Up Panel").GetComponent<LevelUpNotificationScript>();
+        pd = gameObject.GetComponent<PlayerData>();
     }
 
     // Update is called once per frame
@@ -42,20 +49,32 @@ public class PlayerMovement : MonoBehaviour
             lastmovement = movement;
         }
         Animate();
-	}
-	
-	void FixedUpdate()
-	{//movement
-		rb.MovePosition(rb.position+movement.normalized*moveSpeed*Time.fixedDeltaTime);
-	}
+    }
+    
+    void FixedUpdate()
+    {//movement
+        rb.MovePosition(rb.position+movement.normalized*moveSpeed*Time.fixedDeltaTime);
+    }
 
-	void ProcessInputs()
+    void ProcessInputs()
     {
 
     }
 
-	void Animate()
+    void Animate()
     {
+        if (pd.male)
+        {
+            animator = maleAnimator;
+            femaleSprite.SetActive(false);
+            maleSprite.SetActive(true);
+        }
+        else
+        {
+            animator = femaleAnimator;
+            maleSprite.SetActive(false);
+            femaleSprite.SetActive(true);
+        }
         animator.SetFloat("Horizontal", lastmovement.x);
         animator.SetFloat("Vertical", lastmovement.y);
         animator.SetFloat("Speed", movement.magnitude);

@@ -63,9 +63,15 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
 
         handler = GameObject.Find("/UI/VignetteController").GetComponent<CutsceneScript>();
     	movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
-        mps.PlaySong("Sounds/Music/Floor_Mood",1,true);
+        StartCoroutine(StartMusic());
     }
 
+    private IEnumerator StartMusic()
+    {
+        yield return new WaitForSeconds(0.5f);
+        mps.PlaySong("Sounds/Music/Floor_Mood", 1, true);
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -114,7 +120,14 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         };
         string name = "Maddened Lappy?";
         handler.StartDialogue(dialogue, name);
-        handler.SetCallback(InitializeSecondRoomEnemyFight);
+        handler.SetCallback(LappyFightTransition);
+    }
+    public void LappyFightTransition()
+    {
+        movscript.LockMovement();
+        CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
+        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeSecondRoomEnemyFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
     }
     public void EndSecondRoomEnemyEvent()
     {
@@ -243,11 +256,22 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         {
             "If only my demise were televised...",
             "...If you still want a chance to make it as a main character;",
-            "Find the Vroomer."
+            "Find my boss -- the Lieutenant Vroomer."
         };
         string name = "Erudite TV";
         handler.StartDialogue(dialogue, name);
         handler.SetCallback(RemoveTV);
+    }
+
+    public void EntranceTrigger()
+    {
+        string[] dialogue =
+       {
+            "Seems as if the Worst Sell was transformed into a fort. There might be some vital tactical info or personnel here.",
+            "Well, artificial personnel you suppose.",
+            "Regardless, maybe you can find some info on where to go next as well as equipment."
+        };
+        handler.StartScene(dialogue);
     }
     public void InitializeTVBossFight()
     {
