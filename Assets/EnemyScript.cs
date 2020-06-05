@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour, ISaveable
     private Texture inwipe;
     private Texture outwipe;
     public EnemyFactory.EnemyType type;
+    public MusicPlayerScript mps;
 
     public bool active=true;
     
@@ -28,6 +29,7 @@ public class EnemyScript : MonoBehaviour, ISaveable
 
         cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        mps = GameObject.Find("Main Camera/MusicPlayer").GetComponent<MusicPlayerScript>();
         inwipe = Resources.Load<Texture>("Textures/weirdspiralwipe");
         outwipe = Resources.Load<Texture>("Textures/screenwipeouttex");
     }
@@ -48,6 +50,9 @@ public class EnemyScript : MonoBehaviour, ISaveable
         BattleMasterScript bm;
         bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
         bm.InitializeBattle(type);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
         //Destroy(gameObject);
     }
     void OnTriggerEnter2D(Collider2D other)

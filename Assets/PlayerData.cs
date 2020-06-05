@@ -456,6 +456,7 @@ public class PlayerData : MonoBehaviour, ISaveable
             male = true;
         else
             male = false;
+        this.GetComponent<PlayerMovement>().UnlockMovement();
     }
 
     [SerializeField]
@@ -506,5 +507,15 @@ public class PlayerData : MonoBehaviour, ISaveable
             }
         }
         return useableSkills;
+    }
+    public void SetMale()
+    {
+        male = true;
+        this.GetComponent<PlayerMovement>().UnlockMovement();
+    }
+    public void SetFemale()
+    {
+        male = false;
+        this.GetComponent<PlayerMovement>().UnlockMovement();
     }
 }

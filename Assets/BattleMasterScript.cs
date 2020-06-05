@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
 
 public class BattleMasterScript : MonoBehaviour
 {
-    private enum states { battleintro, dead, battlewon, turnstart,turnattack,turnend };
+    private enum states { battleintro, dead, battlewon, turnstart,turnattack,turnend, battlelost };
     private states currstate;
     private EnemyFactory ef = new EnemyFactory();
     public BattleTopBoardScript topboard;
@@ -50,6 +51,15 @@ public class BattleMasterScript : MonoBehaviour
         switch (currstate)
         {
             case states.dead:
+                break;
+            case states.battlelost:
+                generalTimer += Time.deltaTime;
+                if (generalTimer >= 3.0f)
+                {
+                    generalTimer = 0.0f;
+                    currstate = states.dead;
+                    cs.StartWipe(EndGame, null);
+                }
                 break;
             case states.battlewon:
                 generalTimer += Time.deltaTime;
@@ -157,7 +167,7 @@ public class BattleMasterScript : MonoBehaviour
             {
 
                 topboard.UpdateString("You lost...");
-                currstate = states.dead;
+                currstate = states.battlelost;
             }
         }
         audio.PlayOneShot((AudioClip)Resources.Load("Sounds/Hit"));
@@ -228,6 +238,10 @@ public class BattleMasterScript : MonoBehaviour
         playerObj.transform.localPosition = new Vector3(1,0,0);
         player = new Battler(playerObj, "Player");
         PlayerData pd = GameObject.Find("Player").GetComponent<PlayerData>();
+        if (!pd.male)
+        {
+            playerObj.GetComponent<Animator>().runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("Sprites/FemaleBattleAnim");
+        }
         player.hp = pd.stats.hp;
         player.maxhp = pd.stats.maxhp;
         player.en = pd.stats.en;
@@ -260,6 +274,10 @@ public class BattleMasterScript : MonoBehaviour
         playerObj.transform.localPosition = new Vector3(1, 0, 0);
         player = new Battler(playerObj, "Player");
         PlayerData pd = GameObject.Find("Player").GetComponent<PlayerData>();
+        if (!pd.male)
+        {
+            playerObj.GetComponent<Animator>().runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("Sprites/FemaleBattleAnim");
+        }
         player.hp = pd.stats.hp;
         player.maxhp = pd.stats.maxhp;
         player.en = pd.stats.en;
@@ -291,6 +309,10 @@ public class BattleMasterScript : MonoBehaviour
             registeredBattlers.Add(enemy);
         }
 
+    }
+    void EndGame()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
     public void SetBattleEndCallback(EmptyVoidCallback cb)
     {

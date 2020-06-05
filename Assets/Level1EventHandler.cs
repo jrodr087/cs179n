@@ -120,7 +120,14 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         };
         string name = "Maddened Lappy?";
         handler.StartDialogue(dialogue, name);
-        handler.SetCallback(InitializeSecondRoomEnemyFight);
+        handler.SetCallback(LappyFightTransition);
+    }
+    public void LappyFightTransition()
+    {
+        movscript.LockMovement();
+        CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
+        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeSecondRoomEnemyFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
     }
     public void EndSecondRoomEnemyEvent()
     {

@@ -27,6 +27,6 @@ public class TimelineManager : MonoBehaviour
 
     public void TriggerEnterTutorialZone()
     {
-        SceneManager.LoadScene("Level0");
+        SceneManager.LoadScene("Level1");
     }
 }
