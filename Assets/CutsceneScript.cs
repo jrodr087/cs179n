@@ -239,5 +239,4 @@ public class CutsceneScript : MonoBehaviour
     public states getCurrState(){
         return currstate;
     }
-
 }
