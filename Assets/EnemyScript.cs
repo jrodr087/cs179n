@@ -50,7 +50,6 @@ public class EnemyScript : MonoBehaviour, ISaveable
         BattleMasterScript bm;
         bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
         bm.InitializeBattle(type);
-        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
         bm.songloc = "Sounds/Music/Fight_Mood";
         mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
         //Destroy(gameObject);
@@ -59,6 +58,7 @@ public class EnemyScript : MonoBehaviour, ISaveable
     {
         if (other.gameObject.name == "Player" && !movscript.GetMovementLock())
         {
+            mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
             Debug.Log("Enemy touched player");
             cs.StartWipe(inwipe, outwipe, InitializeBattle, null,1.0f,3.0f);
             movscript.LockMovement();

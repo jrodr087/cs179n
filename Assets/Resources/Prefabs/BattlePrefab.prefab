@@ -7255,7 +7255,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tactics
+  m_Text: Run
 --- !u!1 &2914073878781974060
 GameObject:
   m_ObjectHideFlags: 0
@@ -12217,7 +12217,7 @@ GameObject:
   - component: {fileID: 2914073878867595887}
   - component: {fileID: 2914073878867595886}
   m_Layer: 5
-  m_Name: Tactics Image
+  m_Name: Run Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12269,7 +12269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: da033c9ef07f16d4e9fbf793b930ce22, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f410f9472dd5ed447aea96a5d8fbd977, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13087,7 +13087,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tactics
+  m_Text: Run
 --- !u!1 &2968735523508532812
 GameObject:
   m_ObjectHideFlags: 0

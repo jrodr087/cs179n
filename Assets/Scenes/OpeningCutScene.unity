@@ -204,6 +204,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1786135380}
     m_Modifications:
+    - target: {fileID: 1434052738997734621, guid: dd81694f5d8d9464295b36a3dac9955d,
+        type: 3}
+      propertyPath: saveIdentification
+      value: OpeningCutScene-EventTriggerPrefab-777aa
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434052738997734621, guid: dd81694f5d8d9464295b36a3dac9955d,
+        type: 3}
+      propertyPath: sceneName
+      value: OpeningCutScene
+      objectReference: {fileID: 0}
     - target: {fileID: 4147858507445770888, guid: dd81694f5d8d9464295b36a3dac9955d,
         type: 3}
       propertyPath: m_Size.x
