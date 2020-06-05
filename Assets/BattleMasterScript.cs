@@ -403,6 +403,8 @@ public class Battler
         sprite = sp;
         if (enemy.name == "Mega Vroomer"){
             sprite.transform.localScale = new Vector3(3f, 3f, 3f);
+        } else if (enemy.name == "OmniVroom"){
+            sprite.transform.localScale = new Vector3(8f, 8f, 8f);
         }
         pos = sprite.transform.position;
         nme = enemy;
@@ -796,7 +798,7 @@ public class Enemy : ScriptableObject
 };
 public class EnemyFactory
 {
-    public enum EnemyType { vroomer, lappy, selfphone,crashedregister,enlightenedmonitor,barcodeimprinter,tvboss, megavroomer };
+    public enum EnemyType { vroomer, lappy, selfphone,crashedregister,enlightenedmonitor,barcodeimprinter,tvboss, megavroomer, omnivroomer };
     public Enemy CreateEnemy(EnemyType ind)
     {
         switch (ind)
@@ -882,6 +884,17 @@ public class EnemyFactory
             case EnemyType.megavroomer:
             {
                 Enemy nme = new Enemy(100, 20, 20, 12, 8, 2, "Mega Vroomer", "Sprites/EnemyBattleAnims/SpikyVroomer");
+                int[] weights = { 2,2 };
+                Attacks atk = new Attacks();
+                atk.weights = weights;
+                AttackDelegate[] atks = { atk.Ram ,atk.Beep};
+                atk.attacks = atks;
+                nme.atks = atk;
+                return nme;
+                }
+            case EnemyType.omnivroomer:
+            {
+                Enemy nme = new Enemy(400, 40, 40, 25, 16, 4, "OmniVroom", "Sprites/EnemyBattleAnims/SpikyVroomer");
                 int[] weights = { 2,2 };
                 Attacks atk = new Attacks();
                 atk.weights = weights;
