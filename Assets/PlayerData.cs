@@ -196,6 +196,7 @@ public class PlayerData : MonoBehaviour, ISaveable
     public ItemDirectory masterItemDirectory = new ItemDirectory();
     public List<Skill> skillList;
     public Attacks atks;
+    public bool male = true;
 
     [System.Serializable]
     public struct PData
@@ -204,6 +205,7 @@ public class PlayerData : MonoBehaviour, ISaveable
         public int equipSlot;
         public List<ItemDirectory.ItemIndex> item;
         public List<int> equippedItem;
+        public bool gender;  //true is male and false is female
     }
 
     // Start is called before the first frame update
@@ -439,6 +441,13 @@ public class PlayerData : MonoBehaviour, ISaveable
         }
     }
     
+    public void setGender(bool g)
+    {
+        if (g)
+            male = true;
+        else
+            male = false;
+    }
 
     [SerializeField]
     private PData playData;
@@ -448,7 +457,8 @@ public class PlayerData : MonoBehaviour, ISaveable
         return JsonUtility.ToJson(new PData() { stat = this.stats, 
                                                 equipSlot = this.equipSlots, 
                                                 item = this.items, 
-                                                equippedItem = this.equippedItems});
+                                                equippedItem = this.equippedItems,
+                                                gender = this.male});
     }
 
     public void OnLoad(string data)
@@ -460,6 +470,12 @@ public class PlayerData : MonoBehaviour, ISaveable
         equipSlots = playData.equipSlot;
         items = playData.item;
         equippedItems = playData.equippedItem;
+        male = playData.gender;
+        if (male)
+        {
+            //this.GetComponent<SpriteRenderer>().sprite = femaleSprite;
+            //TO DO : change sprite
+        }
     }
 
     public bool OnSaveCondition()
