@@ -249,11 +249,22 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
         {
             "If only my demise were televised...",
             "...If you still want a chance to make it as a main character;",
-            "Find the Vroomer."
+            "Find my boss -- the Lieutenant Vroomer."
         };
         string name = "Erudite TV";
         handler.StartDialogue(dialogue, name);
         handler.SetCallback(RemoveTV);
+    }
+
+    public void EntranceTrigger()
+    {
+        string[] dialogue =
+       {
+            "Seems as if the Worst Sell was transformed into a fort. There might be some vital tactical info or personnel here.",
+            "Well, artificial personnel you suppose.",
+            "Regardless, maybe you can find some info on where to go next as well as equipment."
+        };
+        handler.StartScene(dialogue);
     }
     public void InitializeTVBossFight()
     {
