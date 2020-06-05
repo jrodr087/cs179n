@@ -276,7 +276,7 @@ namespace Lowscope.Saving
             return GetSaveVersion(activeSlot);
         }
 
-        private static SaveGame GetSave(int slot, bool createIfEmpty = true)
+        public static SaveGame GetSave(int slot, bool createIfEmpty = true)
         {
             if (slot == activeSlot)
             {

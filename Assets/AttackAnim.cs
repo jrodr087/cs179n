@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackType { playerDefault,enemyDefault,ram,loudsound, gunchange,barcodelaser};
+public enum AttackType { playerDefault,enemyDefault,ram,loudsound, gunchange,barcodelaser, playerCombo};
 
 public class AttackAnim : MonoBehaviour
 {
@@ -30,10 +30,10 @@ public class AttackAnim : MonoBehaviour
     }
     void CalculateDamage()
     {
-        if (at == AttackType.playerDefault)
+        if (at == AttackType.playerCombo)
         {
             bool crit = false;
-            if (percent > 0.95f)
+            if (percent > 0.92f)
             {
                 percent = 1.1f;
                 crit = true;
@@ -49,6 +49,18 @@ public class AttackAnim : MonoBehaviour
                 dmg = (int)Mathf.Ceil(Mathf.Max(((float)aggressor.att * 0.6f - (float)target.def) * percent, 1));
                 bm.DamageBattlerNoSound(dmg, target, crit);
             }
+            atknum++;
+        }
+        else if (at == AttackType.playerDefault){
+            bool crit = false;
+            if (percent > 0.92f)
+            {
+                percent = 1.1f;
+                crit = true;
+            }
+            int dmg = 0;
+            dmg = (int)Mathf.Ceil(Mathf.Max(((float)aggressor.att * 1.4f - (float)target.def) * percent, 1));
+            bm.DamageBattler(dmg, target, crit);
             atknum++;
         }
         if (at == AttackType.enemyDefault)

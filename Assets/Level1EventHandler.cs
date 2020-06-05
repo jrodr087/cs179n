@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Lowscope.Saving;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Level1EventHandler : MonoBehaviour
+public class Level1EventHandler : MonoBehaviour, ISaveable
 {
+
+    public MusicPlayerScript mps;
     // Start is called before the first frame update
     public GameObject swordObstacles;
     public GameObject secondRoomBlocker;
@@ -20,11 +23,47 @@ public class Level1EventHandler : MonoBehaviour
     public GameObject[] switch2On;
     public GameObject[] switch2Off;
     public GameObject BossTV;
+
+    /// <summary>
+    /// CELL PHONE EVENT OBJECTS
+    /// </summary>
+    public GameObject cellPhone;
+    public SpriteRenderer cellPhoneSR;
+    public Sprite cellPhoneOn;
+    public TeleporterScript cellPhoneDoor;
+    public GameObject cellPhoneFightTrigger;
+
+    public bool sideDoorLock = false;
+    public bool secondEnemyActive = true;
+    public bool secondBlockerActive;
+    public bool swordBlockActive;
+    public bool groupEnemyActive = true;
+    public bool thirdEnemyActive = true;
+    public bool bossEnemyActive = true;
+    public bool switchOne;
+    public bool switchTwo;
+    
+
+    [System.Serializable]
+    public struct LOneData
+    {
+        public bool sideDoor;
+        public bool secondEnemy;
+        public bool secondBlocker;
+        public bool swordBlock;
+        public bool groupEnemy;
+        public bool thirdEnemy;
+        public bool bossEnemy;
+        public bool switchOneOn;
+        public bool switchTwoOn;
+    }
+
     void Start()
     {
 
         handler = GameObject.Find("/UI/VignetteController").GetComponent<CutsceneScript>();
     	movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        mps.PlaySong("Sounds/Music/Floor_Mood",1,true);
     }
 
     // Update is called once per frame
@@ -34,29 +73,35 @@ public class Level1EventHandler : MonoBehaviour
     }
     public void DisappearSwordObstacles()
     {
-        swordObstacles.SetActive(false);
+        swordBlockActive = false;
+        swordObstacles.SetActive(swordBlockActive);
     }
     public void ReappearSwordObstacles()
     {
-        swordObstacles.SetActive(true);
+        swordBlockActive = true;
+        swordObstacles.SetActive(swordBlockActive);
     }
     public void DisappearSecondRoomBlocker()
     {
-        secondRoomBlocker.SetActive(false);
+        secondBlockerActive = false;
+        secondRoomBlocker.SetActive(secondBlockerActive);
     }
     public void ReappearSecondRoomBlocker()
     {
-        secondRoomBlocker.SetActive(true);
+        secondBlockerActive = true;
+        secondRoomBlocker.SetActive(secondBlockerActive);
     }
     public void SideroomDoorLock()
     {
-        sideroomdoor.locked = true;
+        sideDoorLock = true;
+        sideroomdoor.locked = sideDoorLock;
         string[] eventtext = { "You hear the door click behind you." };
         handler.StartScene(eventtext);
     }
     public void SideroomDoorUnlock()
     {
-        sideroomdoor.locked = false;
+        sideDoorLock = false;
+        sideroomdoor.locked = sideDoorLock;
         string[] eventtext = { "You hear the door unlock behind you." };
         handler.StartScene(eventtext);
     }
@@ -69,7 +114,7 @@ public class Level1EventHandler : MonoBehaviour
         };
         string name = "Maddened Lappy?";
         handler.StartDialogue(dialogue, name);
-        handler.SetCallback(StartSecondRoomEnemyFight);
+        handler.SetCallback(InitializeSecondRoomEnemyFight);
     }
     public void EndSecondRoomEnemyEvent()
     {
@@ -78,7 +123,7 @@ public class Level1EventHandler : MonoBehaviour
         string[] dialogue =
         {
             "Hehe, theres a lot of items for you to take...",
-            "Just behind the door"
+            "Just behind the door."
         };
         string name = "Broken Lappy";
         handler.StartDialogue(dialogue, name);
@@ -97,8 +142,12 @@ public class Level1EventHandler : MonoBehaviour
         bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
         bm.InitializeBattle(EnemyFactory.EnemyType.lappy);
         bm.SetBattleEndCallback(EndSecondRoomEnemyEvent);
-        Destroy(SecondRoomEnemy);
+        //Destroy(SecondRoomEnemy);
+        secondEnemyActive = false;
+        SecondRoomEnemy.SetActive(secondEnemyActive);
         movscript.LockMovement();
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
     }
     public void InitializeGroupEnemyFight()
     {
@@ -118,7 +167,11 @@ public class Level1EventHandler : MonoBehaviour
         };
         bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
         bm.InitializeBattle(enemies);
-        Destroy(enemyGroup);
+        //Destroy(enemyGroup);
+        groupEnemyActive = false;
+        enemyGroup.SetActive(groupEnemyActive);
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
     }
     public void StartEnemyGroupDrop()
     {
@@ -155,12 +208,14 @@ public class Level1EventHandler : MonoBehaviour
         movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeGroupEnemyFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
     }
     public void StartSecondRoomEnemyFight()
     {
         movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeSecondRoomEnemyFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
     }
 
      public void StartThirdRoomEnemyEvent()
@@ -177,7 +232,9 @@ public class Level1EventHandler : MonoBehaviour
     }
     public void RemoveTV()
     {
-        Destroy(BossTV);
+        //Destroy(BossTV);
+        bossEnemyActive = false;
+        BossTV.SetActive(bossEnemyActive);
     }
     public void EndTVBossEvent()
     {
@@ -206,12 +263,15 @@ public class Level1EventHandler : MonoBehaviour
         bm.InitializeBattle(EnemyFactory.EnemyType.tvboss);
         bm.SetBattleEndCallback(EndTVBossEvent);
         movscript.LockMovement();
+        mps.PlaySong("Sounds/Music/Boss_Mood", 2, true);
+        bm.songloc = "Sounds/Music/Boss_Mood";
     }
     public void StartTVBossFight()
     {
         movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
-        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeTVBossFight, null, 1.0f, 3.0f);
+        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeTVBossFight, null, .75f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY", 3, false);
     }
     public void StartTVBossEvent()
     {
@@ -250,66 +310,201 @@ public class Level1EventHandler : MonoBehaviour
         bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
         bm.InitializeBattle(EnemyFactory.EnemyType.vroomer);
         bm.SetBattleEndCallback(EndThirdRoomEnemyEvent);
-        Destroy(ThirdRoomEnemy);
+        //Destroy(ThirdRoomEnemy);
+        thirdEnemyActive = false;
+        ThirdRoomEnemy.SetActive(thirdEnemyActive);
         movscript.LockMovement();
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
     }
     public void StartThirdRoomEnemyFight()
     {
         movscript.LockMovement();
         CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
         cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeThirdRoomEnemyFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
     }
 
     public void TriggerPostThirdBlockerEvent()
     {
-    	string[] eventtext = { "Can't go there. Theres too many vroomers there too fight!"};
+    	string[] eventtext = { "Can't go there. Theres too many vroomers there to fight!"};
         handler.StartScene(eventtext);
         movscript.gameObject.GetComponent<Transform>().position = movscript.gameObject.GetComponent<Transform>().position + new Vector3( (float) .25,0,0);
     }
 
     public void SwitchOneOn()
     {
+        switchOne = true;
         for (int i = 0; i < switch1On.Length; i++)
         {
-            switch1On[i].SetActive(true);
+            switch1On[i].SetActive(switchOne);
         }
         for (int i = 0; i < switch1Off.Length; i++)
         {
-            switch1Off[i].SetActive(false);
+            switch1Off[i].SetActive(!switchOne);
         }
     }
     public void SwitchOneOff()
     {
+        switchOne = false;
         for (int i = 0; i < switch1On.Length; i++)
         {
-            switch1On[i].SetActive(false);
+            switch1On[i].SetActive(switchOne);
         }
         for (int i = 0; i < switch1Off.Length; i++)
         {
-            switch1Off[i].SetActive(true);
+            switch1Off[i].SetActive(!switchOne);
         }
     }
     public void SwitchTwoOn()
     {
+        switchTwo = true;
         for (int i = 0; i < switch2On.Length; i++)
         {
-            switch2On[i].SetActive(true);
+            switch2On[i].SetActive(switchTwo);
         }
         for (int i = 0; i < switch2Off.Length; i++)
         {
-            switch2Off[i].SetActive(false);
+            switch2Off[i].SetActive(!switchTwo);
         }
     }
     public void SwitchTwoOff()
     {
+        switchTwo = false;
         for (int i = 0; i < switch2On.Length; i++)
         {
-            switch2On[i].SetActive(false);
+            switch2On[i].SetActive(switchTwo);
         }
         for (int i = 0; i < switch2Off.Length; i++)
         {
-            switch2Off[i].SetActive(true);
+            switch2Off[i].SetActive(!switchTwo);
         }
     }
 
+    public void CellPhoneTrigger()
+    {
+
+        string[] dialogue =
+        {
+            "I'm not broken yet ya idiot!",
+            "Get over here so I can kick your butt!"
+        };
+        string name = "Cell Phone";
+        cellPhoneSR.sprite = cellPhoneOn;
+        cellPhoneFightTrigger.SetActive(true);
+        handler.StartDialogue(dialogue, name);
+    }
+
+    public void StartCellPhoneFight()
+    {
+        movscript.LockMovement();
+        CameraShader cs = GameObject.Find("Main Camera").GetComponent<CameraShader>();
+        cs.StartWipe(Resources.Load<Texture>("Textures/weirdspiralwipe"), Resources.Load<Texture>("Textures/screenwipeouttex"), InitializeCellPhoneFight, null, 1.0f, 3.0f);
+        mps.PlaySong("Sounds/Music/O_SHIT_I_ENCOUNTERED_AN_ENEMY_BUT_ITS_SHORTER", 3, false);
+    }
+    public void InitializeCellPhoneFight()
+    {
+
+        // PlayerMovement movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        GameObject btl = (GameObject)Instantiate(Resources.Load("Prefabs/BattlePrefab"));
+        btl.transform.position = new Vector3(1000, 1000, 0);
+        CameraScript cs = GameObject.Find("Main Camera").GetComponent<CameraScript>();
+        cs.sub = CameraSubject.battle;
+        cs.Battle = btl;
+        movscript.battle = btl;
+        BattleMasterScript bm;
+        bm = GameObject.Find("BattleMaster").GetComponent<BattleMasterScript>();
+        bm.InitializeBattle(EnemyFactory.EnemyType.selfphone);
+        bm.SetBattleEndCallback(EndCellPhoneEvent);
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        movscript.LockMovement();
+        bm.songloc = "Sounds/Music/Fight_Mood";
+        mps.PlaySong("Sounds/Music/Fight_Mood", 2, true);
+    }
+    public void RemoveCellPhone()
+    {
+        cellPhone.SetActive(false);
+    }
+    public void EndCellPhoneEvent()
+    {
+        movscript.UnlockMovement();
+        string[] dialogue =
+       {
+            "Heh... you got me good back there pal, even though I tried to do you dirty.",
+            "Tell you what - I remotely unlocked the backroom's door for you, there's something good in there. You deserve it.",
+            "Now...SeeRee...set a reminder for 6:00pm today...",
+            "For my appointment in Heck..."
+        };
+        string name = "Cell Phone";
+        cellPhoneDoor.locked = false;
+        handler.StartDialogue(dialogue, name);
+        handler.SetCallback(RemoveCellPhone);
+    }
+    public void CellPhoneFightEvent()
+    {
+        string[] dialogue =
+        {
+            "You just fell for the oldest trick in the phone book, pal!"
+        };
+        string name = "Cell Phone";
+        handler.StartDialogue(dialogue, name);
+        handler.SetCallback(StartCellPhoneFight);
+    }
+
+    [SerializeField]
+    private LOneData LevelOneData;
+
+    public string OnSave()
+    {
+        return JsonUtility.ToJson(new LOneData() { sideDoor = sideDoorLock,
+                                                   secondEnemy = secondEnemyActive,
+                                                   secondBlocker = secondBlockerActive,
+                                                   swordBlock = swordBlockActive,
+                                                   groupEnemy = groupEnemyActive,
+                                                   thirdEnemy = thirdEnemyActive,
+                                                   bossEnemy = bossEnemyActive,
+                                                   switchOneOn = switchOne,
+                                                   switchTwoOn = switchTwo
+                                                   });
+    }
+
+    public void OnLoad(string data)
+    {
+        LevelOneData = JsonUtility.FromJson<LOneData>(data);
+
+        //retrieve information
+        sideDoorLock = LevelOneData.sideDoor;
+        secondEnemyActive = LevelOneData.secondEnemy;
+        secondBlockerActive = LevelOneData.secondBlocker;
+        swordBlockActive = LevelOneData.swordBlock;
+        groupEnemyActive = LevelOneData.groupEnemy;
+        thirdEnemyActive = LevelOneData.thirdEnemy;
+        bossEnemyActive = LevelOneData.bossEnemy;
+        switchOne = LevelOneData.switchOneOn;
+        switchTwo = LevelOneData.switchTwoOn;
+
+        //set state
+        sideroomdoor.locked = sideDoorLock;
+        SecondRoomEnemy.SetActive(secondEnemyActive);
+        secondRoomBlocker.SetActive(secondBlockerActive);
+        swordObstacles.SetActive(swordBlockActive);
+        enemyGroup.SetActive(groupEnemyActive);
+        ThirdRoomEnemy.SetActive(thirdEnemyActive);
+        BossTV.SetActive(bossEnemyActive);
+
+        if (switchOne)
+            SwitchOneOn();
+        else
+            SwitchOneOff();
+
+        if (switchTwo)
+            SwitchTwoOn();
+        else
+            SwitchTwoOff();
+    }
+
+    public bool OnSaveCondition()
+    {
+        return true;
+    }
 }

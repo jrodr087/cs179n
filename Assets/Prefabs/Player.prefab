@@ -205,6 +205,7 @@ MonoBehaviour:
   rb: {fileID: 7040238565668720582}
   animator: {fileID: 7040238565285489859}
   battle: {fileID: 0}
+  levelled: 0
 --- !u!50 &7040238565668720582
 Rigidbody2D:
   serializedVersion: 4
@@ -269,6 +270,7 @@ MonoBehaviour:
   equipSlots: 3
   items: 
   equippedItems: 
+  atks: {fileID: 0}
   playData:
     stat:
       maxhp: 0

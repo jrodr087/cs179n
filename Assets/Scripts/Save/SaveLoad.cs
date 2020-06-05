@@ -10,13 +10,14 @@ using UnityEngine.SceneManagement;
  
 namespace Lowscope.Saving.Core
 {
-    public class SaveLoad: MonoBehaviour, ISaveable
+    public class SaveLoad: MonoBehaviour
     {
         public PlayerMovement movscript;
         public int[] saves;
         public bool active = false;
         
         public string sceneName = "";
+        
 
         public void SaveSlot(int slot) {
             SaveMaster.DeleteSave(slot);
@@ -29,8 +30,6 @@ namespace Lowscope.Saving.Core
             txt.alignment = TextAnchor.UpperRight;
             DateTime timeSaved = SaveMaster.GetSaveCreationTime(slot);
             txt.text = timeSaved.ToString("dd MMMM yyyy hh:mm:ss tt");
-
-            //txt.text = "Saved Slot";
         }
 
         public void LoadGame(int slot) {
@@ -38,18 +37,11 @@ namespace Lowscope.Saving.Core
             //SaveMaster.ClearSlot();
             
             SaveMaster.SetSlot(slot, true);
-
-            SceneManager.LoadScene("SampleScene"); //temp until more scenes/levels are added
+            SceneManager.LoadScene("Level1");
         }
 
         void Start()
         {
-
-            Debug.Log("Getting Used Save Slots");
-            saves = SaveFileUtility.GetUsedSlots();
-            Debug.Log("Saves: " + saves.Length.ToString());
-            Debug.Log("Active Slot: " + SaveMaster.GetActiveSlot().ToString());
-            
             Button[] button = GameObject.Find("SaveContent").GetComponentsInChildren<Button>();
             int i = 0;
             foreach(Button btn in button)
@@ -77,25 +69,6 @@ namespace Lowscope.Saving.Core
         {
 
         }
-
-        public string OnSave()
-        {
-            sceneName = SceneManager.GetActiveScene().name;
-            Debug.Log("Scene Name:" + sceneName);
-            return JsonUtility.ToJson("sceneName");
-        }
-
-        public void OnLoad(string data)
-        {
-            //stats = JsonUtility.FromJson<PlayerStats>(data);
-            sceneName = JsonUtility.FromJson<string>(data);
-            Debug.Log("Scene Name:" + sceneName);
-            //SceneManager.LoadScene("sceneName");
-        }
-
-        public bool OnSaveCondition()
-        {
-            return true;
-        }
+        
     }
 }

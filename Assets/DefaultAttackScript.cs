@@ -10,6 +10,7 @@ public class DefaultAttackScript : MonoBehaviour
     public GameObject crosshair2;
     public Battler aggressor;
     public Battler target;
+    public AttackType at = AttackType.playerDefault;
     private float t = 0.0f;
     private float radius = 1.2f;
     AudioSource audio;
@@ -35,12 +36,23 @@ public class DefaultAttackScript : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             float percent = 1.0f - Mathf.Abs(unitradius);
-            GameObject anim = (GameObject)Instantiate(Resources.Load("Prefabs/ComboAttackEffect"));
+            GameObject anim;
+            if (at == AttackType.playerCombo)
+            {
+                anim = (GameObject)Instantiate(Resources.Load("Prefabs/EnemyAttack"));
+                anim.GetComponent<AudioSource>().clip = (AudioClip)Instantiate(Resources.Load("Sounds/AttackSounds/Combo"));
+                anim.GetComponent<Animator>().runtimeAnimatorController = (RuntimeAnimatorController)Instantiate(Resources.Load("Sprites/AttackAnimations/ComboAnim"));
+            }
+            else
+            {
+                anim = (GameObject)Instantiate(Resources.Load("Prefabs/EnemyAttack"));
+            }
             anim.transform.position = gameObject.transform.position;
             AttackAnim attack = anim.GetComponent<AttackAnim>();
             attack.aggressor = aggressor;
             attack.target = target;
             attack.percent = percent;
+            attack.at = at;
             Destroy(gameObject);
         }
     }
