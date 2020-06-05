@@ -340,7 +340,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dialogue:
-  - use the arrow keys to move around
+  - (Use the ARROW KEYS to move around)
+  - (Press the SPACE BAR to interact with the world around you)
 --- !u!1 &1071101194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,9 +1565,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dialogue:
-  - Wha... Where am I?
-  - Is this..... a dream????
-  - Am I... Dead???? ? ?!
+  - Where am I?
+  - Am I dreaming?
+  - AM I....  DEAD?!?!!!?
 --- !u!1001 &1413249887
 PrefabInstance:
   m_ObjectHideFlags: 0

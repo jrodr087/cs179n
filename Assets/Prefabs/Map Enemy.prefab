@@ -128,3 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movscript: {fileID: 0}
+  type: 0
+  active: 1
+  enemyData:
+    isActive: 0
