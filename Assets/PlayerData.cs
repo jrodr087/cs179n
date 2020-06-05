@@ -482,7 +482,6 @@ public class PlayerData : MonoBehaviour, ISaveable
         male = playData.gender;
         if (male)
         {
-            //this.GetComponent<SpriteRenderer>().sprite = femaleSprite;
             //TO DO : change to male sprite
         }
         else
