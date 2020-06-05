@@ -63,9 +63,15 @@ public class Level1EventHandler : MonoBehaviour, ISaveable
 
         handler = GameObject.Find("/UI/VignetteController").GetComponent<CutsceneScript>();
     	movscript = GameObject.Find("Player").GetComponent<PlayerMovement>();
-        mps.PlaySong("Sounds/Music/Floor_Mood",1,true);
+        StartCoroutine(StartMusic());
     }
 
+    private IEnumerator StartMusic()
+    {
+        yield return new WaitForSeconds(0.5f);
+        mps.PlaySong("Sounds/Music/Floor_Mood", 1, true);
+
+    }
     // Update is called once per frame
     void Update()
     {
