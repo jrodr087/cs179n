@@ -189,6 +189,7 @@ public class Skill
 //[System.Serializable]
 public class PlayerData : MonoBehaviour, ISaveable
 {
+    public PlayerMovement movscript;
     public PlayerStats stats = new PlayerStats();
     public int equipSlots = 3;
     public List<ItemDirectory.ItemIndex> items = new List<ItemDirectory.ItemIndex>();
@@ -196,6 +197,8 @@ public class PlayerData : MonoBehaviour, ISaveable
     public ItemDirectory masterItemDirectory = new ItemDirectory();
     public List<Skill> skillList;
     public Attacks atks;
+    public GameObject genderMenu;
+    public bool male = true;
 
     [System.Serializable]
     public struct PData
@@ -204,11 +207,33 @@ public class PlayerData : MonoBehaviour, ISaveable
         public int equipSlot;
         public List<ItemDirectory.ItemIndex> item;
         public List<int> equippedItem;
+        public bool gender;  //true is male and false is female
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (SaveMaster.GetActiveSlot() == -1)
+        {
+            this.GetComponent<PlayerMovement>().LockMovement();
+            stats.maxen = 10;
+            stats.maxhp = 20;
+            stats.hp = 15;
+            stats.en = 5;
+            stats.lvl = 1;
+            stats.exp = 0;
+            stats.exptonext = 20;
+            stats.off = 10;
+            stats.def = 8;
+            stats.spd = 6;
+            stats.pts = 5;
+        }
+        else
+        {
+            this.GetComponent<PlayerMovement>().UnlockMovement();
+            genderMenu.SetActive(false);
+            Debug.Log("Load");
+        }
         //stats.maxen = 10;
         //stats.maxhp = 20;
         //stats.hp = 20;
@@ -230,20 +255,6 @@ public class PlayerData : MonoBehaviour, ISaveable
         skillList.Add(windUp);
         skillList.Add(heal);
         skillList.Add(combo);
-        if(SaveMaster.GetActiveSlot() == -1)
-        {
-            stats.maxen = 10;
-            stats.maxhp = 20;
-            stats.hp = 15;
-            stats.en = 5;
-            stats.lvl = 1;
-            stats.exp = 0;
-            stats.exptonext = 20;
-            stats.off = 10;
-            stats.def = 8;
-            stats.spd = 6;
-            stats.pts = 5;
-        }
     }
 
 
@@ -439,6 +450,13 @@ public class PlayerData : MonoBehaviour, ISaveable
         }
     }
     
+    public void setGender(bool g)
+    {
+        if (g)
+            male = true;
+        else
+            male = false;
+    }
 
     [SerializeField]
     private PData playData;
@@ -448,7 +466,8 @@ public class PlayerData : MonoBehaviour, ISaveable
         return JsonUtility.ToJson(new PData() { stat = this.stats, 
                                                 equipSlot = this.equipSlots, 
                                                 item = this.items, 
-                                                equippedItem = this.equippedItems});
+                                                equippedItem = this.equippedItems,
+                                                gender = this.male});
     }
 
     public void OnLoad(string data)
@@ -460,6 +479,15 @@ public class PlayerData : MonoBehaviour, ISaveable
         equipSlots = playData.equipSlot;
         items = playData.item;
         equippedItems = playData.equippedItem;
+        male = playData.gender;
+        if (male)
+        {
+            //TO DO : change to male sprite
+        }
+        else
+        {
+            //TO DO: change to female sprite
+        }
     }
 
     public bool OnSaveCondition()
