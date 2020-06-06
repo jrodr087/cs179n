@@ -419,7 +419,7 @@ public class Battler
         r = sprite.GetComponent<Renderer>();
         if (shake)
         {
-            radius -= 0.0035f;
+            radius -= (1.0f)* Time.deltaTime;
             shakeT += Time.deltaTime;
             float currradius = radius * Mathf.Sin(shakeT * 12);
             if (radius <= 0.0f)

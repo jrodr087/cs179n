@@ -62,7 +62,8 @@ public class BattleTopBoardScript : MonoBehaviour
                     }
                     else
                     {
-                        charindex++;
+                        charindex+= 2;
+                        if (charindex > fullstring.Length) { charindex = fullstring.Length; }
                         currstring = fullstring.Substring(0, charindex);
                         timer = textspeed;
                         if (!txtsfx.isPlaying)
